@@ -92,23 +92,29 @@ export default function Header() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden mobile-menu ${isMobileMenuOpen ? 'open py-4 border-t border-white/5' : ''}`}>
-          <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 right-0 bg-background/98 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+            <nav className="flex flex-col gap-2 px-6 py-6">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-white/70 hover:text-white transition-colors duration-200 text-base font-medium py-3 border-b border-white/5"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
               <a
-                key={link.href}
-                href={link.href}
-                className="mobile-menu-item text-white/60 hover:text-white transition-colors duration-200 text-sm font-medium py-2"
+                href="/docs"
+                className="btn-primary btn-shine text-sm py-3 px-6 mt-4 inline-block text-center"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                {link.label}
+                Read Lightpaper
               </a>
-            ))}
-            <a href="/docs" className="mobile-menu-item btn-primary btn-shine text-sm py-3 px-6 mt-2 inline-block text-center">
-              Read Lightpaper
-            </a>
-          </nav>
-        </div>
+            </nav>
+          </div>
+        )}
       </div>
     </header>
   );
