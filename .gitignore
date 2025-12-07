@@ -135,10 +135,9 @@ tmp/
 temp/
 
 # ========================================
-# LARGE MEDIA FILES (NOT IN GIT)
-# Deployed via Cloudflare Pages from local build
+# LARGE MEDIA FILES
 # ========================================
-public/*.mp4
+# public/*.mp4  ← Video jetzt im Repo für Cloudflare
 public/*.mov
 public/*.webm
 public/*.avi
