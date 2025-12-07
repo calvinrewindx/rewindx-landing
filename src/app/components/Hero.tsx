@@ -116,7 +116,7 @@ export default function Hero() {
                 onPause={handleVideoPause}
                 onPlay={() => setIsPlaying(true)}
               >
-                <source src="/rewindxviedeodemo.mp4" type="video/mp4" />
+                <source src="/rewindx-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
