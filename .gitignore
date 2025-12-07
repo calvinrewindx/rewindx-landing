@@ -1,0 +1,153 @@
+# ========================================
+# DEPENDENCIES
+# ========================================
+node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ========================================
+# NEXT.JS BUILD & CACHE
+# ========================================
+/.next/
+/out/
+/build/
+/dist/
+.swc/
+
+# ========================================
+# ENVIRONMENT VARIABLES (CRITICAL)
+# ========================================
+.env
+.env.*
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
+*.env
+
+# ========================================
+# SECRETS & KEYS (CRITICAL)
+# ========================================
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.secret
+*.secrets
+secrets/
+private/
+credentials.json
+service-account.json
+*.keystore
+
+# ========================================
+# WALLET & CRYPTO (CRITICAL)
+# ========================================
+*.seed
+*.mnemonic
+wallet.json
+keystore/
+typechain/
+typechain-types/
+artifacts/
+cache/
+deployments/
+
+# ========================================
+# IDE & EDITOR
+# ========================================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.settings/
+*.sublime-*
+
+# ========================================
+# OS SYSTEM FILES
+# ========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ========================================
+# LOGS & DEBUG
+# ========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# ========================================
+# TESTING & COVERAGE
+# ========================================
+/coverage/
+.nyc_output/
+*.lcov
+.jest/
+
+# ========================================
+# TYPESCRIPT
+# ========================================
+*.tsbuildinfo
+next-env.d.ts
+
+# ========================================
+# DEPLOYMENT & HOSTING
+# ========================================
+.vercel/
+.netlify/
+.serverless/
+.firebase/
+firebase-debug.log
+.firebaserc
+
+# ========================================
+# MISC & TEMP FILES
+# ========================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+.cache/
+tmp/
+temp/
+
+# ========================================
+# LARGE MEDIA FILES (NOT IN GIT)
+# Deployed via Cloudflare Pages from local build
+# ========================================
+public/*.mp4
+public/*.mov
+public/*.webm
+public/*.avi
+public/*.mkv
+
+# ========================================
+# BACKUP & OLD VERSIONS
+# ========================================
+public/*-backup.*
+public/*.bak
+*-backup.*
+*.backup
