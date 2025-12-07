@@ -130,10 +130,10 @@ export default function Footer() {
                   <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /contact
                 </a>
                 <a
-                  href="/docs"
+                  href="/lightpaper"
                   className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
                 >
-                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /docs
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /lightpaper
                 </a>
               </div>
             </div>

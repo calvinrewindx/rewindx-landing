@@ -1,23 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { ArrowRight, Shield, Cpu, Coins, Play } from "lucide-react";
+import { ArrowRight, Shield, Cpu, Coins } from "lucide-react";
 import CtrlZAnimation from "./CtrlZAnimation";
 
 export default function Hero() {
-  const [hasStarted, setHasStarted] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handlePlayClick = () => {
-    if (videoRef.current) {
-      videoRef.current.play();
-      setHasStarted(true);
-    }
-  };
-
-  const handleVideoEnd = () => {
-    setHasStarted(false);
-  };
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-20">
@@ -102,43 +88,35 @@ export default function Hero() {
 
             {/* Video Container */}
             <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-cyan/20">
-              {/* Video */}
+              {/* Video - Autoplay muted loop */}
               <video
-                ref={videoRef}
                 className="w-full h-auto relative z-0"
-                controls={hasStarted}
-                preload="metadata"
-                onEnded={handleVideoEnd}
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls
               >
                 <source src="/rewindx-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-
-              {/* Custom Play Button Overlay */}
-              {!hasStarted && (
-                <button
-                  onClick={handlePlayClick}
-                  className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 transition-all duration-300 hover:bg-black/20 cursor-pointer group/play"
-                >
-                  <div className="relative">
-                    {/* Glow Ring */}
-                    <div className="absolute -inset-4 bg-cyan/30 rounded-full blur-xl animate-pulse" />
-                    {/* Play Button */}
-                    <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-cyan to-cyan/70 flex items-center justify-center shadow-lg shadow-cyan/50 group-hover/play:scale-110 transition-transform duration-300">
-                      <Play className="w-8 h-8 text-white ml-1" fill="white" />
-                    </div>
-                  </div>
-                  {/* Text */}
-                  <span className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/60 text-sm font-medium opacity-0 group-hover/play:opacity-100 transition-opacity duration-300">
-                    Watch Demo
-                  </span>
-                </button>
-              )}
             </div>
 
             {/* Bottom Reflection */}
             <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-cyan/10 to-transparent blur-xl rounded-full" />
           </div>
+        </div>
+
+        {/* Subtle Investor CTA */}
+        <div className="mt-12 text-center">
+          <a
+            href="/contact"
+            className="inline-flex items-center gap-2 text-white/40 hover:text-cyan/70 transition-colors text-base"
+          >
+            <span>Investor inquiries</span>
+            <span className="text-cyan/50">→</span>
+            <span className="font-mono text-sm">investors.rewindx@proton.me</span>
+          </a>
         </div>
       </div>
     </section>

@@ -43,7 +43,7 @@ export default function CTASection() {
             Follow Updates on X
           </a>
           <Link
-            href="/docs"
+            href="/lightpaper"
             className="btn-secondary flex items-center gap-2"
           >
             <FileText className="w-4 h-4" />

@@ -15,6 +15,7 @@ const nftTiers = [
 
 export default function NFTProof() {
   const [tiersOpen, setTiersOpen] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <section className="section relative overflow-visible py-24 sm:py-32">
@@ -49,8 +50,11 @@ export default function NFTProof() {
               <div className="absolute -inset-10 bg-gradient-to-br from-cyan/25 to-violet/25 blur-[100px] rounded-full pointer-events-none" />
 
               {/* Flip Card */}
-              <div className="flip-card-container cursor-pointer relative z-10">
-                <div className="flip-card-inner">
+              <div
+                className="flip-card-container cursor-pointer relative z-10"
+                onClick={() => setIsFlipped(!isFlipped)}
+              >
+                <div className={`flip-card-inner ${isFlipped ? 'flipped' : ''}`}>
 
                   {/* === FRONT SIDE === */}
                   <div className="flip-card-front">
@@ -172,7 +176,9 @@ export default function NFTProof() {
 
               {/* Info text below card */}
               <p className="text-white/40 text-xs mt-4 text-center max-w-[280px] mx-auto">
-                Visible in any NFT-compatible wallet. Automatically updated via on-chain metadata.
+                <span className="sm:hidden">Tap to flip · </span>
+                <span className="hidden sm:inline">Hover to flip · </span>
+                Visible in any NFT-compatible wallet.
               </p>
             </div>
           </div>
@@ -256,7 +262,7 @@ export default function NFTProof() {
                     return (
                       <div
                         key={index}
-                        className="flex items-center justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5"
+                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5 gap-1 sm:gap-0"
                       >
                         <span
                           className={`font-medium ${colorClasses[tier.color]}`}
@@ -264,12 +270,12 @@ export default function NFTProof() {
                         >
                           {tier.name}
                         </span>
-                        <div className="flex items-center gap-4 text-sm">
+                        <div className="flex items-center gap-3 sm:gap-4 text-sm">
                           <span className="text-emerald-400 font-medium">
-                            {tier.discount} Discount
+                            {tier.discount}
                           </span>
                           <span className="text-white/50">
-                            {tier.window} Window
+                            {tier.window}
                           </span>
                         </div>
                       </div>
