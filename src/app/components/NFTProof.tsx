@@ -4,11 +4,11 @@ import { useState } from "react";
 import { Award, RotateCcw, Shield, Layers, CheckCircle, FileCheck, Eye, ChevronDown } from "lucide-react";
 
 const nftTiers = [
-  { name: "Genesis", discount: "10%", window: "24h", color: "zinc" },
-  { name: "Gatekeeper", discount: "20%", window: "24h", color: "cyan" },
-  { name: "Enterprise", discount: "30%", window: "30h", color: "fuchsia" },
-  { name: "Prime", discount: "40%", window: "36h", color: "orange" },
-  { name: "Nexus", discount: "50%", window: "48h", color: "gold" },
+  { name: "Genesis", discount: "10%", window: "24h" },
+  { name: "Gatekeeper", discount: "20%", window: "24h" },
+  { name: "Enterprise", discount: "30%", window: "30h" },
+  { name: "Prime", discount: "40%", window: "36h" },
+  { name: "Nexus", discount: "50%", window: "48h" },
 ];
 
 // Note: Discounts apply to Protection Activation Fee only
@@ -51,8 +51,15 @@ export default function NFTProof() {
 
               {/* Flip Card */}
               <div
-                className="flip-card-container cursor-pointer relative z-10"
-                onClick={() => setIsFlipped(!isFlipped)}
+                className="flip-card-container cursor-pointer relative z-10 select-none"
+                role="button"
+                tabIndex={0}
+                onClick={() => setIsFlipped(prev => !prev)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setIsFlipped(prev => !prev);
+                  }
+                }}
               >
                 <div className={`flip-card-inner ${isFlipped ? 'flipped' : ''}`}>
 
@@ -246,32 +253,20 @@ export default function NFTProof() {
 
               <div
                 className={`overflow-hidden transition-all duration-300 ${
-                  tiersOpen ? "max-h-96 mt-3" : "max-h-0"
+                  tiersOpen ? "max-h-[800px] mt-3" : "max-h-0"
                 }`}
               >
                 <div className="space-y-2">
-                  {nftTiers.map((tier, index) => {
-                    const isGold = tier.color === "gold";
-                    const colorClasses: Record<string, string> = {
-                      "zinc": "text-zinc-400",
-                      "cyan": "text-cyan-400",
-                      "fuchsia": "text-fuchsia-400",
-                      "orange": "text-orange-400",
-                      "gold": "",
-                    };
-                    return (
+                  {nftTiers.map((tier, index) => (
                       <div
                         key={index}
                         className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5 gap-1 sm:gap-0"
                       >
-                        <span
-                          className={`font-medium ${colorClasses[tier.color]}`}
-                          style={isGold ? { color: "#FFD700" } : undefined}
-                        >
+                        <span className="font-medium text-white">
                           {tier.name}
                         </span>
                         <div className="flex items-center gap-3 sm:gap-4 text-sm">
-                          <span className="text-emerald-400 font-medium">
+                          <span className="text-cyan font-medium">
                             {tier.discount}
                           </span>
                           <span className="text-white/50">
@@ -279,8 +274,7 @@ export default function NFTProof() {
                           </span>
                         </div>
                       </div>
-                    );
-                  })}
+                    ))}
                 </div>
                 <p className="text-white/40 text-xs mt-3 text-center">
                   Discounts apply to Protection Activation Fees only. Rewind execution fees are risk-based and not discounted.

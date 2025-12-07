@@ -235,16 +235,16 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Desktop: hover to flip */
-@media (hover: hover) {
-  .flip-card-container:hover .flip-card-inner {
-    transform: rotateY(180deg);
-  }
-}
-
-/* Mobile: click/tap to flip */
+/* Flip via click/tap - works on all devices */
 .flip-card-inner.flipped {
   transform: rotateY(180deg);
+}
+
+/* Desktop only: also allow hover (but click still works) */
+@media (hover: hover) and (pointer: fine) {
+  .flip-card-container:hover .flip-card-inner:not(.flipped) {
+    transform: rotateY(180deg);
+  }
 }
 
 .flip-card-front,
