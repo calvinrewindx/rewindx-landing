@@ -5,22 +5,18 @@ import { ArrowRight, Shield, Cpu, Coins, Play } from "lucide-react";
 import CtrlZAnimation from "./CtrlZAnimation";
 
 export default function Hero() {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handlePlayClick = () => {
     if (videoRef.current) {
       videoRef.current.play();
-      setIsPlaying(true);
+      setHasStarted(true);
     }
   };
 
   const handleVideoEnd = () => {
-    setIsPlaying(false);
-  };
-
-  const handleVideoPause = () => {
-    setIsPlaying(false);
+    setHasStarted(false);
   };
 
   return (
@@ -110,18 +106,16 @@ export default function Hero() {
               <video
                 ref={videoRef}
                 className="w-full h-auto relative z-0"
-                controls={isPlaying}
+                controls={hasStarted}
                 preload="metadata"
                 onEnded={handleVideoEnd}
-                onPause={handleVideoPause}
-                onPlay={() => setIsPlaying(true)}
               >
                 <source src="/rewindx-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
 
               {/* Custom Play Button Overlay */}
-              {!isPlaying && (
+              {!hasStarted && (
                 <button
                   onClick={handlePlayClick}
                   className="absolute inset-0 z-20 flex items-center justify-center bg-black/40 transition-all duration-300 hover:bg-black/20 cursor-pointer group/play"
