@@ -108,7 +108,7 @@ export default function Hero() {
         </div>
 
         {/* Subtle Investor CTA */}
-        <div className="mt-12 text-center">
+        <div className="mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
           <a
             href="/contact"
             className="inline-flex items-center gap-2 text-white/40 hover:text-cyan/70 transition-colors text-base"
@@ -116,6 +116,17 @@ export default function Hero() {
             <span>Investor inquiries</span>
             <span className="text-cyan/50">→</span>
             <span className="font-mono text-sm">investors.rewindx@proton.me</span>
+          </a>
+          <span className="text-white/20 hidden sm:inline">|</span>
+          <a
+            href="https://x.com/calvinrewindx"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-white/40 hover:text-cyan/70 transition-colors text-sm"
+          >
+            <span>DMs open</span>
+            <span className="text-cyan/50">→</span>
+            <span className="font-mono">@calvinrewindx</span>
           </a>
         </div>
       </div>

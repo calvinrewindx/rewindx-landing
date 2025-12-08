@@ -152,7 +152,7 @@ export default function FAQ() {
               {/* Answer */}
               <div
                 className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? "max-h-48 pb-5" : "max-h-0"
+                  openIndex === index ? "max-h-96 pb-5" : "max-h-0"
                 }`}
               >
                 <p className="px-5 pl-[4.5rem] text-white/60 text-sm leading-relaxed">

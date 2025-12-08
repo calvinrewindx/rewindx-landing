@@ -103,6 +103,16 @@ export default function ContactPage() {
 
                 <CopyableEmail email="investors.rewindx@proton.me" variant="cyan" />
 
+                <a
+                  href="https://x.com/calvinrewindx"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 mt-3 text-white/40 hover:text-cyan/70 transition-colors text-sm"
+                >
+                  <span>Or DM on X:</span>
+                  <span className="font-mono text-cyan/70">@calvinrewindx</span>
+                </a>
+
                 <p className="text-white/40 text-xs mt-4">
                   Response time: 24–48 hours
                 </p>

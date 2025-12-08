@@ -2,6 +2,14 @@
 
 import { useEffect, useState, useRef } from "react";
 import { RotateCcw, Shield, Check } from "lucide-react";
+import Image from "next/image";
+
+// Token logos for orbiting
+const tokens = [
+  { symbol: "USDC", logo: "/tokens/usdc.png" },
+  { symbol: "USDT", logo: "/tokens/usdt.png" },
+  { symbol: "DAI", logo: "/tokens/dai.png" },
+];
 
 export default function CircularRewindAnimation() {
   const [phase, setPhase] = useState<"idle" | "filling" | "protected" | "rewind" | "complete">("idle");
@@ -9,6 +17,8 @@ export default function CircularRewindAnimation() {
   const [isVisible, setIsVisible] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [size, setSize] = useState(280);
+  const [activeToken, setActiveToken] = useState(0);
+  const [countdown, setCountdown] = useState(24);
   const ref = useRef<HTMLDivElement>(null);
 
   // Responsive size based on screen width
@@ -72,41 +82,55 @@ export default function CircularRewindAnimation() {
     }
 
     const runCycle = () => {
+      // Rotate token each cycle
+      setActiveToken(prev => (prev + 1) % tokens.length);
       setPhase("idle");
       setProgress(0);
+      setCountdown(24);
 
+      // Filling phase - smooth CSS transition
       setTimeout(() => {
         setPhase("filling");
-
-        let currentProgress = 0;
-        const fillInterval = setInterval(() => {
-          currentProgress += 3; // Faster increment for better performance
-          setProgress(currentProgress);
-          if (currentProgress >= 75) {
-            clearInterval(fillInterval);
-            setPhase("protected");
-          }
-        }, 50); // 50ms instead of 40ms
+        setProgress(75);
       }, 500);
 
+      // Countdown from 24 to 6 during filling (500ms to 2000ms = 1500ms)
+      for (let i = 0; i <= 18; i++) {
+        setTimeout(() => {
+          setCountdown(24 - i);
+        }, 500 + i * 83);
+      }
+
+      // Protected phase
+      setTimeout(() => {
+        setPhase("protected");
+        setCountdown(6);
+      }, 2000);
+
+      // Rewind phase - smooth CSS transition
       setTimeout(() => {
         setPhase("rewind");
-
-        let currentProgress = 75;
-        const rewindInterval = setInterval(() => {
-          currentProgress -= 5; // Faster decrement
-          setProgress(Math.max(0, currentProgress));
-          if (currentProgress <= 0) {
-            clearInterval(rewindInterval);
-            setPhase("complete");
-          }
-        }, 40); // 40ms instead of 30ms
+        setProgress(0);
       }, 3500);
 
+      // Count back up from 6 to 24 during rewind (3500ms to 4700ms = 1200ms)
+      for (let i = 0; i <= 18; i++) {
+        setTimeout(() => {
+          setCountdown(6 + i);
+        }, 3500 + i * 67);
+      }
+
+      // Complete phase
+      setTimeout(() => {
+        setPhase("complete");
+      }, 4700);
+
+      // Reset
       setTimeout(() => {
         setPhase("idle");
         setProgress(0);
-      }, 5500);
+        setCountdown(24);
+      }, 6000);
     };
 
     runCycle();
@@ -116,10 +140,10 @@ export default function CircularRewindAnimation() {
 
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
-  // Token position on circle
-  const tokenAngle = (progress / 100) * 270 - 135;
-  const tokenX = size / 2 + radius * 0.85 * Math.cos((tokenAngle * Math.PI) / 180);
-  const tokenY = size / 2 + radius * 0.85 * Math.sin((tokenAngle * Math.PI) / 180);
+  // Token position - follows the progress ring (starts at top, moves clockwise)
+  const tokenAngle = -90 + (progress / 100) * 360;
+  const tokenX = size / 2 + radius * Math.cos((tokenAngle * Math.PI) / 180);
+  const tokenY = size / 2 + radius * Math.sin((tokenAngle * Math.PI) / 180);
 
   // Center content size scales with main size
   const centerSize = Math.round(size * 0.45);
@@ -168,7 +192,7 @@ export default function CircularRewindAnimation() {
             strokeLinecap="round"
             strokeDasharray={circumference}
             strokeDashoffset={strokeDashoffset}
-            className="transition-[stroke-dashoffset] duration-75"
+            className="transition-[stroke-dashoffset] duration-[1500ms] ease-out"
           />
 
           {/* Gradient Definitions */}
@@ -189,25 +213,29 @@ export default function CircularRewindAnimation() {
         </svg>
 
         {/* Orbiting Token */}
-        {progress > 0 && phase !== "complete" && !prefersReducedMotion && (
+        {(progress > 0 || phase === "rewind") && phase !== "complete" && !prefersReducedMotion && (
           <div
-            className="absolute w-7 h-7 sm:w-8 sm:h-8 will-change-transform"
+            className="absolute w-10 h-10 sm:w-12 sm:h-12 transition-all duration-[1500ms] ease-out -translate-x-1/2 -translate-y-1/2"
             style={{
-              transform: `translate(${tokenX - size/2}px, ${tokenY - size/2}px)`,
-              left: "50%",
-              top: "50%",
-              marginLeft: "-14px",
-              marginTop: "-14px",
+              left: tokenX,
+              top: tokenY,
             }}
           >
-            <div className={`w-full h-full rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-colors duration-300 ${
+            <div className={`w-full h-full rounded-full overflow-hidden border-2 transition-all duration-300 ${
               phase === "rewind"
-                ? "bg-cyan shadow-lg shadow-cyan/50"
+                ? "border-cyan shadow-lg shadow-cyan/50 scale-110"
                 : phase === "protected"
-                ? "bg-violet shadow-lg shadow-violet/50"
-                : "bg-cyan shadow-lg shadow-cyan/40"
+                ? "border-violet shadow-lg shadow-violet/50"
+                : "border-cyan/50 shadow-lg shadow-cyan/30"
             }`}>
-              $
+              <Image
+                src={tokens[activeToken].logo}
+                alt={tokens[activeToken].symbol}
+                width={40}
+                height={40}
+                className="w-full h-full object-cover bg-white"
+                unoptimized
+              />
             </div>
           </div>
         )}
@@ -245,9 +273,9 @@ export default function CircularRewindAnimation() {
               "text-white/50"
             }`}>
               {phase === "complete" ? "DONE" :
-               phase === "rewind" ? "REWIND" :
-               phase === "protected" ? `${Math.round(24 * (1 - progress/100))}h left` :
-               phase === "filling" ? `${Math.round(24 * progress/100)}h` :
+               phase === "rewind" ? `${countdown}h` :
+               phase === "protected" ? `${countdown}h left` :
+               phase === "filling" ? `${countdown}h` :
                "24h"}
             </div>
           </div>
@@ -322,7 +350,7 @@ export default function CircularRewindAnimation() {
       <div className="mt-3 sm:mt-4 hidden xs:flex items-center gap-4 sm:gap-6 text-[10px] sm:text-xs text-white/40 font-mono">
         <div className="flex items-center gap-1.5 sm:gap-2">
           <div className="w-2.5 sm:w-3 h-0.5 sm:h-1 rounded-full bg-cyan" />
-          <span>Time elapsed</span>
+          <span>Time remaining</span>
         </div>
         <div className="flex items-center gap-1.5 sm:gap-2">
           <div className="w-2.5 sm:w-3 h-0.5 sm:h-1 rounded-full bg-violet" />
