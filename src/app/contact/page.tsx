@@ -114,7 +114,7 @@ export default function ContactPage() {
                 </a>
 
                 <p className="text-white/40 text-xs mt-4">
-                  Response time: 24–48 hours
+                  Written inquiries preferred · 24–48h response
                 </p>
               </div>
             </div>
@@ -143,7 +143,7 @@ export default function ContactPage() {
                 <CopyableEmail email="contact.rewindx@proton.me" variant="violet" />
 
                 <p className="text-white/40 text-xs mt-4">
-                  Response time: 24–48 hours
+                  Written inquiries preferred · 24–48h response
                 </p>
               </div>
             </div>

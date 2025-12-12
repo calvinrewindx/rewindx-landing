@@ -39,8 +39,8 @@ export default function InvestorInfo() {
                   for crypto.
                 </h2>
                 <p className="text-white/50 text-lg mb-8 max-w-md leading-relaxed">
-                  Angel bridge round (token-only). Open to infra-focused angels,
-                  wallet builders, exchanges, and ecosystem funds.
+                  Pre-seed bridge round. Token-based. Open to infrastructure-focused
+                  angels and ecosystem funds.
                 </p>
 
                 <a
@@ -51,10 +51,20 @@ export default function InvestorInfo() {
                     className="text-white font-semibold"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
-                    Get in Touch
+                    Start Conversation
                   </span>
                   <ArrowRight className="w-5 h-5 text-cyan group-hover:translate-x-1 transition-transform duration-300" />
                 </a>
+
+                {/* Self-Service Links */}
+                <div className="mt-6 flex flex-wrap gap-4 text-sm">
+                  <a href="/architecture" className="text-white/40 hover:text-cyan transition-colors">
+                    Architecture →
+                  </a>
+                  <a href="/lightpaper" className="text-white/40 hover:text-cyan transition-colors">
+                    Lightpaper →
+                  </a>
+                </div>
               </div>
 
               {/* Right: Statement */}

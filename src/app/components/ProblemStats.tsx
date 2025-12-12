@@ -5,14 +5,14 @@ import { AlertTriangle, Users, Building2 } from "lucide-react";
 const stats = [
   {
     icon: AlertTriangle,
-    value: "$10B+",
+    value: "Billions",
     label: "Annual Losses",
     sublabel: "Irreversible transfers",
     color: "red",
   },
   {
     icon: Users,
-    value: "60%",
+    value: "Majority",
     label: "Fear Mistakes",
     sublabel: "Permanent errors",
     color: "amber",

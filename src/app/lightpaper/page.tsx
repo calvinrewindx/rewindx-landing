@@ -35,7 +35,7 @@ export default function DocsPage() {
       // Horizontal rules
       .replace(/^---$/gm, '<hr class="my-8 border-white/10" />')
       // List items
-      .replace(/^- (.*$)/gm, '<li class="flex items-start gap-2 text-white/60 mb-2"><span class="text-cyan mt-1.5">•</span><span>$1</span></li>')
+      .replace(/^- (.*$)/gm, '<li class="flex items-start gap-3 text-white/60 mb-3"><span class="text-cyan text-lg leading-6">•</span><span class="flex-1">$1</span></li>')
       // Paragraphs
       .replace(/\n\n/g, '</p><p class="text-white/60 leading-relaxed mb-4">');
   };

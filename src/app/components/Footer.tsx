@@ -135,6 +135,12 @@ export default function Footer() {
                 >
                   <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /lightpaper
                 </a>
+                <a
+                  href="/architecture"
+                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
+                >
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /architecture
+                </a>
               </div>
             </div>
           </div>

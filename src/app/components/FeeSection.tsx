@@ -77,7 +77,7 @@ export default function FeeSection() {
         </div>
 
         {/* Expandable Cards */}
-        <div className="space-y-4 mb-14">
+        <div className="space-y-5 mb-14">
           {/* Protection Activation Fee */}
           <div className={`rounded-xl border transition-all duration-300 overflow-hidden ${openCard === 'protection' ? 'border-cyan/40 bg-cyan/[0.03]' : 'border-white/10 bg-white/[0.02]'}`}>
             <button
@@ -153,7 +153,7 @@ export default function FeeSection() {
               <ChevronDown className={`w-5 h-5 text-white/40 transition-transform duration-300 ${openCard === 'rewind' ? 'rotate-180 text-violet' : ''}`} />
             </button>
 
-            <div className={`transition-all duration-300 ${openCard === 'rewind' ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
+            <div className={`transition-all duration-300 ${openCard === 'rewind' ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'} overflow-hidden`}>
               <div className="px-5 pb-5 pt-0">
                 <div className="p-4 rounded-lg bg-white/[0.03] border border-white/5">
                   <p className="text-white/60 text-sm mb-4">

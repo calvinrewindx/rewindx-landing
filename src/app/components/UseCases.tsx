@@ -15,8 +15,8 @@ const useCases = [
     icon: Building2,
     title: "Enterprise Ready",
     description:
-      "Trusted for treasury operations and",
-    highlight: "automated payouts.",
+      "Designed for multi-signature setups, batched treasury workflows, and",
+    highlight: "on-chain audit trails.",
     color: "violet",
   },
   {
@@ -31,8 +31,8 @@ const useCases = [
     icon: Bot,
     title: "AI Agent Safety",
     description:
-      "Autonomous transactions with",
-    highlight: "built in safety guarantees for AI driven economies.",
+      "Autonomous agents can execute protected transfers with",
+    highlight: "built-in rollback capability.",
     color: "violet",
   },
 ];

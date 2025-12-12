@@ -11,9 +11,9 @@ const principles = [
   },
   {
     icon: KeyRound,
-    title: "No Admin Keys",
+    title: "Trust-Minimized Controls",
     description:
-      "No privileged access. No operator can modify, pause, or override transfers.",
+      "Administrative functions are bounded and cannot move user funds. Emergency pause halts new operations only — balances remain in place.",
   },
   {
     icon: Wallet,
@@ -38,8 +38,11 @@ export default function SecurityPrinciples() {
           >
             Security <span className="gradient-text">Principles</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-white/60 text-lg max-w-2xl mx-auto mb-3">
             Built on transparency and trust minimization
+          </p>
+          <p className="text-white/40 text-sm max-w-2xl mx-auto">
+            Protected execution for operational transfers — strict finality for DeFi-critical flows.
           </p>
         </div>
 
@@ -67,6 +70,31 @@ export default function SecurityPrinciples() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Scope Clarification */}
+        <div className="mt-16 pt-10 border-t border-white/5">
+          <div className="max-w-2xl mx-auto text-center">
+            <p className="text-cyan/60 text-xs font-mono tracking-[0.2em] mb-6">
+              PREVENTIVE SAFETY LAYER · NOT RECOVERY OR INSURANCE
+            </p>
+            <div className="glass-card p-6 border border-white/5">
+              <ul className="text-white/40 text-sm space-y-3">
+                <li className="flex items-center justify-center gap-3">
+                  <span className="w-1 h-1 rounded-full bg-cyan/50" />
+                  <span>Mitigates sender-side mistakes within a bounded time window</span>
+                </li>
+                <li className="flex items-center justify-center gap-3">
+                  <span className="w-1 h-1 rounded-full bg-cyan/50" />
+                  <span>Assumes standard wallet security practices by the user</span>
+                </li>
+                <li className="flex items-center justify-center gap-3">
+                  <span className="w-1 h-1 rounded-full bg-cyan/50" />
+                  <span>After window expiry, finality is absolute by design</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

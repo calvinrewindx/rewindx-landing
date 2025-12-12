@@ -102,6 +102,11 @@ export default function Hero() {
               </video>
             </div>
 
+            {/* Video Label */}
+            <p className="mt-4 text-center text-white/50 text-xs font-mono tracking-wider">
+              System flow walkthrough
+            </p>
+
             {/* Bottom Reflection */}
             <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-cyan/10 to-transparent blur-xl rounded-full" />
           </div>

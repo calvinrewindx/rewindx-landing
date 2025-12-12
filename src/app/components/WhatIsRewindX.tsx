@@ -45,8 +45,8 @@ export default function WhatIsRewindX() {
           </p>
           <p className="text-white/50 text-base max-w-3xl mx-auto leading-relaxed">
             Rewind X introduces a deterministic, non-custodial undo window for
-            ERC-20 transfers. Fully on-chain, rule-based, and without admin
-            keys. Finally, a safety layer that protects users without
+            ERC-20 transfers. Fully on-chain, rule-based, with trust-minimized
+            controls. Finally, a safety layer that protects users without
             compromising decentralization.
           </p>
         </div>
