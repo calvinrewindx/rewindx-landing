@@ -28,7 +28,7 @@ export default function ArchitecturePage() {
     // Extract code blocks first (protect from other transformations)
     html = html.replace(/```([\s\S]*?)```/g, (_match, code) => {
       const index = codeBlocks.length;
-      codeBlocks.push(`<pre class="bg-white/5 border border-white/10 rounded-xl p-6 overflow-x-auto my-8 font-mono text-sm text-cyan/80 leading-relaxed whitespace-pre">${code.trim()}</pre>`);
+      codeBlocks.push(`<pre class="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-6 overflow-x-auto my-8 font-mono text-[10px] sm:text-xs md:text-sm text-cyan/80 leading-relaxed whitespace-pre min-w-max">${code.trim()}</pre>`);
       return `__CODE_BLOCK_${index}__`;
     });
 
