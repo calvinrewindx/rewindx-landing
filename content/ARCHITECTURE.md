@@ -9,36 +9,36 @@ Deterministic, non-custodial infrastructure for reversible ERC-20 transfers.
 ## System Flow
 
 ```
-┌─────────────────┐
-│   User Wallet   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Transfer Layer │  ← Protected transfer creation, claims, rewind intents
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│   State Ledger  │  ← Single source of truth for transfer lifecycle
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  Risk & Safety  │  ← Deterministic gates: limits, cooldowns, integrity checks
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    ▼         ▼
-┌───────┐ ┌───────┐
-│Rewind │ │Final- │
-│       │ │ize    │
-└───┬───┘ └───────┘
-    │
-    ▼
-┌─────────────────┐
-│  Proof Layer    │  ← On-chain rewind attestation
-└─────────────────┘
++-----------------+
+|   User Wallet   |
++--------+--------+
+         |
+         v
++-----------------+
+|  Transfer Layer |  <- Protected transfer creation, claims, rewind intents
++--------+--------+
+         |
+         v
++-----------------+
+|   State Ledger  |  <- Single source of truth for transfer lifecycle
++--------+--------+
+         |
+         v
++-----------------+
+|  Risk & Safety  |  <- Deterministic gates: limits, cooldowns, integrity checks
++--------+--------+
+         |
+    +----+----+
+    v         v
++-------+ +-------+
+|Rewind | |Final- |
+|       | |ize    |
++---+---+ +-------+
+    |
+    v
++-----------------+
+|  Proof Layer    |  <- On-chain rewind attestation
++-----------------+
 ```
 
 All user-initiated state changes pass through a single canonical entry layer. Internal modules are strictly composable and cannot be invoked directly by users.
@@ -65,23 +65,23 @@ Rewind X introduces a protected execution window for operational transfers, whil
 ```
                     ERC-20 Transfer Flow
 
-            ┌──────────────────────────┐
-            │        User Wallet       │
-            └────────────┬─────────────┘
-                         │
-        ┌────────────────┴────────────────┐
-        │                                 │
-        ▼                                 ▼
+            +--------------------------+
+            |        User Wallet       |
+            +------------+-------------+
+                         |
+        +----------------+----------------+
+        |                                 |
+        v                                 v
 
-┌───────────────────────┐      ┌────────────────────────┐
-│    Protected Rail     │      │       Final Rail       │
-│   (Rewind X Layer)    │      │    (DEX / Trading)     │
-├───────────────────────┤      ├────────────────────────┤
-│ • Time-bounded window │      │ • Immediate finality   │
-│ • Sender can rewind   │      │ • No rewind possible   │
-│ • Mistake mitigation  │      │ • Full composability   │
-│ • Proof on rewind     │      │ • Liquidity & trading  │
-└───────────────────────┘      └────────────────────────┘
++-----------------------+      +------------------------+
+|    Protected Rail     |      |       Final Rail       |
+|   (Rewind X Layer)    |      |    (DEX / Trading)     |
++-----------------------+      +------------------------+
+| - Time-bounded window |      | - Immediate finality   |
+| - Sender can rewind   |      | - No rewind possible   |
+| - Mistake mitigation  |      | - Full composability   |
+| - Proof on rewind     |      | - Liquidity & trading  |
++-----------------------+      +------------------------+
 ```
 
 Users choose the appropriate rail based on use case. Safety-critical transfers use the Protected Rail. Trading and DeFi interactions use the Final Rail.
