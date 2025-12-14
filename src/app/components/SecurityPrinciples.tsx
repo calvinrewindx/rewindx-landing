@@ -13,13 +13,13 @@ const principles = [
     icon: KeyRound,
     title: "Trust-Minimized Controls",
     description:
-      "Administrative functions are bounded and cannot move user funds. Emergency pause halts new operations only — balances remain in place.",
+      "Administrative functions are bounded and cannot move user funds. Emergency pause can halt operations. Balances always remain in place.",
   },
   {
     icon: Wallet,
     title: "Non-Custodial Fund Flow",
     description:
-      "Your assets always remain under your control. Rewind X never takes custody.",
+      "Funds are held under deterministic smart contract rules during protected transfers. No admin keys can move them.",
   },
 ];
 

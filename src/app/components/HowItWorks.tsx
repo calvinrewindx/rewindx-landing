@@ -9,8 +9,8 @@ const steps = [
     icon: Send,
     title: "Create Protected Transfer",
     description:
-      "Send any ERC-20 using protected mode. The funds enter a time-bounded non-custodial state.",
-    bullets: ["Sender retains full control", "Funds remain under deterministic protocol rules", "State transitions are enforced by fixed on-chain rules"],
+      "Send any ERC-20 using protected mode. Funds enter a time-bounded, contract-held state (non-custodial).",
+    bullets: ["No admin keys can move funds", "Funds are held under deterministic on-chain rules", "State transitions are enforced by fixed on-chain rules"],
     color: "cyan",
   },
   {
@@ -18,8 +18,8 @@ const steps = [
     icon: Clock,
     title: "Active Undo Window (24h)",
     description:
-      "The sender can initiate a rewind anytime during the active window. After expiry, the transfer becomes final.",
-    bullets: ["NFT tiers unlock extended windows up to 48h"],
+      "The sender can initiate a rewind anytime during the active window.",
+    bullets: ["NFT tiers unlock extended windows up to 48h", "After expiry, rewinds are no longer possible; the recipient can finalize (pull-based)"],
     color: "violet",
   },
   {
@@ -36,8 +36,8 @@ const steps = [
     icon: Award,
     title: "On-Chain Proof",
     description:
-      "Each successful rewind mints a Fragment NFT: a permanent, verifiable audit artifact.",
-    bullets: ["Immutable proof", "Publicly visible on-chain"],
+      "Each successful rewind mints/updates a Fragment NFT: a tamper-evident audit artifact.",
+    bullets: ["Tamper-evident proof index", "Publicly visible on-chain", "Underlying records/events remain immutable"],
     color: "violet",
   },
 ];

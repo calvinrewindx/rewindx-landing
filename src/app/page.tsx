@@ -8,6 +8,7 @@ import UserStory from "./components/UserStory";
 import MultiTokenPreview from "./components/MultiTokenPreview";
 import NFTProof from "./components/NFTProof";
 import FeeSection from "./components/FeeSection";
+import RewindSimulator from "./components/RewindSimulator";
 import SecurityPrinciples from "./components/SecurityPrinciples";
 import FAQ from "./components/FAQ";
 import InvestorInfo from "./components/InvestorInfo";
@@ -47,6 +48,9 @@ export default function Home() {
       </ScrollReveal>
       <ScrollReveal>
         <FeeSection />
+      </ScrollReveal>
+      <ScrollReveal delay={100}>
+        <RewindSimulator />
       </ScrollReveal>
       <ScrollReveal delay={100}>
         <div id="security">

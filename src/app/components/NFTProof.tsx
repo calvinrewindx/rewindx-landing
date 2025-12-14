@@ -36,7 +36,7 @@ export default function NFTProof() {
             On-Chain <span className="gradient-text">Proof</span> of Successful Rewinds
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            A single, user-bound proof token. Minted once per wallet, updated after each successful rewind.
+            A transferable proof index. Minted on first rewind, updated with cumulative stats on each subsequent rewind.
           </p>
         </div>
 
@@ -144,7 +144,7 @@ export default function NFTProof() {
 
                         {/* Description */}
                         <p className="text-white/60 text-sm leading-relaxed mb-6">
-                          Immutable Proof-of-Rewind. On-chain audit trail for transaction reversal. Automatically minted on first rewind.
+                          Tamper-evident Proof Index. On-chain audit trail for reversals.
                         </p>
 
                         {/* What each Fragment contains */}
@@ -172,7 +172,7 @@ export default function NFTProof() {
 
                         {/* Note */}
                         <p className="text-white/40 text-[11px] mt-auto pt-3 border-t border-white/5">
-                          Fragments do not grant fee discounts. Only Utility NFTs reduce fees.
+                          Fragments are an updatable index; underlying transfer records and events remain immutable. No fee discounts.
                         </p>
                       </div>
                     </div>
@@ -196,10 +196,10 @@ export default function NFTProof() {
               className="text-2xl font-bold text-white mb-6"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Permanent Audit Trail
+              Tamper-Evident Audit Trail
             </h3>
             <p className="text-white/50 mb-8 leading-relaxed">
-              Automatically minted on your first rewind. Updated with each successful execution. No fee discounts. Fragments are proof, not utility.
+              Updated with each successful execution. No fee discounts. Fragments are proof, not utility.
             </p>
 
             {/* Feature List */}
@@ -210,7 +210,7 @@ export default function NFTProof() {
                 </div>
                 <div>
                   <h4 className="text-white font-semibold mb-1">Automatic Minting</h4>
-                  <p className="text-white/50 text-sm">Created on your first successful rewind. One Fragment per wallet, updated with each execution.</p>
+                  <p className="text-white/50 text-sm">Minted on your first successful rewind. Updated with cumulative stats on each subsequent rewind. Transferable.</p>
                 </div>
               </div>
 
@@ -279,6 +279,31 @@ export default function NFTProof() {
                 <p className="text-white/40 text-xs mt-3 text-center">
                   Discounts apply to Protection Activation Fees only. Rewind execution fees are risk-based and not discounted.
                 </p>
+
+                {/* Enterprise+ capabilities note */}
+                <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-violet/[0.08] to-cyan/[0.05] border border-white/10">
+                  <div className="flex items-start gap-3">
+                    <Layers className="w-5 h-5 text-violet flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="text-white/70 text-sm font-medium mb-2">
+                        Gatekeeper+ tiers unlock:
+                      </p>
+                      <ul className="space-y-1 mb-3">
+                        <li className="flex items-center gap-2 text-white/50 text-xs">
+                          <CheckCircle className="w-3 h-3 text-cyan" />
+                          Batch execution
+                        </li>
+                        <li className="flex items-center gap-2 text-white/50 text-xs">
+                          <CheckCircle className="w-3 h-3 text-cyan" />
+                          Team-based flows
+                        </li>
+                      </ul>
+                      <p className="text-white/30 text-[11px]">
+                        Core transfer rules remain on-chain and deterministic.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

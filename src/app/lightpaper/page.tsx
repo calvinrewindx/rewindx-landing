@@ -9,7 +9,7 @@ export default function DocsPage() {
   let hasLightpaper = false;
 
   try {
-    const filePath = join(process.cwd(), "content", "Rewind_X_Lightpaper_PUBLIC_v1.1.md");
+    const filePath = join(process.cwd(), "content", "Rewind_X_Lightpaper_PUBLIC_v1.2.md");
     if (existsSync(filePath)) {
       content = readFileSync(filePath, "utf-8");
       hasLightpaper = true;

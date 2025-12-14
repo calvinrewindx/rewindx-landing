@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "Is Rewind X custodial?",
     answer:
-      "No. Rewind X never takes custody of user funds. During a protected transfer, assets remain under the sender's authority and can only move according to deterministic on-chain rules.",
+      "No. Rewind X is non-custodial: funds are held by smart contracts under deterministic on-chain rules. No admin key can move or redirect user funds. During the active window, only the sender can execute a rewind; after expiry, only the recipient can claim the held amount.",
     icon: Shield,
     color: "cyan",
   },
@@ -21,9 +21,16 @@ const faqs = [
   {
     question: "What happens when the 24h / 48h window expires?",
     answer:
-      "After the window expires, the transfer becomes final and behaves exactly like a normal ERC-20 transfer. No rewinds are possible beyond the window.",
+      "After the window expires, the transfer becomes claimable by the recipient. No rewinds are possible beyond the window. Settlement is finalized when the recipient claims.",
     icon: Clock,
     color: "cyan",
+  },
+  {
+    question: "Does the recipient receive the full amount?",
+    answer:
+      "Protected transfers settle as net amounts: the protection fee is deducted at creation, so the recipient receives the held (net) amount. If a rewind is executed, the sender recovers the held amount minus the rewind execution fee.",
+    icon: Coins,
+    color: "violet",
   },
   {
     question: "Does Rewind X modify Ethereum or BNB Chain finality?",
@@ -49,9 +56,16 @@ const faqs = [
   {
     question: "Can receivers skip the waiting period and claim instantly?",
     answer:
-      "No. During the active rewind window, only the sender can act. The receiver cannot claim or finalize early. Once the window expires, the transfer either finalizes automatically or can be claimed where supported.",
+      "No. During the active rewind window, only the sender can act. The recipient cannot claim early. After expiry, the recipient must claim (pull-based) to receive the held amount.",
     icon: CheckCircle,
     color: "cyan",
+  },
+  {
+    question: "What happens if the recipient never claims?",
+    answer:
+      "After the window expires, the transfer is finalizable by the recipient (pull-based). If the recipient never finalizes, the net amount remains held under deterministic contract rules until it is finalized. It is not auto-released or returned by the protocol.",
+    icon: Clock,
+    color: "violet",
   },
   {
     question: "Which tokens are supported?",
