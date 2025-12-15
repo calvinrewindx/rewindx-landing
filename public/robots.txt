@@ -1,0 +1,8 @@
+# Rewind X Protocol
+# https://rewindx.io
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://rewindx.io/sitemap.xml

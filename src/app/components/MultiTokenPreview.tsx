@@ -88,34 +88,37 @@ export default function MultiTokenPreview() {
           <div className="absolute inset-0 bg-gradient-to-r from-cyan/10 via-violet/10 to-cyan/10 blur-[60px] rounded-3xl" />
 
           <div className="relative glass-card p-8 sm:p-10">
-            <div className="flex flex-col lg:flex-row items-center gap-8">
+            <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
               {/* RWXT Token */}
-              <div className="flex items-center gap-4">
-                <div className="w-16 h-16 aspect-square rounded-full overflow-hidden border-2 border-cyan/30 flex-shrink-0">
+              <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+                <div className="w-24 h-24 sm:w-32 sm:h-32 aspect-square rounded-full overflow-hidden flex-shrink-0">
                   <Image
-                    src="/token.jpeg"
+                    src="/tokenlogo.png"
                     alt="RWXT"
-                    width={64}
-                    height={64}
-                    className="w-full h-full object-cover"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-contain"
+                    unoptimized
                   />
                 </div>
                 <div>
                   <h3
-                    className="text-xl font-bold text-white"
+                    className="text-lg sm:text-xl font-bold text-white"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
                     RWXT Optional Utility
                   </h3>
-                  <p className="text-white/50 text-sm mb-2">Enhances usage. Not required for basic transfers.</p>
+                  <p className="text-white/50 text-xs sm:text-sm mb-2">Enhances usage. Not required for basic transfers.</p>
                   <ul className="space-y-1">
-                    <li className="text-white/40 text-xs flex items-start gap-2">
-                      <span className="text-cyan mt-1">•</span>
-                      <span>Basic protected transfers are paid in the token you are sending (e.g. USDC, USDT).</span>
+                    <li className="text-white/40 text-[10px] sm:text-xs flex items-start gap-2">
+                      <span className="text-cyan mt-0.5">•</span>
+                      <span className="hidden sm:inline">Basic protected transfers are paid in the token you are sending (e.g. USDC, USDT).</span>
+                      <span className="sm:hidden">Fees paid in token you send (USDC, USDT, etc.)</span>
                     </li>
-                    <li className="text-white/40 text-xs flex items-start gap-2">
-                      <span className="text-cyan mt-1">•</span>
-                      <span>RWXT is only required if you want to acquire NFT utility tiers (Genesis → Nexus).</span>
+                    <li className="text-white/40 text-[10px] sm:text-xs flex items-start gap-2">
+                      <span className="text-cyan mt-0.5">•</span>
+                      <span className="hidden sm:inline">RWXT is only required if you want to acquire NFT utility tiers (Genesis → Nexus).</span>
+                      <span className="sm:hidden">RWXT only for NFT tiers (Genesis → Nexus)</span>
                     </li>
                   </ul>
                 </div>
@@ -126,65 +129,53 @@ export default function MultiTokenPreview() {
               <div className="lg:hidden w-full h-px bg-white/10" />
 
               {/* Benefits */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center flex-shrink-0">
-                    <Shield className="w-4 h-4 text-cyan" />
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4">
+                <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                    <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                   </div>
-                  <div>
-                    <p className="text-white text-sm font-medium">Utility NFTs</p>
-                    <p className="text-white/40 text-xs">Genesis → Nexus</p>
-                  </div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Utility NFTs</p>
+                  <p className="text-white/40 text-[10px] sm:text-xs mt-1">Genesis → Nexus</p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-violet/10 border border-violet/30 flex items-center justify-center flex-shrink-0">
-                    <Percent className="w-4 h-4 text-violet" />
+                <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                    <Percent className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                   </div>
-                  <div>
-                    <p className="text-white text-sm font-medium">Fee Discounts</p>
-                    <p className="text-white/40 text-xs">On activation fees</p>
-                  </div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Fee Discounts</p>
+                  <p className="text-white/40 text-[10px] sm:text-xs mt-1">On activation fees</p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-4 h-4 text-cyan" />
+                <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                    <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                   </div>
-                  <div>
-                    <p className="text-white text-sm font-medium">Extended Windows</p>
-                    <p className="text-white/40 text-xs">Up to 48h</p>
-                  </div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Extended Windows</p>
+                  <p className="text-white/40 text-[10px] sm:text-xs mt-1">Up to 48h</p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-violet/10 border border-violet/30 flex items-center justify-center flex-shrink-0">
-                    <TrendingUp className="w-4 h-4 text-violet" />
+                <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                    <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                   </div>
-                  <div>
-                    <p className="text-white text-sm font-medium">Higher Limits</p>
-                    <p className="text-white/40 text-xs">Daily protected capacity</p>
-                  </div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Higher Limits</p>
+                  <p className="text-white/40 text-[10px] sm:text-xs mt-1">Daily capacity</p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-cyan/10 border border-cyan/30 flex items-center justify-center flex-shrink-0">
-                    <Layers className="w-4 h-4 text-cyan" />
+                <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                    <Layers className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                   </div>
-                  <div>
-                    <p className="text-white text-sm font-medium">Batch Operations</p>
-                    <p className="text-white/40 text-xs">Higher tiers</p>
-                  </div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Batch Ops</p>
+                  <p className="text-white/40 text-[10px] sm:text-xs mt-1">Higher tiers</p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-violet/10 border border-violet/30 flex items-center justify-center flex-shrink-0">
-                    <Vote className="w-4 h-4 text-violet" />
+                <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                    <Vote className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                   </div>
-                  <div>
-                    <p className="text-white text-sm font-medium">Governance</p>
-                    <p className="text-white/40 text-xs">Off-chain (future)</p>
-                  </div>
+                  <p className="text-white text-xs sm:text-sm font-medium">Governance</p>
+                  <p className="text-white/40 text-[10px] sm:text-xs mt-1">Off-chain</p>
                 </div>
               </div>
             </div>

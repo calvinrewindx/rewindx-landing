@@ -46,12 +46,6 @@ export default function Footer() {
           <div className="absolute -bottom-1 -left-1 w-3 h-3 border-l border-b border-cyan/40" />
           <div className="absolute -bottom-1 -right-1 w-3 h-3 border-r border-b border-cyan/40" />
 
-          {/* Center Crosshair */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-20">
-            <div className="w-px h-16 bg-gradient-to-b from-transparent via-cyan to-transparent" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-px bg-gradient-to-r from-transparent via-cyan to-transparent" />
-          </div>
-
           {/* Content Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 items-center">
             {/* Left: Technical Spec */}
@@ -74,28 +68,24 @@ export default function Footer() {
 
             {/* Center: Logo & Brand */}
             <div className="flex flex-col items-center">
-              {/* Blueprint Circle */}
-              <div className="relative mb-4">
-                {/* Outer ring */}
-                <div className="absolute inset-0 w-20 h-20 rounded-full border border-dashed border-cyan/20 animate-[spin_20s_linear_infinite]" />
-                {/* Inner ring */}
-                <div className="absolute inset-2 w-16 h-16 rounded-full border border-cyan/10" />
+              {/* Logo with Glow + Pulsing Brackets */}
+              <div className="relative mb-3">
+                {/* Pulsing glow behind logo */}
+                <div className="absolute -inset-4 bg-cyan/10 blur-xl rounded-full animate-pulse" />
+                {/* Pulsing corner brackets */}
+                <div className="absolute -left-1.5 -top-1.5 w-3 h-3 border-l-2 border-t-2 border-cyan/50 animate-pulse" />
+                <div className="absolute -left-1.5 -bottom-1.5 w-3 h-3 border-l-2 border-b-2 border-cyan/50 animate-pulse" style={{ animationDelay: '0.5s' }} />
+                <div className="absolute -right-1.5 -top-1.5 w-3 h-3 border-r-2 border-t-2 border-cyan/50 animate-pulse" style={{ animationDelay: '1s' }} />
+                <div className="absolute -right-1.5 -bottom-1.5 w-3 h-3 border-r-2 border-b-2 border-cyan/50 animate-pulse" style={{ animationDelay: '1.5s' }} />
                 {/* Logo */}
-                <div className="relative w-20 h-20 flex items-center justify-center">
-                  <Image
-                    src="/rewind-logo.png"
-                    alt="Rewind X"
-                    width={56}
-                    height={56}
-                    className="w-14 h-14 opacity-80"
-                    unoptimized
-                  />
-                </div>
-                {/* Measurement lines */}
-                <div className="absolute -left-4 top-1/2 w-3 h-px bg-cyan/30" />
-                <div className="absolute -right-4 top-1/2 w-3 h-px bg-cyan/30" />
-                <div className="absolute left-1/2 -top-4 w-px h-3 bg-cyan/30" />
-                <div className="absolute left-1/2 -bottom-4 w-px h-3 bg-cyan/30" />
+                <Image
+                  src="/logov2.png"
+                  alt="Rewind X"
+                  width={240}
+                  height={120}
+                  className="h-20 w-auto relative z-10"
+                  unoptimized
+                />
               </div>
 
               <h3
@@ -155,11 +145,17 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Version Tag */}
-        <div className="mt-6 text-center">
-          <span className="font-mono text-[9px] text-white/15 tracking-wider">
-            v1.0 · © {new Date().getFullYear()} REWIND X PROTOCOL
-          </span>
+        {/* Legal & Copyright */}
+        <div className="mt-6 text-center space-y-1">
+          <p className="font-mono text-[9px] text-white/30 tracking-wider">
+            © 2025 Rewind X Protocol
+          </p>
+          <p className="font-mono text-[9px] text-white/30 tracking-wider">
+            An independent software project · Not affiliated with similarly named entities
+          </p>
+          <p className="font-mono text-[9px] text-white/30 tracking-wider">
+            Informational only · No financial services or token offerings
+          </p>
         </div>
       </div>
     </footer>

@@ -9,11 +9,11 @@
 ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═════╝     ╚═╝  ╚═╝
 ```
 
-<img src="public/rewind-logo1.png" alt="Rewind X" width="120" />
+<img src="public/logov2.png" alt="Rewind X" width="360" />
 
 ### Reversible Transfer Layer for ERC-20 Tokens
 
-![Version](https://img.shields.io/badge/Version-1.0.0-cyan?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-1.1.0-cyan?style=for-the-badge)
 [![Status](https://img.shields.io/badge/Status-Private_Development-blueviolet?style=for-the-badge)](https://rewindx.io)
 [![Chain](https://img.shields.io/badge/Chain-EVM_Compatible-00d4aa?style=for-the-badge&logo=ethereum&logoColor=white)](https://ethereum.org)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
@@ -57,9 +57,9 @@ Rewind X introduces a **deterministic, non-custodial undo window** for ERC-20 tr
 | Feature | Description |
 |:-------:|:------------|
 | 🕐 | **24–48h Undo Window** — Deterministic, on-chain safety period |
-| 🔐 | **Non-Custodial** — No admin keys, no overrides, no trust required |
-| 🎖️ | **Fragment NFT** — On-chain proof of successful rewinds |
-| ⚙️ | **Immutable Core** — Safety modules, battle-tested architecture |
+| 🔐 | **Non-Custodial** — No admin keys can move funds, no trust required |
+| 🎖️ | **Fragment NFT** — Tamper-evident proof index for rewinds |
+| ⚙️ | **Non-Upgradeable Core** — Safety modules upgradeable only |
 | 🔌 | **Wallet-Ready** — Built for integrations & infrastructure |
 
 </div>
@@ -72,8 +72,9 @@ Rewind X introduces a **deterministic, non-custodial undo window** for ERC-20 tr
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
 ║   ✓  No custody of user funds — ever                          ║
+║   ✓  No admin keys can move or redirect balances              ║
 ║   ✓  All actions are rule-based smart contract executions     ║
-║   ✓  Zero operator intervention required                      ║
+║   ✓  Emergency pause only — balances always remain in place   ║
 ║   ✓  Fully auditable, fully deterministic                     ║
 ║                                                                ║
 ╚════════════════════════════════════════════════════════════════╝
@@ -93,8 +94,9 @@ rewindx-landing/
 │       ├── contact/        # Contact page
 │       └── ...
 ├── public/
-│   ├── rewind-logo1.png    # Primary logo
-│   ├── tokens/             # Token icons
+│   ├── logov2.png          # Primary logo
+│   ├── tokenlogo.png       # RWXT token icon
+│   ├── tokens/             # Token icons (USDC, USDT, etc.)
 │   └── ...
 └── next.config.ts          # Next.js configuration
 ```
@@ -123,11 +125,11 @@ rewindx-landing/
 <div align="center">
 
 ```
-                         ↺
-            ┌────────────────────────┐
-            │   REWIND X — 2025      │
-            │   The Undo Layer       │
-            └────────────────────────┘
+                              ↺
+            ┌─────────────────────────────────┐
+            │   REWIND X PROTOCOL — 2025      │
+            │        The Undo Layer           │
+            └─────────────────────────────────┘
 ```
 
 <sub>Built for the future of safe transfers.</sub>

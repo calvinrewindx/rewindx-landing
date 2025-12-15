@@ -37,13 +37,13 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           {/* Logo + Navigation */}
           <div className="flex items-center gap-8">
-            <a href="/" className="flex items-center gap-3 flex-shrink-0">
+            <a href="/" className="flex items-center gap-1.5 flex-shrink-0">
               <Image
-                src="/rewind-logo.png"
+                src="/logov2.png"
                 alt="Rewind X"
-                width={56}
-                height={56}
-                className="w-14 h-14"
+                width={200}
+                height={100}
+                className="h-16 w-auto"
                 unoptimized
               />
               <span

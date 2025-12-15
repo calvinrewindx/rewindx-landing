@@ -43,21 +43,21 @@ export const metadata: Metadata = {
     "ethereum",
   ],
   icons: {
-    icon: "/rewind-logo.png",
-    apple: "/rewind-logo.png",
+    icon: "/logov2.png",
+    apple: "/logov2.png",
   },
   openGraph: {
     title: "Rewind X — Ctrl+Z for Crypto",
     description:
       "Reversible ERC-20 transfers with a deterministic 24-hour undo window. Non-custodial, rule-based, no admin keys.",
     type: "website",
-    siteName: "Rewind X",
+    siteName: "Rewind X Protocol",
     images: [
       {
-        url: "/rewind-logo.png",
-        width: 1024,
+        url: "/og.png",
+        width: 1536,
         height: 1024,
-        alt: "Rewind X - Reversible ERC-20 Transfers",
+        alt: "Rewind X Protocol - Reversible ERC-20 Transfers",
       },
     ],
   },
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     title: "Rewind X — Ctrl+Z for Crypto",
     description:
       "Reversible ERC-20 transfers with a deterministic 24-hour undo window.",
-    images: ["/rewind-logo.png"],
+    images: ["/og.png"],
   },
   metadataBase: new URL("https://rewindx.io"),
 };
