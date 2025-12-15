@@ -26,7 +26,7 @@ export default function InvestorInfo() {
                   className="inline-block text-cyan text-lg sm:text-xl font-semibold mb-6 tracking-wide"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
-                  For Investors
+                  Early Supporters
                 </span>
                 <h2
                   className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
@@ -39,8 +39,8 @@ export default function InvestorInfo() {
                   for crypto.
                 </h2>
                 <p className="text-white/50 text-lg mb-8 max-w-md leading-relaxed">
-                  Pre-seed bridge round. Token-based. Open to infrastructure-focused
-                  angels and ecosystem funds.
+                  We're exploring aligned early support and partnerships.
+                  Private outreach only.
                 </p>
 
                 <a
@@ -51,7 +51,7 @@ export default function InvestorInfo() {
                     className="text-white font-semibold"
                     style={{ fontFamily: "var(--font-space-grotesk)" }}
                   >
-                    Start Conversation
+                    Contact
                   </span>
                   <ArrowRight className="w-5 h-5 text-cyan group-hover:translate-x-1 transition-transform duration-300" />
                 </a>

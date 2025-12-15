@@ -107,7 +107,7 @@ Trust-minimized administrative controls:
 |---------|-------|------------|
 | Emergency pause | State transitions | Halts new operations; cannot move balances |
 | Fee parameters | Accounting | Bounded ranges; cannot exceed protocol caps |
-| Module upgrades | Non-core paths | Timelock-governed; core ledger is designed to remain immutable |
+| Module upgrades | Non-core paths | Timelock-governed; core ledger is non-upgradeable |
 
 No admin path exists to transfer, redirect, or freeze user funds.
 
