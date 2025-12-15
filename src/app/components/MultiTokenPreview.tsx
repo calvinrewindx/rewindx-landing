@@ -91,7 +91,7 @@ export default function MultiTokenPreview() {
             <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
               {/* RWXT Token */}
               <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
-                <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 aspect-square rounded-full overflow-hidden flex-shrink-0">
+                <div className="w-28 h-28 sm:w-32 sm:h-32 aspect-square rounded-full overflow-hidden flex-shrink-0">
                   <Image
                     src="/tokenlogo.png"
                     alt="RWXT"
