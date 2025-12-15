@@ -95,8 +95,8 @@ export default function MultiTokenPreview() {
                   <Image
                     src="/tokenlogo.png"
                     alt="RWXT"
-                    width={256}
-                    height={256}
+                    width={512}
+                    height={512}
                     className="w-full h-full object-contain"
                     unoptimized
                     priority
@@ -129,11 +129,11 @@ export default function MultiTokenPreview() {
               <div className="hidden lg:block w-px h-16 bg-white/10" />
               <div className="lg:hidden w-full h-px bg-white/10" />
 
-              {/* Benefits */}
-              <div className="w-full">
-                {/* Top Row - 3 cards */}
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 mb-2 sm:mb-4">
-                  <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+              {/* Benefits - 5 cards: 2+2+1 on mobile, 3+2 on desktop */}
+              <div className="w-full space-y-2 sm:space-y-4">
+                {/* Row 1 */}
+                <div className="flex justify-center gap-2 sm:gap-4">
+                  <div className="flex-1 max-w-[160px] flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
                       <Shield className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                     </div>
@@ -141,7 +141,7 @@ export default function MultiTokenPreview() {
                     <p className="text-white/40 text-[10px] sm:text-xs mt-1">Genesis → Nexus</p>
                   </div>
 
-                  <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="flex-1 max-w-[160px] flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
                       <Percent className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                     </div>
@@ -149,7 +149,7 @@ export default function MultiTokenPreview() {
                     <p className="text-white/40 text-[10px] sm:text-xs mt-1">On activation fees</p>
                   </div>
 
-                  <div className="flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="hidden sm:flex flex-1 max-w-[160px] flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
                       <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                     </div>
@@ -158,9 +158,17 @@ export default function MultiTokenPreview() {
                   </div>
                 </div>
 
-                {/* Bottom Row - 2 cards centered */}
+                {/* Row 2 */}
                 <div className="flex justify-center gap-2 sm:gap-4">
-                  <div className="w-full sm:w-auto sm:min-w-[140px] flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="sm:hidden flex-1 max-w-[160px] flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+                      <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
+                    </div>
+                    <p className="text-white text-xs sm:text-sm font-medium">Extended Windows</p>
+                    <p className="text-white/40 text-[10px] sm:text-xs mt-1">Up to 48h</p>
+                  </div>
+
+                  <div className="flex-1 max-w-[160px] flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
                       <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                     </div>
@@ -168,12 +176,23 @@ export default function MultiTokenPreview() {
                     <p className="text-white/40 text-[10px] sm:text-xs mt-1">Daily capacity</p>
                   </div>
 
-                  <div className="w-full sm:w-auto sm:min-w-[140px] flex flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                  <div className="hidden sm:flex flex-1 max-w-[160px] flex-col items-center text-center p-3 sm:p-4 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
                       <Layers className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
                     </div>
                     <p className="text-white text-xs sm:text-sm font-medium">Batch Ops</p>
                     <p className="text-white/40 text-[10px] sm:text-xs mt-1">Higher tiers</p>
+                  </div>
+                </div>
+
+                {/* Row 3 - Mobile only: Batch Ops centered */}
+                <div className="sm:hidden flex justify-center">
+                  <div className="flex-1 max-w-[160px] flex flex-col items-center text-center p-3 rounded-xl bg-white/5 border border-yellow-500/20 hover:border-yellow-500/40 transition-all group">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/30 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
+                      <Layers className="w-5 h-5 text-yellow-500" />
+                    </div>
+                    <p className="text-white text-xs font-medium">Batch Ops</p>
+                    <p className="text-white/40 text-[10px] mt-1">Higher tiers</p>
                   </div>
                 </div>
               </div>
