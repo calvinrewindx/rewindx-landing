@@ -183,6 +183,10 @@ body {
   .section {
     padding: 80px 16px;
   }
+
+  html {
+    scroll-padding-top: 100px;
+  }
 }
 
 /* Subtle grid background */

@@ -2,6 +2,7 @@
 
 import { ArrowRight, Shield, Cpu, Coins } from "lucide-react";
 import CtrlZAnimation from "./CtrlZAnimation";
+import DemoVideoToggle from "./DemoVideoToggle";
 
 export default function Hero() {
 
@@ -79,46 +80,16 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Demo Video */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative group">
-            {/* Animated Glow Background */}
-            <div className="absolute -inset-4 bg-gradient-to-r from-cyan/30 via-violet/20 to-cyan/30 rounded-3xl blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 animate-pulse" />
-            <div className="absolute -inset-2 bg-gradient-to-r from-cyan/20 to-violet/20 rounded-2xl blur-xl opacity-40" />
+        {/* Demo Video Toggle */}
+        <DemoVideoToggle />
 
-            {/* Video Container */}
-            <div className="relative rounded-2xl overflow-hidden border border-white/20 shadow-2xl shadow-cyan/20">
-              {/* Video - Autoplay muted loop */}
-              <video
-                className="w-full h-auto relative z-0"
-                autoPlay
-                muted
-                loop
-                playsInline
-                controls
-              >
-                <source src="/rewindx-demo.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-
-            {/* Video Label */}
-            <p className="mt-4 text-center text-white/50 text-xs font-mono tracking-wider">
-              System flow walkthrough
-            </p>
-
-            {/* Bottom Reflection */}
-            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-cyan/10 to-transparent blur-xl rounded-full" />
-          </div>
-        </div>
-
-        {/* Subtle Investor CTA */}
+        {/* Subtle Contact CTA */}
         <div className="mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
           <a
             href="/contact"
             className="inline-flex items-center gap-2 text-white/40 hover:text-cyan/70 transition-colors text-base"
           >
-            <span>Investor inquiries</span>
+            <span>Partnerships & inquiries</span>
             <span className="text-cyan/50">→</span>
             <span className="font-mono text-sm">investors.rewindx@proton.me</span>
           </a>

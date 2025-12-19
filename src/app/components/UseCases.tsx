@@ -7,32 +7,32 @@ const useCases = [
     icon: RotateCcw,
     title: "Retail Error Recovery",
     description:
-      "Wrong address, phishing attacks, fat finger errors.",
-    highlight: "Recover funds within the undo window.",
+      "Wrong address, wrong amount, wrong token, duplicate payment.",
+    highlight: "Time-bounded chance to undo sender errors.",
     color: "cyan",
   },
   {
     icon: Building2,
     title: "Enterprise Ready",
     description:
-      "Designed for multi-signature setups, batched treasury workflows, and",
-    highlight: "on-chain audit trails.",
+      "Multi-sig workflows, role separation, batched payouts, and",
+    highlight: "verifiable on-chain audit trails.",
     color: "violet",
   },
   {
     icon: Wallet,
     title: "Wallet Compatibility",
     description:
-      "Built to integrate with existing EVM wallets and",
-    highlight: "smart wallet standards.",
+      "Integrates with EVM wallets and smart account standards.",
+    highlight: "Non-custodial by default.",
     color: "cyan",
   },
   {
     icon: Bot,
     title: "AI Agent Safety",
     description:
-      "Autonomous agents can execute protected transfers with",
-    highlight: "built-in rollback capability.",
+      "Agents execute protected transfers under explicit permissions.",
+    highlight: "Rewind if flagged by policy.",
     color: "violet",
   },
 ];
@@ -52,7 +52,7 @@ export default function UseCases() {
             Built for <span className="gradient-text">Everyone</span>
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            From individual users to enterprise treasuries. Reversibility for every use case.
+            From everyday users to treasury operators. A deterministic undo window for ERC-20 transfers.
           </p>
         </div>
 

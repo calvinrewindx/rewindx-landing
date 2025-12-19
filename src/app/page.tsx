@@ -1,5 +1,7 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import WhatYouJustWatched from "./components/WhatYouJustWatched";
+import TwoModes from "./components/TwoModes";
 import ProblemStats from "./components/ProblemStats";
 import WhatIsRewindX from "./components/WhatIsRewindX";
 import HowItWorks from "./components/HowItWorks";
@@ -21,6 +23,12 @@ export default function Home() {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <ScrollReveal>
+        <WhatYouJustWatched />
+      </ScrollReveal>
+      <ScrollReveal delay={100}>
+        <TwoModes />
+      </ScrollReveal>
       <ScrollReveal>
         <ProblemStats />
       </ScrollReveal>
