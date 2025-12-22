@@ -2,7 +2,7 @@
 
 **The Reversibility Primitive for Blockchain Transfers**
 
-Version 1.2 | Classification: PUBLIC | December 2025
+Version 1.3 | Classification: PUBLIC | December 2025
 
 ---
 
