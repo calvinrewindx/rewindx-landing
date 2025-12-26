@@ -47,36 +47,25 @@ export default function TwoModes() {
             </ul>
           </div>
 
-          {/* AI Autonomous */}
+          {/* Policy-Gated Autonomy */}
           <div className="glass-card p-8 border-violet/20">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 rounded-xl bg-violet/10 border border-violet/30 flex items-center justify-center">
                 <Bot className="w-6 h-6 text-violet" />
               </div>
-              <div>
-                <h3
-                  className="text-xl font-semibold text-white"
-                  style={{ fontFamily: "var(--font-space-grotesk)" }}
-                >
-                  AI Autonomous
-                </h3>
-                <span className="text-xs text-violet/80 font-mono">(Demo)</span>
-              </div>
+              <h3
+                className="text-xl font-semibold text-white"
+                style={{ fontFamily: "var(--font-space-grotesk)" }}
+              >
+                Policy-Gated Autonomy
+              </h3>
             </div>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <span className="text-violet mt-1">→</span>
-                <span className="text-white/70">
-                  Agent acts within delegated, revocable permissions
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-violet mt-1">→</span>
-                <span className="text-white/70">
-                  Fast, bounded execution (capped test funds)
-                </span>
-              </li>
-            </ul>
+            <p className="text-white/70 leading-relaxed mb-4">
+              AI agents can act autonomously when critical threats are detected — no manual approval needed. Pre-configured rules trigger automatic protection within the active window.
+            </p>
+            <p className="text-white/50 text-sm">
+              Production supports both autonomous and manual approval modes.
+            </p>
           </div>
         </div>
 
@@ -88,6 +77,13 @@ export default function TwoModes() {
           >
             Autonomy = <span className="text-cyan">Permissions</span>, not{" "}
             <span className="text-white/50">Custody</span>.
+          </p>
+        </div>
+
+        {/* Disclaimer */}
+        <div className="mt-12 text-center">
+          <p className="text-white/60 text-sm font-mono tracking-wide">
+            ⚙️ Production supports configurable permission levels: autonomous, delayed, or manual approval.
           </p>
         </div>
       </div>

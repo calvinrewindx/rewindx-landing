@@ -7,23 +7,23 @@ const steps = [
     number: "01",
     title: "Protected Transfer",
     description:
-      "AI executes a transfer on a protected rail with a bounded rewind window.",
+      "Funds enter 24h protected holding state.",
     icon: Shield,
     color: "cyan",
   },
   {
     number: "02",
-    title: "Policy / Context Flag Detected",
+    title: "Threat Detection",
     description:
-      "The agent detects a policy/context issue with the recipient — funds are at risk if finalized.",
+      "Address poisoning detected (97% similarity).",
     icon: AlertTriangle,
     color: "violet",
   },
   {
     number: "03",
-    title: "Deterministic Rewind",
+    title: "Autonomous Rewind",
     description:
-      "The agent initiates a deterministic rewind within the active window (no discretionary rollback).",
+      "AI triggers rewind (policy-gated).",
     icon: RotateCcw,
     color: "cyan",
   },
@@ -31,7 +31,7 @@ const steps = [
     number: "04",
     title: "On-Chain Proof",
     description:
-      "State change is verified on-chain. A Fragment NFT records the rewind as proof.",
+      "Fragment NFT records AI safety action.",
     icon: FileCheck,
     color: "violet",
   },

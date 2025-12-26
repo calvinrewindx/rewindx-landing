@@ -96,6 +96,7 @@ export default function DemoVideoToggle() {
             loop
             playsInline
             controls
+            preload="auto"
           >
             <source src={config.src} type="video/mp4" />
             Your browser does not support the video tag.
@@ -109,14 +110,9 @@ export default function DemoVideoToggle() {
               System flow walkthrough
             </p>
           ) : (
-            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-xs font-mono">
-              <span className="px-2.5 py-1 rounded-full bg-violet/20 text-violet border border-violet/40">
-                Demo mode (test funds)
-              </span>
-              <span className="text-white/60">
-                Production: user-owned smart accounts with delegated, revocable permissions
-              </span>
-            </div>
+            <p className="text-center text-white/50 text-xs font-mono tracking-wider max-w-xl">
+              Demo: Autonomous mode — AI detects address poisoning and protects funds without user prompt
+            </p>
           )}
         </div>
 
