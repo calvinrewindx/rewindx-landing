@@ -12,7 +12,7 @@ const DEMO_CONFIG = {
     icon: Cpu,
   },
   ai: {
-    src: "/ai-demo.mp4",
+    src: "/ai-demo.mp4?v=2",
     label: "AI Agent",
     icon: Bot,
   },
