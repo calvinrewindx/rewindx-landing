@@ -43,7 +43,7 @@ export default function UnderTheHood({ expanded, onToggle, currentStep }: UnderT
       <div
         className="overflow-hidden transition-all duration-300 ease-in-out"
         style={{
-          maxHeight: expanded ? '600px' : '0',
+          maxHeight: expanded ? '1200px' : '0',
           opacity: expanded ? 1 : 0,
           marginTop: expanded ? '1rem' : '0',
         }}
