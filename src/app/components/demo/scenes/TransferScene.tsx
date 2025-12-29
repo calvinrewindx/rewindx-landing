@@ -24,21 +24,21 @@ export default function TransferScene() {
 
       {/* Card */}
       <div className="demo-inner-card max-w-lg mx-auto">
-        {/* Transfer Flow */}
-        <div className="flex items-center justify-center gap-4 mb-6">
+        {/* Transfer Flow - stacked on mobile */}
+        <div className="flex flex-col items-center gap-4 mb-6">
           <div className="text-center">
             <div className="demo-big-number" style={{ color: '#fff', fontSize: '2.5rem' }}>
               {SCENARIO.transfer.amount.toLocaleString()}
             </div>
             <div style={{ color: 'var(--text-muted)', fontSize: '0.875rem' }}>{SCENARIO.transfer.token}</div>
           </div>
-          <div className="flex items-center gap-2 px-4">
-            <div className="w-8 h-0.5" style={{ background: 'rgba(255,255,255,0.2)' }} />
+          <div className="flex items-center gap-2">
+            <div className="w-6 h-0.5" style={{ background: 'rgba(255,255,255,0.2)' }} />
             <SendHorizontal size={20} style={{ color: '#4488ff' }} />
-            <div className="w-8 h-0.5" style={{ background: 'rgba(255,255,255,0.2)' }} />
+            <div className="w-6 h-0.5" style={{ background: 'rgba(255,255,255,0.2)' }} />
           </div>
           <code
-            className="text-sm px-3 py-2 rounded-lg"
+            className="text-sm px-4 py-2 rounded-lg"
             style={{ background: 'rgba(255,255,255,0.05)', color: 'var(--text-secondary)', fontFamily: 'var(--font-jetbrains-mono)' }}
           >
             {SCENARIO.transfer.recipient}

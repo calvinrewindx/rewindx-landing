@@ -151,17 +151,17 @@ export default function UnderTheHood({ expanded, onToggle, currentStep }: UnderT
             </div>
 
             <div
-              className="space-y-1.5"
-              style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '10px' }}
+              className="space-y-2"
+              style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '9px' }}
             >
               {AUDIT_TRAIL.map((event, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-2 transition-opacity duration-300"
+                  className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 transition-opacity duration-300"
                   style={{ opacity: i < visibleEvents ? 1 : 0.3 }}
                 >
                   <span style={{ color: 'rgba(255,255,255,0.3)' }}>{event.time}</span>
-                  <span style={{ color: 'var(--text-muted)' }}>{event.event}</span>
+                  <span style={{ color: 'var(--text-muted)', wordBreak: 'break-all' }}>{event.event}</span>
                 </div>
               ))}
             </div>
