@@ -70,8 +70,8 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <a href="#features" className="btn-primary flex items-center gap-2">
-            Learn More
+          <a href="/demo" className="btn-primary flex items-center gap-2">
+            Try Interactive Demo
             <ArrowRight className="w-4 h-4" />
           </a>
           <a href="#how-it-works" className="btn-secondary flex items-center gap-2">
