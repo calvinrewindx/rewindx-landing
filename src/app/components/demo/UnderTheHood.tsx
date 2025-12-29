@@ -140,7 +140,7 @@ export default function UnderTheHood({ expanded, onToggle, currentStep }: UnderT
 
           {/* Audit Trail Card */}
           <div
-            className="rounded-xl p-4"
+            className="rounded-xl p-4 md:p-4 min-w-0"
             style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(255,255,255,0.06)' }}
           >
             <div className="flex items-center gap-2 mb-4">
@@ -151,17 +151,17 @@ export default function UnderTheHood({ expanded, onToggle, currentStep }: UnderT
             </div>
 
             <div
-              className="space-y-2"
-              style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '9px' }}
+              className="space-y-2 overflow-x-auto"
+              style={{ fontFamily: 'var(--font-jetbrains-mono)', fontSize: '10px' }}
             >
               {AUDIT_TRAIL.map((event, i) => (
                 <div
                   key={i}
-                  className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-2 transition-opacity duration-300"
+                  className="flex items-center gap-2 transition-opacity duration-300 whitespace-nowrap"
                   style={{ opacity: i < visibleEvents ? 1 : 0.3 }}
                 >
-                  <span style={{ color: 'rgba(255,255,255,0.3)' }}>{event.time}</span>
-                  <span style={{ color: 'var(--text-muted)', wordBreak: 'break-all' }}>{event.event}</span>
+                  <span style={{ color: 'rgba(255,255,255,0.3)', flexShrink: 0 }}>{event.time}</span>
+                  <span style={{ color: 'var(--text-muted)' }}>{event.event}</span>
                 </div>
               ))}
             </div>
