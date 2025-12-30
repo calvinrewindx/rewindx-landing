@@ -163,19 +163,6 @@ export default function DemoPlayer() {
       data-step={currentStep}
       style={{ backgroundColor: getStepBg() }}
     >
-      {/* Demo Badge - fixed center */}
-      <div className="fixed top-24 md:top-28 left-1/2 -translate-x-1/2 z-[60]">
-        <span
-          className="px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-[10px] md:text-xs font-medium uppercase tracking-wider"
-          style={{
-            background: 'rgba(0, 212, 255, 0.15)',
-            border: '1px solid rgba(0, 212, 255, 0.3)',
-            color: '#00d4ff',
-          }}
-        >
-          Simulation
-        </span>
-      </div>
 
       {/* Progress Bar - fixed at top */}
       <div className="fixed top-0 left-0 right-0 z-40 h-1 bg-black/30">
@@ -298,13 +285,23 @@ export default function DemoPlayer() {
         )}
 
         {/* Legal Disclaimer */}
-        <footer className="mt-12 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="mt-12 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <span
+            className="inline-block px-3 py-1 mb-3 rounded-lg text-xs font-medium uppercase tracking-wider"
+            style={{
+              background: 'rgba(0, 212, 255, 0.15)',
+              border: '1px solid rgba(0, 212, 255, 0.3)',
+              color: '#00d4ff',
+            }}
+          >
+            Simulation
+          </span>
           <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
-            Simulation for demonstration purposes only. No real transactions occur.
+            For demonstration purposes only. No real transactions occur.
             <br />
             Not financial advice. Product features may vary.
           </p>
-        </footer>
+        </div>
       </div>
 
       {/* Receipt Modal */}
