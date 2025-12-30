@@ -163,10 +163,10 @@ export default function DemoPlayer() {
       data-step={currentStep}
       style={{ backgroundColor: getStepBg() }}
     >
-      {/* Demo Badge - fixed center on demo box */}
-      <div className="fixed top-32 left-1/2 -translate-x-1/2 z-50">
+      {/* Demo Badge - fixed center */}
+      <div className="fixed top-24 md:top-28 left-1/2 -translate-x-1/2 z-[60]">
         <span
-          className="px-3 py-1.5 rounded-lg text-xs font-medium uppercase tracking-wider"
+          className="px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-[10px] md:text-xs font-medium uppercase tracking-wider"
           style={{
             background: 'rgba(0, 212, 255, 0.15)',
             border: '1px solid rgba(0, 212, 255, 0.3)',
