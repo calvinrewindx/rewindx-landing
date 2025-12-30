@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Header from '@/app/components/Header';
 import DemoPlayer from '@/app/components/demo/DemoPlayer';
 
 export const metadata: Metadata = {
@@ -12,5 +13,10 @@ export const metadata: Metadata = {
 };
 
 export default function DemoPage() {
-  return <DemoPlayer />;
+  return (
+    <>
+      <Header />
+      <DemoPlayer />
+    </>
+  );
 }

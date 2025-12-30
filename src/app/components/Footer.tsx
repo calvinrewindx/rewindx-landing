@@ -106,6 +106,12 @@ export default function Footer() {
               </div>
               <div className="space-y-2">
                 <a
+                  href="/contact"
+                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
+                >
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /contact
+                </a>
+                <a
                   href="https://x.com/calvinrewindx"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -114,10 +120,16 @@ export default function Footer() {
                   <span className="text-cyan/30 group-hover:text-cyan/50">→</span> x.com/calvinrewindx
                 </a>
                 <a
-                  href="/contact"
+                  href="/demo"
                   className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
                 >
-                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /contact
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /demo
+                </a>
+                <a
+                  href="/agents"
+                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
+                >
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /agents
                 </a>
                 <a
                   href="/lightpaper"

@@ -5,12 +5,12 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "Demo", href: "/demo" },
+  { label: "Agents", href: "/agents" },
   { label: "How it Works", href: "/#how-it-works" },
-  { label: "Security", href: "/#security" },
   { label: "Architecture", href: "/architecture" },
   { label: "Lightpaper", href: "/lightpaper" },
-  { label: "Contact", href: "/contact" },
 ];
 
 export default function Header() {

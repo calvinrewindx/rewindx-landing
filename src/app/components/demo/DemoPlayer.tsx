@@ -198,26 +198,18 @@ export default function DemoPlayer() {
       {/* Background Grid */}
       <div className="fixed inset-0 grid-bg opacity-20 pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 py-8 md:py-12 demo-main-content">
-        {/* Header with Logo */}
-        <header className="text-center mb-8">
-          <div className="flex flex-col items-center gap-3">
-            <a href="/" className="flex flex-col items-center gap-3 hover:opacity-80 transition-opacity">
-              <img src="/logov2.png" alt="Rewind X" className="h-20 w-auto" />
-              <span className="text-2xl font-bold" style={{ color: '#ffffff', fontFamily: 'var(--font-space-grotesk)' }}>
-                Rewind X
-              </span>
-            </a>
-            {currentStep > 1 && (
-              <span
-                className="text-sm px-3 py-1 rounded-full"
-                style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.6)' }}
-              >
-                Step {currentStep}/{totalSteps}
-              </span>
-            )}
+      <div className="relative z-10 max-w-4xl mx-auto px-4 pt-24 pb-8 md:pt-28 md:pb-12 demo-main-content">
+        {/* Step Counter */}
+        {currentStep > 1 && (
+          <div className="text-center mb-8">
+            <span
+              className="text-sm px-3 py-1 rounded-full"
+              style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.6)' }}
+            >
+              Step {currentStep}/{totalSteps}
+            </span>
           </div>
-        </header>
+        )}
 
         {/* View Toggle - hidden on intro */}
         {currentStep > 1 && (
