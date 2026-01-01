@@ -28,9 +28,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Rewind X — Ctrl+Z for Crypto",
+  title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
   description:
-    "Reversible ERC-20 transfers with a deterministic 24-hour undo window. Non-custodial, rule-based, no admin keys.",
+    "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. 24h undo window. Any ERC-20 token.",
   keywords: [
     "crypto",
     "ERC-20",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
     apple: "/logov2.png",
   },
   openGraph: {
-    title: "Rewind X — Ctrl+Z for Crypto",
+    title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
     description:
-      "Reversible ERC-20 transfers with a deterministic 24-hour undo window. Non-custodial, rule-based, no admin keys.",
+      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. 24h undo window. Any ERC-20 token.",
     type: "website",
     siteName: "Rewind X Protocol",
     images: [
@@ -63,9 +63,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Rewind X — Ctrl+Z for Crypto",
+    title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
     description:
-      "Reversible ERC-20 transfers with a deterministic 24-hour undo window.",
+      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. 24h undo window.",
     images: ["/og.png"],
   },
   metadataBase: new URL("https://rewindx.io"),

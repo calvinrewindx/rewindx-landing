@@ -28,7 +28,7 @@ export default function AgentsCTA() {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
           <a
             href="/demo"
-            className="btn-primary flex items-center gap-2 px-8 py-4"
+            className="btn-primary btn-pulse flex items-center gap-2 px-8 py-4"
           >
             Try Demo
             <ArrowRight className="w-4 h-4" />

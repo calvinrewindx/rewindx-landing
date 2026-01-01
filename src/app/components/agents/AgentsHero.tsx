@@ -1,9 +1,28 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
 import AgentRewindAnimation from "./AgentRewindAnimation";
 
 export default function AgentsHero() {
+  const [displayText, setDisplayText] = useState("");
+  const [showLine, setShowLine] = useState(false);
+  const fullText = "AI AGENTS";
+
+  useEffect(() => {
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index <= fullText.length) {
+        setDisplayText(fullText.slice(0, index));
+        index++;
+      } else {
+        clearInterval(timer);
+        setTimeout(() => setShowLine(true), 200);
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-20 pb-16 md:pb-20">
       {/* Background Effects */}
@@ -12,19 +31,27 @@ export default function AgentsHero() {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-cyan/5 blur-[100px]" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
-        {/* Brand Title with Glow */}
+        {/* Brand Title with Typing + Glow */}
         <div className="mb-6">
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest uppercase text-white"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest uppercase agents-gradient-text"
             style={{
               fontFamily: "var(--font-space-grotesk)",
-              textShadow: "0 0 30px rgba(139, 92, 246, 0.6), 0 0 60px rgba(139, 92, 246, 0.4)"
+              minHeight: "1.2em"
             }}
           >
-            AI Agents
+            {displayText}
+            {displayText.length < fullText.length && <span className="animate-blink" style={{ color: '#a855f7' }}>|</span>}
           </h2>
-          <div className="mt-2 flex justify-center">
-            <div className="h-px w-40 sm:w-52 md:w-72 bg-gradient-to-r from-transparent via-violet to-transparent" />
+          <div className="mt-3 flex justify-center">
+            <div
+              className={`h-0.5 bg-gradient-to-r from-transparent via-violet to-cyan/50 to-transparent transition-all duration-700 ${
+                showLine ? "w-48 sm:w-60 md:w-80" : "w-0"
+              }`}
+              style={{
+                boxShadow: showLine ? '0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(0, 212, 255, 0.3)' : 'none'
+              }}
+            />
           </div>
         </div>
 

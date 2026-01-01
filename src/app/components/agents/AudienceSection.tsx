@@ -58,10 +58,11 @@ export default function AudienceSection() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {audiences.map((item) => (
+            {audiences.map((item, index) => (
               <div
                 key={item.title}
-                className="glass-card glass-card-hover p-6"
+                className="glass-card glass-card-hover p-6 stagger-item"
+                style={{ animationDelay: `${0.1 + index * 0.15}s` }}
               >
                 <div
                   className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 ${

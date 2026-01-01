@@ -54,10 +54,11 @@ export default function ProblemSection() {
 
         {/* Risk Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {risks.map((risk) => (
+          {risks.map((risk, index) => (
             <div
               key={risk.title}
-              className="glass-card glass-card-hover p-8 text-center"
+              className="glass-card glass-card-hover p-8 text-center stagger-item"
+              style={{ animationDelay: `${0.1 + index * 0.15}s` }}
             >
               <div
                 className={`w-14 h-14 rounded-xl flex items-center justify-center mx-auto mb-6 border ${

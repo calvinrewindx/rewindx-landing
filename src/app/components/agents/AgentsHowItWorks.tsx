@@ -58,8 +58,8 @@ export default function AgentsHowItWorks() {
 
         {/* Steps Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {steps.map((step) => (
-            <div key={step.number} className="relative flex flex-col">
+          {steps.map((step, index) => (
+            <div key={step.number} className="relative flex flex-col stagger-item" style={{ animationDelay: `${0.1 + index * 0.12}s` }}>
               <div className="glass-card glass-card-hover p-6 h-full group">
                 {/* Step Number Badge */}
                 <div

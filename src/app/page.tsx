@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import Hero from "./components/Hero";
+import HeroV2 from "./components/HeroV2";
 import WhatYouJustWatched from "./components/WhatYouJustWatched";
 import TwoModes from "./components/TwoModes";
 import ProblemStats from "./components/ProblemStats";
@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <Hero />
+      <HeroV2 />
       <ScrollReveal>
         <WhatYouJustWatched />
       </ScrollReveal>
