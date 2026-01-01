@@ -71,7 +71,7 @@ export default function AgentsHero() {
 
         {/* Subheadline */}
         <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Your agents can trade, pay, and transfer crypto.
+          Your agents can <span className="text-violet">trade</span>, <span className="text-violet">pay</span>, and <span className="text-violet">transfer</span> crypto.
           <br />
           Rewind X makes critical mistakes <span className="text-cyan font-semibold">survivable</span>.
         </p>
