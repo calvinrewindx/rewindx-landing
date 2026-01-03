@@ -12,7 +12,7 @@ import AgentsCTA from "../components/agents/AgentsCTA";
 export const metadata: Metadata = {
   title: "AI Agents | Rewind X - Safety for Autonomous Transfers",
   description:
-    "Protect AI agents with bounded reversibility. Policy-gated autonomy, on-chain enforcement, 24h rewind window.",
+    "Protect AI agents with bounded reversibility. Delegated AI protection, on-chain enforcement, configurable rewind window.",
 };
 
 export default function AgentsPage() {

@@ -30,7 +30,7 @@ export default function ProtocolFlowchart() {
           </div>
           <div className="flex-1 p-4 rounded-xl bg-white/[0.03] border border-white/10">
             <p className="text-white text-sm font-medium">Rewind Window Active</p>
-            <p className="text-white/40 text-xs">24-48h deterministic window</p>
+            <p className="text-white/40 text-xs">5min-48h deterministic window</p>
           </div>
         </div>
 

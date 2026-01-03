@@ -36,7 +36,7 @@ const securityPoints = [
   { icon: Shield, text: "Non-custodial: you control your keys" },
   { icon: Clock, text: "Window fixed at creation, enforced on-chain" },
   { icon: FileText, text: "Fragment NFT records every rewind" },
-  { icon: Bot, text: "Autonomy is opt-in and policy-controlled" },
+  { icon: Bot, text: "AI protection requires your activation" },
 ];
 
 export default function AudienceSection() {

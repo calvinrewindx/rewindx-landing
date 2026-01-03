@@ -82,7 +82,7 @@ export default function SolutionSection() {
           </div>
         </div>
 
-        {/* Policy-Gated Autonomy Box */}
+        {/* Delegated Protection Box */}
         <div className="gradient-border glass-card-hover p-8 md:p-10 max-w-3xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="w-5 h-5 text-violet" />
@@ -90,7 +90,7 @@ export default function SolutionSection() {
               className="text-2xl font-bold text-violet"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Policy-Gated Autonomy
+              Delegated Protection
             </h3>
           </div>
 
@@ -103,7 +103,7 @@ export default function SolutionSection() {
           </p>
 
           <p className="text-white/50 leading-relaxed">
-            Agents act autonomously — within deterministic rules.
+            Agents act autonomously — only when <span className="text-violet">you activate</span>. Disable anytime.
           </p>
         </div>
       </div>

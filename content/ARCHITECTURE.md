@@ -55,6 +55,51 @@ All user-initiated state changes pass through a single canonical entry layer. In
 | **Fees & Accounting** | Bounded fee computation and revenue distribution. |
 | **Proof & Utility** | On-chain rewind attestation. Tier-based parameter constraints. |
 | **Final Rail** | Optional DEX-compatible wrapper. Transfers on this rail are **irreversible by design** to preserve DeFi composability and market finality. |
+| **Delegation Layer** | Enables autonomous AI agents to execute rewinds on behalf of users (explicit user activation required). |
+
+---
+
+## Delegation Layer
+
+The protocol supports two permission models for rewind execution:
+
+```
++------------------+          +------------------+
+|   Manual Mode    |          | Delegated Mode   |
++------------------+          +------------------+
+| User signs every |          | User activates   |
+| rewind manually  |          | via setDelegate()|
+|                  |          |                  |
+| No delegation    |          | 1-hour cooldown  |
+| required         |          | before active    |
++------------------+          +------------------+
+         |                            |
+         v                            v
++--------------------------------------------------+
+|              IntentBasedRewind                   |
+|          (Same on-chain enforcement)             |
++--------------------------------------------------+
+```
+
+### Authorization Flow (Delegated Mode)
+
+- User calls `setDelegate(agent)` to enable AI protection
+- 1-hour security cooldown begins (prevents phishing exploits)
+- After cooldown, agent can auto-rewind critical threats
+- User can disable instantly via `removeDelegate()` (no cooldown)
+- Daily limits enforced based on NFT tier
+- Agent can only rewind — never transfer or access funds
+
+### Security Model
+
+| Guarantee | Implementation |
+|-----------|----------------|
+| Non-Custodial | Agent can only call rewind; funds never leave user control |
+| Explicit Activation | User must call setDelegate(); no default delegation |
+| Instant Revoke | removeDelegate() takes effect immediately |
+| Cooldown Protection | 1-hour delay prevents social engineering attacks |
+| Daily Limits | Enforced per-tier (3-70 rewinds/day) |
+| Official Agents | AgentPass holders must use protocol-approved agents |
 
 ---
 

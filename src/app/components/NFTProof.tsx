@@ -4,11 +4,12 @@ import { useState } from "react";
 import { Award, RotateCcw, Shield, Layers, CheckCircle, FileCheck, Eye, ChevronDown } from "lucide-react";
 
 const nftTiers = [
-  { name: "Genesis", discount: "10%", window: "24h" },
-  { name: "Gatekeeper", discount: "20%", window: "24h" },
-  { name: "Enterprise", discount: "30%", window: "30h" },
-  { name: "Prime", discount: "40%", window: "36h" },
-  { name: "Nexus", discount: "50%", window: "48h" },
+  { name: "AgentPass", discount: "", window: "", note: "AI Protection" },
+  { name: "Genesis", discount: "10%", window: "max 24h" },
+  { name: "Gatekeeper", discount: "20%", window: "max 24h" },
+  { name: "Enterprise", discount: "30%", window: "max 30h" },
+  { name: "Prime", discount: "40%", window: "max 36h" },
+  { name: "Nexus", discount: "50%", window: "max 48h" },
 ];
 
 // Note: Discounts apply to Protection Activation Fee only
@@ -256,15 +257,31 @@ export default function NFTProof() {
                   tiersOpen ? "max-h-[800px] mt-3" : "max-h-0"
                 }`}
               >
+                <div className="flex items-center justify-between px-3 py-2 text-[10px] text-white/30 uppercase tracking-wider">
+                  <span>Tier</span>
+                  <div className="flex items-center gap-3 sm:gap-4">
+                    <span>Fee Discount</span>
+                    <span>Max Window</span>
+                  </div>
+                </div>
                 <div className="space-y-2">
                   {nftTiers.map((tier, index) => (
                       <div
                         key={index}
-                        className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg bg-white/[0.02] border border-white/5 gap-1 sm:gap-0"
+                        className={`flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 rounded-lg border gap-1 sm:gap-0 ${
+                          tier.note ? 'bg-violet/[0.05] border-violet/20' : 'bg-white/[0.02] border-white/5'
+                        }`}
                       >
-                        <span className="font-medium text-white">
-                          {tier.name}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="font-medium text-white">
+                            {tier.name}
+                          </span>
+                          {tier.note && (
+                            <span className="text-[10px] text-violet px-1.5 py-0.5 rounded bg-violet/20">
+                              {tier.note}
+                            </span>
+                          )}
+                        </div>
                         <div className="flex items-center gap-3 sm:gap-4 text-sm">
                           <span className="text-cyan font-medium">
                             {tier.discount}
@@ -278,6 +295,9 @@ export default function NFTProof() {
                 </div>
                 <p className="text-white/40 text-xs mt-3 text-center">
                   Discounts apply to Protection Activation Fees only. Rewind execution fees are risk-based and not discounted.
+                </p>
+                <p className="text-white/40 text-xs mt-2 text-center">
+                  <span className="text-violet">AgentPass</span> enables AI protection; window depends on your utility tier.
                 </p>
 
                 {/* Enterprise+ capabilities note */}
