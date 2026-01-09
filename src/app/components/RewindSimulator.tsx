@@ -13,7 +13,7 @@ const tiers = {
 } as const;
 type TierKey = keyof typeof tiers;
 
-const PROTECTION_FEE_BASE = 0.02;
+const PROTECTION_FEE_BASE = 0.01; // 1% base (RWXT preferred)
 const REWIND_FEE_BASE = 0.015;
 
 function useAnimatedNumber(value: number, duration: number = 300) {

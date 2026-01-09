@@ -101,7 +101,7 @@ export default function UserStory() {
                 <div className="flex-1 pt-1">
                   <p className="text-white/80">
                     {hasRewindX
-                      ? 'Transfer enters 24-hour protection window'
+                      ? 'Transfer enters your protection window (2min – 48h)'
                       : 'Transaction confirms instantly on-chain'}
                   </p>
                 </div>
@@ -146,7 +146,7 @@ export default function UserStory() {
           <div className="flex items-center gap-2">
             <ArrowRight className="w-5 h-5 text-violet" />
             <span className="text-white/70">
-              <span className="text-white font-semibold">2 to 4%</span> fee, not total loss
+              <span className="text-white font-semibold">1 to 4%</span> fee, not total loss
             </span>
           </div>
           <div className="hidden sm:block w-px h-6 bg-white/10" />

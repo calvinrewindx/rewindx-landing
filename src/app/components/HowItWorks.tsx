@@ -16,7 +16,7 @@ const steps = [
   {
     number: "02",
     icon: Clock,
-    title: "Active Undo Window (24h)",
+    title: "Active Undo Window (2min–48h)",
     description:
       "The sender can initiate a rewind anytime during the active window.",
     bullets: ["NFT tiers unlock extended windows up to 48h", "After expiry, rewinds are no longer possible; the recipient can finalize (pull-based)"],

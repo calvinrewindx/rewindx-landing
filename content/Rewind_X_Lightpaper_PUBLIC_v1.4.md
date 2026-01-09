@@ -1,8 +1,27 @@
-# Rewind X: Lightpaper
+# Rewind X Lightpaper
 
 **The Reversibility Primitive for Blockchain Transfers**
 
-Version 1.3 | Classification: PUBLIC | December 2025
+Version 1.4 | Classification: PUBLIC | December 2025
+
+---
+
+## Table of Contents
+
+1. [Problem: Finality Without Safety](#1-problem-finality-without-safety)
+2. [Core Principles](#2-core-principles)
+3. [System Overview](#3-system-overview)
+4. [Lifecycle of a Protected Transfer](#4-lifecycle-of-a-protected-transfer)
+5. [Security Model](#5-security-model)
+6. [Fee Model & Integrity Engine](#6-fee-model--integrity-engine)
+7. [Fragment NFT: The Proof Layer](#7-fragment-nft-the-proof-layer)
+8. [RWXT Utility](#8-rwxt-utility)
+9. [Use Cases](#9-use-cases)
+10. [Limitations](#10-limitations)
+11. [Roadmap](#11-roadmap)
+12. [Vision](#12-vision)
+13. [Prior Art & Differentiation](#13-prior-art--differentiation)
+14. [Appendix: Definitions](#14-appendix-definitions)
 
 ---
 
@@ -12,7 +31,7 @@ Rewind X introduces time-bounded reversibility for on-chain token transfers, a f
 
 Billions of dollars in cryptocurrency have been lost permanently due to human error, phishing attacks, and address manipulation. Unlike traditional finance, blockchain offers no recourse. Once a transaction confirms, funds are gone forever.
 
-Rewind X solves this through Protected Transfers: a non-custodial, deterministic mechanism that gives senders a configurable window to reverse transactions before final settlement. Windows range from 5 minutes to 48 hours. The standard maximum is 24 hours; higher NFT tiers unlock extended windows up to 48 hours. Protected transfers settle as net amounts: the Protection Activation Fee is deducted at creation; the recipient receives the net held amount if no rewind occurs. The protocol requires no manual intervention, holds no private keys, and emits tamper-evident on-chain proof signals for reversals, indexed via the Fragment NFT system.
+Rewind X solves this through Protected Transfers: a non-custodial, deterministic mechanism that gives senders a configurable window to reverse transactions before final settlement. Windows range from 2 minutes to 48 hours. The standard maximum is 24 hours; higher NFT tiers unlock extended windows up to 48 hours. Protected transfers settle as net amounts: the Protection Activation Fee is deducted at creation; the recipient receives the net held amount if no rewind occurs. The protocol requires no manual intervention, holds no private keys, and emits tamper-evident on-chain proof signals for reversals, indexed via the Fragment NFT system.
 
 Rewind X is infrastructure: a protocol-level safety layer that can be used directly by individuals and scaled through integrations with wallets, treasuries, and DeFi applications. As wallets integrate Rewind X, users will see it as a simple "Protected Transfer" option, without custodial intermediaries.
 
@@ -54,7 +73,7 @@ Every protocol operation follows predetermined logic with no manual intervention
 
 ### Time-Bounded Windows
 
-Reversibility is strictly limited. The standard window is 24 hours; NFT tier holders can extend up to 48 hours. For faster workflows, windows can also be configured in minutes, with a minimum of 5 minutes.
+Reversibility is strictly limited. The standard window is 24 hours; NFT tier holders can extend up to 48 hours. For faster workflows, windows can also be configured in minutes, with a minimum of 2 minutes.
 
 The sender's selected window defines the guaranteed period during which a rewind can be executed. For safety, settlement may finalize shortly after the selected window due to deterministic hold and finality buffers that prevent race conditions and flash-style abuse. Once this deterministic boundary is reached, the transfer becomes claimable; the recipient must finalize to receive funds. After expiry, the transfer is irreversible; claim only releases funds. This bounded approach preserves blockchain's finality guarantee while providing a safety buffer.
 
@@ -80,13 +99,18 @@ sequenceDiagram
     participant Fragment NFT
 
     Sender->>Protocol: Create Protected Transfer
-    Note over Protocol: Rewind Window Active (5min-48h)
+    Note over Protocol: Rewind Window Active (2min-48h)
     Note over Sender,Receiver: Only sender can act during window
 
     alt Sender Reverses (during window)
         Sender->>Protocol: Execute Rewind
         Protocol->>Sender: Return Funds
         Protocol->>Fragment NFT: Mint (first) / Update (cumulative stats)
+    else Sender Releases Early
+        Sender->>Protocol: Release Transfer Early
+        Note over Protocol: Transfer immediately claimable
+        Receiver->>Protocol: Finalize (claim)
+        Protocol->>Receiver: Release Funds
     else Window Expires (no rewind)
         Note over Protocol: Transfer becomes claimable
         Receiver->>Protocol: Finalize (claim)
@@ -98,7 +122,7 @@ sequenceDiagram
 
 When a user initiates a Protected Transfer, tokens enter a time-bounded state. The transfer is recorded on-chain with a unique identifier, the sender's address, the recipient's address, the token and amount, and the window duration.
 
-During the rewind window, only the sender can act. Two outcomes are possible: the sender reverses the transfer, or the window expires and the transfer becomes claimable by the recipient.
+During the rewind window, only the sender can act. Three outcomes are possible: the sender reverses the transfer, the sender releases early, or the window expires and the transfer becomes claimable by the recipient.
 
 ### Multi-Token Support
 
@@ -128,9 +152,11 @@ Critically, no party can extend or shorten the window after creation. The durati
 
 ### Stage 3: Resolution
 
-Resolution occurs through one of two paths:
+Resolution occurs through one of three paths:
 
 **Sender Reversal:** The sender initiates a rewind while the window is active. The protocol validates the request (window still open, sender is original initiator, limits not exceeded). On success, funds return to the sender's wallet in a single atomic transaction.
+
+**Early Release:** The sender can waive their rewind right before the window expires by calling `releaseTransferEarly()`. This immediately makes the transfer claimable by the recipient, eliminating the remaining wait time. Useful when the recipient confirms receipt and both parties want faster settlement. The sender retains no reversal rights after early release.
 
 **Window Expiry:** If the rewind window reaches its deterministic settlement boundary without sender action, the transfer becomes claimable. The recipient must call finalize (technically: `claim()`) to receive funds. Claim releases the net held amount; no additional fee is charged at claim. This is pull-based by design. Settlement is irreversible once claimed. After expiry, funds remain claimable until the recipient finalizes.
 
@@ -324,7 +350,7 @@ Windows have maximum durations. Once expired, finality is absolute. The protocol
 
 ### Minimum Window Granularity
 
-Protected Transfers have a minimum rewind window of 5 minutes. This prevents "instant reversibility" patterns that could enable abuse while still supporting faster workflows compared to hour-level windows.
+Protected Transfers have a minimum rewind window of 2 minutes. This prevents "instant reversibility" patterns that could enable abuse while still supporting faster workflows compared to hour-level windows.
 
 ### No Fraud Adjudication
 
@@ -348,7 +374,7 @@ If a recipient never finalizes after window expiry, funds remain held under dete
 
 ### Current Status
 
-Landing page and demo environment active. Protocol architecture complete. Fork-tested on EVM-compatible testnet with working on-chain proof generation.
+Landing page and interactive demo active. Protocol architecture complete. Core contracts complete with verified on-chain proof generation.
 
 ### Pre-Mainnet
 
@@ -378,12 +404,12 @@ The technical capability exists. The demand is clear from billions in annual los
 
 ## 13. Prior Art & Differentiation
 
-Rewind X builds on the idea of reversible transfers, but introduces one of the first implementations that satisfies the requirements of real decentralized infrastructure. Earlier approaches, such as custodial recovery services, backend-driven approval flows, or token-specific escrow contracts, either required trust in intermediaries or broke core decentralization guarantees.
+Rewind X builds on the idea of reversible transfers, but introduces one of the first implementations that satisfies the requirements of real decentralized infrastructure. Earlier approaches, such as custodial recovery services, backend-driven approval flows, or token-specific custody contracts, either required trust in intermediaries or broke core decentralization guarantees.
 
 Rewind X differs in several essential ways:
 
 - **Fully non-custodial and non-upgradeable at the core:** No trusted intermediaries, no manual intervention, unlike custodial recovery services. No privileged keys to move funds; emergency controls can only pause the protocol, not override individual transfers.
-- **Protocol-native, not application-layer:** Works at the transfer level, not as a wrapper or separate escrow contract.
+- **Protocol-native, not application-layer:** Works at the transfer level, not as a wrapper or separate custody contract.
 - **Integration-ready:** Usable directly by individuals, and designed to scale through wallet, treasury, and DeFi integrations.
 
 Rewind X does not remove finality—it makes finality safer.
@@ -394,7 +420,7 @@ Rewind X does not remove finality—it makes finality safer.
 
 **Protected Transfer:** A token transfer initiated through Rewind X that includes a time-bounded reversal window before final settlement.
 
-**Rewind Window:** The configurable period (default 24 hours; minimum 5 minutes; up to 48 hours with NFT tiers) during which the sender can rewind a Protected Transfer.
+**Rewind Window:** The configurable period (default 24 hours; minimum 2 minutes; up to 48 hours with NFT tiers) during which the sender can rewind a Protected Transfer.
 
 **Rewind:** The action of reversing a Protected Transfer, returning funds to the original sender.
 
@@ -404,7 +430,9 @@ Rewind X does not remove finality—it makes finality safer.
 
 **Non-Custodial:** The protocol architecture where user funds are never held by or accessible to the protocol team or any third party outside deterministic smart contract logic.
 
-**Finalization:** The irreversible completion of a Protected Transfer, triggered when the recipient calls finalize (technically: `claim()`) after window expiry. Settlement is always pull-based.
+**Finalization:** The irreversible completion of a Protected Transfer, triggered when the recipient calls finalize (technically: `claim()`) after window expiry or early release. Settlement is always pull-based.
+
+**Early Release:** The sender's option to waive their rewind right before the window expires via `releaseTransferEarly()`. Makes the transfer immediately claimable by the recipient without waiting for window expiry.
 
 **Manual Mode:** The default permission model where users create protected transfers and request rewinds manually. No delegation required.
 
@@ -430,5 +458,5 @@ Cryptocurrency involves significant risk including potential loss of principal. 
 
 ---
 
-**Rewind X: Making Finality Safer**
+**Rewind X — Making Finality Safer**
 

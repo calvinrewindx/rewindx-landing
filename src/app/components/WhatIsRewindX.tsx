@@ -6,7 +6,7 @@ const features = [
   {
     icon: Clock,
     title: "Protected Transfers",
-    subtitle: "24h Undo Window",
+    subtitle: "2min–48h Window",
     description:
       "Every protected transfer enters a time-bounded state. The sender remains fully in control during this window. NFT holders may unlock extended windows (up to 48h).",
   },

@@ -7,7 +7,7 @@ const steps = [
     number: "01",
     icon: Send,
     title: "Protected Transfer",
-    description: "You create a protected transfer with configurable window (5min-48h).",
+    description: "You create a protected transfer with configurable window (2min-48h).",
     note: "If no rewind, recipient finalizes after window expires.",
     color: "cyan",
   },

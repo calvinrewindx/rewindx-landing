@@ -134,7 +134,7 @@ export default function TransactionVisualizer() {
       {/* Labels */}
       <div className="flex justify-between px-2 mt-2">
         <span className="text-xs text-white/50 font-mono w-16 text-center">You</span>
-        <span className="text-xs text-white/50 font-mono">24h Window</span>
+        <span className="text-xs text-white/50 font-mono">Protected</span>
         <span className="text-xs text-white/50 font-mono w-16 text-center">Recipient</span>
       </div>
 
@@ -149,7 +149,7 @@ export default function TransactionVisualizer() {
         }`}>
           {phase === "idle" && "Ready to send"}
           {phase === "forward" && "→ Sending..."}
-          {phase === "protected" && "🛡️ Protected (24h window active)"}
+          {phase === "protected" && "🛡️ Protected (window active)"}
           {phase === "rewind" && "↺ Rewinding..."}
           {phase === "complete" && "✓ Funds returned to sender"}
         </div>

@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
   description:
-    "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. 24h undo window. Any ERC-20 token.",
+    "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window. Any ERC-20 token.",
   keywords: [
     "crypto",
     "ERC-20",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
     description:
-      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. 24h undo window. Any ERC-20 token.",
+      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window. Any ERC-20 token.",
     type: "website",
     siteName: "Rewind X Protocol",
     images: [
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
     description:
-      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. 24h undo window.",
+      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window.",
     images: ["/og.png"],
   },
   metadataBase: new URL("https://rewindx.io"),

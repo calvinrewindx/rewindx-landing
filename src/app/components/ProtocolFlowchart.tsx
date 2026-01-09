@@ -30,7 +30,7 @@ export default function ProtocolFlowchart() {
           </div>
           <div className="flex-1 p-4 rounded-xl bg-white/[0.03] border border-white/10">
             <p className="text-white text-sm font-medium">Rewind Window Active</p>
-            <p className="text-white/40 text-xs">5min-48h deterministic window</p>
+            <p className="text-white/40 text-xs">2min-48h deterministic window</p>
           </div>
         </div>
 
@@ -49,10 +49,10 @@ export default function ProtocolFlowchart() {
               <p className="text-white/30 text-[10px]">During window only</p>
             </div>
 
-            {/* Step 2: Window Expires (state change) */}
+            {/* Step 2: Window Expires or Early Release (state change) */}
             <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
               <Clock className="w-4 h-4 text-white/50 mx-auto mb-2" />
-              <p className="text-white/60 text-xs font-medium">Window Expires</p>
+              <p className="text-white/60 text-xs font-medium">Expiry or Early Release</p>
               <p className="text-white/30 text-[10px]">Becomes claimable</p>
             </div>
 
@@ -66,7 +66,7 @@ export default function ProtocolFlowchart() {
 
           {/* Disclaimer */}
           <p className="text-white/30 text-[10px] text-center mt-4">
-            After expiry, nothing auto-sends — claim is required to release funds.
+            After expiry or early release, claim is required to release funds.
           </p>
         </div>
 

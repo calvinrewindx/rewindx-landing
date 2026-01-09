@@ -65,7 +65,7 @@ export default function Hero() {
           The <span className="gradient-text font-semibold">first</span> <span className="text-cyan/80">reversible</span> transfer layer for <span className="text-cyan/80">ERC-20</span> tokens.
         </p>
         <p className="font-mono text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-10 tracking-wide">
-          <span className="text-cyan">24h</span> undo window · Non-custodial · Deterministic
+          <span className="text-cyan">Configurable</span> undo window · Non-custodial · Deterministic
         </p>
 
         {/* CTA Buttons */}

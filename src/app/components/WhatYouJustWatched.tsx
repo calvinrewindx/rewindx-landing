@@ -7,7 +7,7 @@ const steps = [
     number: "01",
     title: "Protected Transfer",
     description:
-      "Funds enter 24h protected holding state.",
+      "Funds enter configurable protected holding state.",
     icon: Shield,
     color: "cyan",
   },

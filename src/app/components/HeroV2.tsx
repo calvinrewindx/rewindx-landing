@@ -40,11 +40,11 @@ export default function HeroV2() {
         {/* Brand */}
         <div className="mb-6">
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest uppercase animate-glow-pulse"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest uppercase"
             style={{
               fontFamily: "var(--font-space-grotesk)",
-              color: "#00d4ff",
-              textShadow: "0 0 30px rgba(0, 212, 255, 0.6), 0 0 60px rgba(0, 212, 255, 0.4)",
+              color: "#00b8d9",
+              textShadow: "0 0 25px rgba(0, 212, 255, 0.25), 0 0 50px rgba(0, 212, 255, 0.15)",
               minHeight: "1.2em"
             }}
           >
@@ -72,13 +72,9 @@ export default function HeroV2() {
         </h1>
 
         {/* Subheadline */}
-        <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-4 leading-relaxed">
+        <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-6 leading-relaxed">
           The <span className="gradient-text font-semibold">first</span> <span className="text-cyan">reversible</span> transfer layer for <span className="text-cyan">ERC-20</span> tokens.
         </p>
-        <p className="font-mono text-sm sm:text-base text-white/70 max-w-xl mx-auto mb-8 tracking-wide">
-          <span className="text-cyan">24h</span> undo window · <span className="text-violet">Configurable</span> · <span className="text-cyan/80">Deterministic</span>
-        </p>
-
         {/* Animation */}
         <div className="mb-6">
           <CtrlZAnimation size="md" />

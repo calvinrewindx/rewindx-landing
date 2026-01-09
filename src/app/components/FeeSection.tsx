@@ -39,7 +39,7 @@ export default function FeeSection() {
                   textShadow: "0 0 60px rgba(0, 212, 255, 0.3), 0 0 120px rgba(0, 212, 255, 0.1)"
                 }}
               >
-                2–4<span className="text-cyan">%</span>
+                1–4<span className="text-cyan">%</span>
               </h3>
             </div>
 
@@ -51,19 +51,19 @@ export default function FeeSection() {
             <div className="flex flex-col gap-3">
               {/* Base + Surcharge */}
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-white font-medium">2% base fee</span>
+                <span className="text-white font-medium">1% base fee</span>
                 <span className="text-white/30">+</span>
-                <span className="text-cyan font-medium">0–2% surcharge</span>
+                <span className="text-cyan font-medium">0–3% surcharge</span>
               </div>
 
               {/* Token Cards */}
               <div className="flex gap-3">
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyan/10 border border-cyan/30">
-                  <span className="text-white/60 text-xs">Preferred tokens</span>
-                  <span className="text-cyan font-bold">2%</span>
+                  <span className="text-white/60 text-xs">RWXT & Stablecoins</span>
+                  <span className="text-cyan font-bold">1%</span>
                 </div>
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/20">
-                  <span className="text-white/60 text-xs">Non-preferred tokens</span>
+                  <span className="text-white/60 text-xs">Other tokens</span>
                   <span className="text-white font-bold">4%</span>
                 </div>
               </div>
@@ -105,12 +105,12 @@ export default function FeeSection() {
               <div className="px-5 pb-5 pt-0">
                 <div className="p-4 rounded-lg bg-white/[0.03] border border-white/5">
                   <p className="text-white/60 text-sm mb-4">
-                    This fee enables the deterministic 24h safety window.
+                    This fee enables the deterministic safety window.
                   </p>
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2 text-sm">
                       <Check className="w-4 h-4 text-cyan mt-0.5 flex-shrink-0" />
-                      <span className="text-white/50"><span className="text-white/80">Typical cost:</span> 2–4% for normal EOA transfers</span>
+                      <span className="text-white/50"><span className="text-white/80">Typical cost:</span> 1–4% for normal EOA transfers</span>
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <Check className="w-4 h-4 text-cyan mt-0.5 flex-shrink-0" />
@@ -185,6 +185,72 @@ export default function FeeSection() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Reversal Models Comparison */}
+        <div className="mb-14">
+          <h3
+            className="text-xl font-semibold text-white text-center mb-3"
+            style={{ fontFamily: "var(--font-space-grotesk)" }}
+          >
+            Reversal Models <span className="text-cyan">Compared</span>
+          </h3>
+          <p className="text-white/50 text-sm text-center mb-8 max-w-xl mx-auto leading-relaxed">
+            Traditional systems rely on custodial dispute processes. Crypto today offers no recourse. <span className="text-cyan font-medium">Rewind X</span> introduces protocol-level, <span className="text-white font-medium">deterministic</span> reversibility.
+          </p>
+
+          <div className="rounded-xl border border-white/10 overflow-hidden">
+            <table className="w-full">
+              <thead>
+                <tr className="bg-white/[0.03]">
+                  <th className="text-left py-4 px-5 text-white/50 text-xs uppercase tracking-wider font-medium">Model</th>
+                  <th className="text-center py-4 px-5 text-white/50 text-xs uppercase tracking-wider font-medium">Custody</th>
+                  <th className="text-left py-4 px-5 text-white/50 text-xs uppercase tracking-wider font-medium">Reversal Type</th>
+                  <th className="text-left py-4 px-5 text-white/50 text-xs uppercase tracking-wider font-medium">Time Window</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5">
+                <tr className="hover:bg-white/[0.02] transition-colors">
+                  <td className="py-4 px-5 text-white/70 font-medium">Chargebacks</td>
+                  <td className="py-4 px-5 text-center">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400">Custodial</span>
+                  </td>
+                  <td className="py-4 px-5 text-white/50">Discretionary</td>
+                  <td className="py-4 px-5 text-white/50">Days – Months</td>
+                </tr>
+                <tr className="hover:bg-white/[0.02] transition-colors">
+                  <td className="py-4 px-5 text-white/70 font-medium">Bank Recall</td>
+                  <td className="py-4 px-5 text-center">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-yellow-500/10 text-yellow-400">Custodial</span>
+                  </td>
+                  <td className="py-4 px-5 text-white/50">Manual</td>
+                  <td className="py-4 px-5 text-white/50">Uncertain</td>
+                </tr>
+                <tr className="hover:bg-white/[0.02] transition-colors">
+                  <td className="py-4 px-5 text-white/70 font-medium">Crypto Today</td>
+                  <td className="py-4 px-5 text-center">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400">Non-custodial</span>
+                  </td>
+                  <td className="py-4 px-5 text-red-400/80">Irreversible</td>
+                  <td className="py-4 px-5 text-white/30">—</td>
+                </tr>
+                <tr className="bg-gradient-to-r from-cyan/10 to-violet/5">
+                  <td className="py-4 px-5">
+                    <span className="text-cyan font-semibold">Rewind X</span>
+                  </td>
+                  <td className="py-4 px-5 text-center">
+                    <span className="px-2 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400">Non-custodial</span>
+                  </td>
+                  <td className="py-4 px-5">
+                    <span className="text-cyan font-medium">Deterministic</span>
+                  </td>
+                  <td className="py-4 px-5">
+                    <span className="text-cyan font-medium font-mono">2min – 48h</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
 
