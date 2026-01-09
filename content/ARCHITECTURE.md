@@ -163,7 +163,7 @@ Paused state preserves all balances in-place; resolution resumes from the same s
 ## Verification Status
 
 - ~20 coordinated contracts
-- Fork-tested against mainnet-equivalent state
+- Tested against production-equivalent EVM state
 - Public deployment intentionally limited pending third-party audit
 
 A deeper walkthrough (design + threat model) is available on request for qualified reviewers.
