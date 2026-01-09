@@ -200,7 +200,41 @@ export default function FeeSection() {
             Traditional systems rely on custodial dispute processes. Crypto today offers no recourse. <span className="text-cyan font-medium">Rewind X</span> introduces protocol-level, <span className="text-white font-medium">deterministic</span> reversibility.
           </p>
 
-          <div className="rounded-xl border border-white/10 overflow-hidden">
+          {/* Mobile: Cards */}
+          <div className="sm:hidden space-y-3">
+            {[
+              { name: "Chargebacks", custody: "Custodial", custodyColor: "yellow", type: "Discretionary", time: "Days – Months" },
+              { name: "Bank Recall", custody: "Custodial", custodyColor: "yellow", type: "Manual", time: "Uncertain" },
+              { name: "Crypto Today", custody: "Non-custodial", custodyColor: "emerald", type: "Irreversible", typeColor: "red", time: "—" },
+            ].map((item) => (
+              <div key={item.name} className="p-4 rounded-xl border border-white/10 bg-white/[0.02]">
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-white/70 font-medium">{item.name}</span>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${item.custodyColor === 'yellow' ? 'bg-yellow-500/10 text-yellow-400' : 'bg-emerald-500/10 text-emerald-400'}`}>
+                    {item.custody}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-sm">
+                  <span className={item.typeColor === 'red' ? 'text-red-400/80' : 'text-white/50'}>{item.type}</span>
+                  <span className="text-white/30">{item.time}</span>
+                </div>
+              </div>
+            ))}
+            {/* Rewind X Card - Highlighted */}
+            <div className="p-4 rounded-xl border border-cyan/30 bg-gradient-to-r from-cyan/10 to-violet/5">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-cyan font-semibold">Rewind X</span>
+                <span className="px-2 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400">Non-custodial</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-cyan font-medium">Deterministic</span>
+                <span className="text-cyan font-medium font-mono">2min – 48h</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Desktop: Table */}
+          <div className="hidden sm:block rounded-xl border border-white/10 overflow-hidden">
             <table className="w-full">
               <thead>
                 <tr className="bg-white/[0.03]">
