@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, HelpCircle, Shield, Clock, Wallet, Lock, Users, Coins, CheckCircle, AlertTriangle, Zap, Ban, ArrowRight } from "lucide-react";
+import { ChevronDown, HelpCircle, Shield, Clock, Wallet, Lock, Users, Coins, CheckCircle, AlertTriangle, Zap, ArrowRight } from "lucide-react";
 
 const faqs = [
   {
@@ -19,9 +19,9 @@ const faqs = [
     color: "violet",
   },
   {
-    question: "What happens when the 24h / 48h window expires?",
+    question: "What happens when the rewind window expires?",
     answer:
-      "After the window expires, the transfer becomes claimable by the recipient. No rewinds are possible beyond the window. Settlement is finalized when the recipient claims.",
+      "Windows are configurable from 2 minutes to 48 hours. Users select their preferred duration at transfer creation. NFT tiers unlock extended windows up to 48h. After expiry, the transfer becomes claimable by the recipient. No rewinds are possible beyond the window.",
     icon: Clock,
     color: "cyan",
   },
@@ -61,6 +61,13 @@ const faqs = [
     color: "cyan",
   },
   {
+    question: "Can the sender release a transfer early?",
+    answer:
+      "Yes. The sender can waive their rewind right before the window expires, making the transfer immediately claimable by the recipient. This is useful when both parties want faster settlement.",
+    icon: Zap,
+    color: "violet",
+  },
+  {
     question: "What happens if the recipient never claims?",
     answer:
       "After the window expires, the transfer is finalizable by the recipient (pull-based). If the recipient never finalizes, the net amount remains held under deterministic contract rules until it is finalized. It is not auto-released or returned by the protocol.",
@@ -80,13 +87,6 @@ const faqs = [
       "RWXT is used to acquire optional NFT utility tiers that unlock enhanced protocol parameters: fee discounts on protection activation, extended windows (up to 48h), higher daily limits, batch operations, and team wallet controls for enterprise users.",
     icon: Zap,
     color: "cyan",
-  },
-  {
-    question: "Does RWXT give yield or profit?",
-    answer:
-      "No. RWXT provides software access and fee benefits only. It is not designed as an investment. There are no profit promises, yield mechanisms, or return expectations associated with holding RWXT.",
-    icon: Ban,
-    color: "violet",
   },
 ];
 

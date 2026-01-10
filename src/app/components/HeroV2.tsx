@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, Shield, Link2, Coins } from "lucide-react";
+import { ArrowRight, Shield, Link2, Coins, Bot } from "lucide-react";
 import CtrlZAnimation from "./CtrlZAnimation";
 import DemoVideoToggle from "./DemoVideoToggle";
 
@@ -94,6 +94,10 @@ export default function HeroV2() {
             <Coins className="w-3.5 h-3.5 text-cyan" />
             Any ERC-20
           </span>
+          <span className="badge">
+            <Bot className="w-3.5 h-3.5 text-violet" />
+            AI Protection
+          </span>
         </div>
 
         {/* CTA */}
@@ -102,8 +106,8 @@ export default function HeroV2() {
             Try Interactive Demo
             <ArrowRight className="w-4 h-4" />
           </a>
-          <a href="#how-it-works" className="btn-secondary flex items-center gap-2">
-            Explore the Mechanism
+          <a href="#features" className="btn-secondary flex items-center gap-2">
+            What is Rewind X?
             <ArrowRight className="w-4 h-4" />
           </a>
         </div>

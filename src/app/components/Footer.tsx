@@ -168,6 +168,9 @@ export default function Footer() {
           <p className="font-mono text-[9px] text-white/30 tracking-wider">
             Informational only · No financial services or token offerings
           </p>
+          <p className="font-mono text-[9px] text-white/30 tracking-wider">
+            RWXT is a utility token for protocol access · Not investment advice · No guaranteed returns
+          </p>
         </div>
       </div>
     </footer>

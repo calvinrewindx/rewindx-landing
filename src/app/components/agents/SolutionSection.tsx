@@ -105,6 +105,13 @@ export default function SolutionSection() {
           <p className="text-white/50 leading-relaxed">
             Agents act autonomously — only when <span className="text-violet">you activate</span>. Disable anytime.
           </p>
+
+          {/* Security Disclaimer */}
+          <div className="mt-6 pt-6 border-t border-white/10">
+            <p className="text-white/40 text-sm">
+              <span className="text-emerald-400/80">⚡</span> AI provides threat signals. Smart contract enforces constraints. The agent <span className="text-white/60">cannot move funds</span> outside protocol rules.
+            </p>
+          </div>
         </div>
       </div>
     </section>

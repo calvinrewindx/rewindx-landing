@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Cpu, User } from "lucide-react";
+import { Clock, Cpu, User, Check, X } from "lucide-react";
 
 const features = [
   {
@@ -41,13 +41,14 @@ export default function WhatIsRewindX() {
             What is <span className="gradient-text">Rewind X</span>?
           </h2>
           <p className="text-white/60 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed mb-4">
-            A single typo or wrong address shouldn&apos;t mean permanent loss.
+            Undo transfers before they&apos;re final.
           </p>
-          <p className="text-white/50 text-base max-w-3xl mx-auto leading-relaxed">
-            Rewind X introduces a deterministic, non-custodial undo window for
-            ERC-20 transfers. Fully on-chain, rule-based, with trust-minimized
-            controls. Finally, a safety layer that protects users without
-            compromising decentralization.
+          <p className="text-white/50 text-base max-w-3xl mx-auto leading-relaxed mb-4">
+            A time-bounded safety window for ERC-20 transfers.
+            Fully on-chain. Non-custodial. Deterministic.
+          </p>
+          <p className="text-white/60 text-base max-w-3xl mx-auto font-medium">
+            Finally, <span className="text-cyan">safety</span> without compromising <span className="text-violet">decentralization</span>.
           </p>
         </div>
 
@@ -75,6 +76,36 @@ export default function WhatIsRewindX() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Is / Is Not Card */}
+        <div className="mt-12 max-w-2xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* IS */}
+            <div className="p-5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/40 hover:shadow-lg hover:shadow-emerald-500/10">
+              <h4 className="text-emerald-400 font-semibold text-sm mb-3 flex items-center gap-2">
+                <Check className="w-4 h-4" />
+                What it is
+              </h4>
+              <ul className="space-y-2 text-white/60 text-sm">
+                <li>Preventive safety layer</li>
+                <li>Deterministic on-chain rules</li>
+                <li>Sender-initiated only</li>
+              </ul>
+            </div>
+            {/* IS NOT */}
+            <div className="p-5 rounded-xl border border-red-500/20 bg-red-500/5 transition-all duration-300 hover:-translate-y-1 hover:border-red-500/40 hover:shadow-lg hover:shadow-red-500/10">
+              <h4 className="text-red-400 font-semibold text-sm mb-3 flex items-center gap-2">
+                <X className="w-4 h-4" />
+                What it is not
+              </h4>
+              <ul className="space-y-2 text-white/60 text-sm">
+                <li>Not insurance or recovery</li>
+                <li>Not custodial</li>
+                <li>Not changing finality</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

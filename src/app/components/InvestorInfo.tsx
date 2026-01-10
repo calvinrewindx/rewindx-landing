@@ -11,13 +11,13 @@ export default function InvestorInfo() {
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Glass Card Container */}
         <div className="relative group/card">
-          {/* Glow effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-cyan/30 via-cyan/10 to-cyan/30 rounded-3xl blur-xl opacity-50 group-hover/card:opacity-80 transition-opacity duration-700" />
+          {/* Glow effect - dual color */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-cyan/30 via-violet/20 to-cyan/30 rounded-3xl blur-xl opacity-50 group-hover/card:opacity-80 transition-opacity duration-700" />
 
           {/* Card */}
           <div className="relative glass-card rounded-3xl border border-white/10 group-hover/card:border-cyan/30 transition-all duration-500 p-10 sm:p-14 lg:p-16 overflow-hidden">
-            {/* Inner glow */}
-            <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-cyan/10 blur-[120px] pointer-events-none" />
+            {/* Inner glow - dual color */}
+            <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full bg-gradient-to-br from-cyan/15 to-violet/10 blur-[120px] pointer-events-none" />
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
               {/* Left: Headline + CTA */}
@@ -34,13 +34,12 @@ export default function InvestorInfo() {
                 >
                   Building the
                   <br />
-                  <span className="text-white/40">safety layer</span>
+                  <span className="gradient-text">safety layer</span>
                   <br />
                   for crypto.
                 </h2>
                 <p className="text-white/50 text-lg mb-8 max-w-md leading-relaxed">
-                  We're exploring aligned early support and partnerships.
-                  Private outreach only.
+                  Exploring aligned early support and strategic partnerships.
                 </p>
 
                 <a
@@ -70,20 +69,20 @@ export default function InvestorInfo() {
               {/* Right: Statement */}
               <div className="lg:pl-8 flex items-center">
                 <div className="relative group/statement">
-                  {/* Prominent animated line */}
-                  <div className="absolute -left-6 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-cyan via-cyan/50 to-transparent group-hover/statement:from-cyan group-hover/statement:via-cyan/70 transition-all duration-500">
+                  {/* Prominent animated line - gradient */}
+                  <div className="absolute -left-6 top-0 bottom-0 w-1 rounded-full bg-gradient-to-b from-cyan via-violet to-violet/30 group-hover/statement:from-cyan group-hover/statement:via-violet group-hover/statement:to-violet/50 transition-all duration-500">
                     <div className="absolute top-0 left-0 w-full h-8 bg-cyan blur-md opacity-60 group-hover/statement:opacity-100 transition-opacity duration-500" />
                   </div>
                   <blockquote className="pl-10">
                     <p
-                      className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight"
+                      className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-6 leading-tight"
                       style={{ fontFamily: "var(--font-space-grotesk)" }}
                     >
-                      Non-custodial.
+                      <span className="text-cyan">Non-custodial.</span>
                       <br />
-                      <span className="text-white/60">Deterministic.</span>
+                      <span className="text-violet/70">Deterministic.</span>
                       <br />
-                      <span className="text-white/40">On-chain.</span>
+                      <span className="text-white">On-chain.</span>
                     </p>
                     <p className="text-white/50 text-base leading-relaxed max-w-md">
                       A reversibility primitive designed for ecosystem
