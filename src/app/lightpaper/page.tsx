@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import ProtocolFlowchart from "../components/ProtocolFlowchart";
 import ReadingProgress from "../components/ReadingProgress";
+import ScrollMemory from "../components/ScrollMemory";
 
 export default function DocsPage() {
   let content = "";
@@ -40,25 +41,25 @@ export default function DocsPage() {
       // Headers with IDs for anchor links
       .replace(/^### (.*$)/gm, (_, title) => {
         const id = slugify(title);
-        return `<h3 id="${id}" class="text-xl font-semibold text-white mt-8 mb-4" style="font-family: var(--font-space-grotesk)">${title}</h3>`;
+        return `<h3 id="${id}" class="text-xl font-semibold text-cyan/90 mt-8 mb-4" style="font-family: var(--font-space-grotesk)">${title}</h3>`;
       })
       .replace(/^## (.*$)/gm, (_, title) => {
         const id = slugify(title);
-        return `<h2 id="${id}" class="text-2xl font-bold text-white mt-12 mb-6 pb-2 border-b border-white/10" style="font-family: var(--font-space-grotesk)">${title}</h2>`;
+        return `<h2 id="${id}" class="text-2xl font-bold text-cyan mt-12 mb-6 scroll-mt-20" style="font-family: var(--font-space-grotesk)">${title}</h2>`;
       })
       .replace(/^# (.*$)/gm, '<h1 class="text-4xl font-bold gradient-text mb-8" style="font-family: var(--font-space-grotesk)">$1</h1>')
       // Bold
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-cyan font-semibold">$1</strong>')
       // Links
       .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-cyan hover:text-cyan/80 underline underline-offset-2">$1</a>')
       // Horizontal rules
-      .replace(/^---$/gm, '<hr class="my-8 border-white/10" />')
+      .replace(/^---$/gm, '<hr class="my-8 border-cyan/20" />')
       // Numbered lists (preserve numbers)
-      .replace(/^(\d+)\. (.*$)/gm, '<li class="flex items-start gap-3 text-white/60 mb-2"><span class="text-cyan font-mono text-sm min-w-[1.5rem]">$1.</span><span class="flex-1">$2</span></li>')
+      .replace(/^(\d+)\. (.*$)/gm, '<li class="flex items-start gap-3 text-white mb-2"><span class="text-cyan font-mono text-sm min-w-[2.5rem] text-right">$1.</span><span class="flex-1">$2</span></li>')
       // Bullet list items
-      .replace(/^- (.*$)/gm, '<li class="flex items-start gap-3 text-white/60 mb-3"><span class="text-cyan text-lg leading-6">•</span><span class="flex-1">$1</span></li>')
+      .replace(/^- (.*$)/gm, '<li class="flex items-start gap-3 text-white mb-3"><span class="text-cyan text-lg leading-6">•</span><span class="flex-1">$1</span></li>')
       // Paragraphs
-      .replace(/\n\n/g, '</p><p class="text-white/60 leading-relaxed mb-4">');
+      .replace(/\n\n/g, '</p><p class="text-white leading-relaxed mb-4">');
   };
 
   return (
@@ -81,8 +82,11 @@ export default function DocsPage() {
       {/* Reading Progress Bar */}
       <ReadingProgress />
 
+      {/* Scroll Memory (saves position, back-to-top button) */}
+      <ScrollMemory storageKey="lp-pos" />
+
       {/* Content */}
-      <div className="pt-24 pb-20 px-6">
+      <div id="lp-content" className="pt-24 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           {hasLightpaper ? (
             <article className="prose prose-invert max-w-none">

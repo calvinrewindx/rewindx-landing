@@ -2,7 +2,7 @@
 
 **The Reversibility Primitive for Blockchain Transfers**
 
-Version 1.4 | Classification: PUBLIC | December 2025
+Version 1.4.1 | Classification: PUBLIC | January 2026
 
 ---
 
@@ -13,7 +13,7 @@ Version 1.4 | Classification: PUBLIC | December 2025
 3. [System Overview](#3-system-overview)
 4. [Lifecycle of a Protected Transfer](#4-lifecycle-of-a-protected-transfer)
 5. [Security Model](#5-security-model)
-6. [Fee Model & Integrity Engine](#6-fee-model--integrity-engine)
+6. [Fee Model & Integrity Engine](#6-fee-model-integrity-engine)
 7. [Fragment NFT: The Proof Layer](#7-fragment-nft-the-proof-layer)
 8. [RWXT Utility](#8-rwxt-utility)
 9. [Use Cases](#9-use-cases)
@@ -27,7 +27,7 @@ Version 1.4 | Classification: PUBLIC | December 2025
 
 ## Abstract
 
-Rewind X introduces time-bounded reversibility for on-chain token transfers, a foundational primitive missing from blockchain infrastructure since inception.
+Rewind X introduces time-bounded reversibility for on-chain token transfers, a capability missing from blockchain infrastructure since inception.
 
 Billions of dollars in cryptocurrency have been lost permanently due to human error, phishing attacks, and address manipulation. Unlike traditional finance, blockchain offers no recourse. Once a transaction confirms, funds are gone forever.
 
@@ -39,11 +39,11 @@ Rewind X is infrastructure: a protocol-level safety layer that can be used direc
 
 ## 1. Problem: Finality Without Safety
 
-Blockchain's greatest technical achievement, irreversible finality, is also its most significant barrier to mainstream adoption.
+Blockchain's core strength, irreversible finality, is also a key barrier to mainstream adoption.
 
 ### The Cost of Irreversibility
 
-The scale is staggering. The causes are predictable and recurring: typographical errors in wallet addresses, copy-paste mistakes, decimal point errors, address poisoning attacks where malicious actors create lookalike addresses, and phishing schemes that redirect funds to attacker-controlled wallets.
+The causes are predictable and recurring: typographical errors in wallet addresses, copy-paste mistakes, decimal point errors, address poisoning attacks where malicious actors create lookalike addresses, and phishing schemes that redirect funds to attacker-controlled wallets.
 
 Traditional financial systems have evolved comprehensive safeguards: chargebacks, fraud protection, dispute resolution, and regulatory oversight. When a bank customer sends money to the wrong account, there are established processes for recovery. When a credit card is compromised, transactions can be reversed.
 
@@ -53,15 +53,15 @@ Cryptocurrency offers none of these protections. The very properties that make b
 
 This creates a fundamental problem for cryptocurrency adoption. Sophisticated users implement elaborate verification procedures before every transaction. Enterprise treasury managers require multiple approval layers. Yet mistakes still happen: a single misplaced character in an address can result in total loss.
 
-For mainstream users, this risk profile is simply unacceptable. The mental overhead of knowing that any transaction could be an irreversible catastrophe prevents the casual usage that characterizes successful financial technologies.
+For mainstream users, this level of risk is unacceptable. The mental overhead of knowing that any transaction could be an irreversible catastrophe prevents the casual usage that characterizes successful financial technologies.
 
-The market needs a solution that preserves blockchain's core properties while adding a safety layer for human fallibility.
+The market needs a solution that adds a safety layer without compromising decentralization or custody.
 
 ---
 
 ## 2. Core Principles
 
-Rewind X is built on five non-negotiable principles that distinguish it from centralized alternatives:
+Rewind X is built on five core principles that distinguish it from centralized alternatives:
 
 ### Non-Custodial Architecture
 
@@ -168,7 +168,7 @@ On a sender's first successful rewind, the protocol mints a Fragment NFT to the 
 
 ## 5. Security Model
 
-Rewind X employs a defense-in-depth approach with multiple independent protection layers.
+Rewind X uses multiple independent protection layers.
 
 ### Immutable Core
 
@@ -177,6 +177,16 @@ Core transfer records are non-upgradeable once deployed. Upgradeability, where p
 ### No Privileged Functions
 
 The protocol contains no privileged/admin functions capable of moving user funds, redirecting balances, or overriding individual transfer outcomes. Emergency controls are limited to pausing operations; balances remain in place.
+
+### Signature-Based Authorization
+
+Certain safety-critical actions in Rewind X require explicit user consent, such as reversing a transfer or granting limited delegation rights.
+
+This consent is expressed through a digital signature. A signature is a one-time, explicit confirmation that a user agrees to a specific action under clearly defined conditions. It does not grant ongoing access, custody, or control over funds.
+
+Each signature is bound to a single action, includes a strict expiration time, and cannot be reused. Once the signature expires or is consumed, it becomes invalid.
+
+Rewind X uses typed structured data signing (EIP-712) to ensure that users can clearly see and approve exactly what they are authorizing. This mechanism prevents silent actions, replay across contexts, and unintended permission escalation, while remaining compatible with both externally owned accounts and contract wallets via standard signature verification.
 
 ### Checks-Effects-Interactions Pattern
 
@@ -392,19 +402,19 @@ Post-launch development will focus on documentation improvements and optional in
 
 ## 12. Vision
 
-Rewind X aims to be one of the first non-custodial, protocol-level primitives for reversible ERC-20 transfers on public blockchains.
+Rewind X introduces the first non-custodial, protocol-level reversibility for ERC-20 transfers on public blockchains.
 
 The goal is not to replace blockchain finality. It is to make finality safer. By providing a bounded window for human review and error correction, the protocol removes a critical barrier to mainstream cryptocurrency adoption.
 
 We envision Rewind X as infrastructure: a foundational layer that wallets, protocols, and applications build upon to offer users protection they currently lack. Just as SSL became an invisible security layer for the web, reversibility can become a standard option for blockchain transfers.
 
-The technical capability exists. The demand is clear from billions in annual losses. What remains is execution: secure deployment, ecosystem integration, and the slow work of establishing a new standard for user protection in decentralized systems.
+The technical capability exists. The demand is clear. What remains is execution: secure deployment and ecosystem integration.
 
 ---
 
 ## 13. Prior Art & Differentiation
 
-Rewind X builds on the idea of reversible transfers, but introduces one of the first implementations that satisfies the requirements of real decentralized infrastructure. Earlier approaches, such as custodial recovery services, backend-driven approval flows, or token-specific custody contracts, either required trust in intermediaries or broke core decentralization guarantees.
+Rewind X builds on the idea of reversible transfers with an implementation designed for real decentralized infrastructure. Earlier approaches, such as custodial recovery services, backend-driven approval flows, or token-specific custody contracts, either required trust in intermediaries or broke core decentralization guarantees.
 
 Rewind X differs in several essential ways:
 
