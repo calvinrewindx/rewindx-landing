@@ -19,16 +19,14 @@ const TOTAL_STEPS = STEPS.length;
 export default function DemoPlayer() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isHovering, setIsHovering] = useState(false);
   const [stepProgress, setStepProgress] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const currentStepData = STEPS[currentStep - 1] || STEPS[0];
-  const shouldAnimate = isPlaying && !isHovering;
 
   // Autoplay: progress within step
   useEffect(() => {
-    if (!shouldAnimate) return;
+    if (!isPlaying) return;
 
     const stepDuration = currentStepData.duration;
     const updateInterval = 50;
@@ -45,15 +43,15 @@ export default function DemoPlayer() {
     }, updateInterval);
 
     return () => clearInterval(timer);
-  }, [shouldAnimate, currentStep, currentStepData.duration]);
+  }, [isPlaying, currentStep, currentStepData.duration]);
 
   // Move to next step when progress reaches 100
   useEffect(() => {
-    if (stepProgress >= 100 && shouldAnimate) {
+    if (stepProgress >= 100 && isPlaying) {
       setStepProgress(0);
       setCurrentStep((prev) => (prev < TOTAL_STEPS ? prev + 1 : 1));
     }
-  }, [stepProgress, shouldAnimate]);
+  }, [stepProgress, isPlaying]);
 
   const handleNext = useCallback(() => {
     setStepProgress(0);
@@ -87,15 +85,6 @@ export default function DemoPlayer() {
     setCurrentStep(step);
     setStepProgress(0);
     setIsPlaying(false);
-  }, []);
-
-  // Pause on hover - smooth, temporary pause
-  const handleMouseEnter = useCallback(() => {
-    setIsHovering(true);
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
   }, []);
 
   // Keyboard navigation
@@ -210,8 +199,6 @@ export default function DemoPlayer() {
         {/* Main Stage */}
         <div
           ref={containerRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -268,13 +255,13 @@ export default function DemoPlayer() {
           <button
             onClick={handleTogglePlay}
             className={`p-4 rounded-xl border transition-colors ${
-              shouldAnimate
+              isPlaying
                 ? 'bg-gradient-to-r from-cyan/20 to-violet/20 border-cyan/30 text-white'
                 : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10 hover:text-white'
             }`}
             aria-label={isPlaying ? 'Pause' : 'Play'}
           >
-            {shouldAnimate ? (
+            {isPlaying ? (
               <Pause className="w-5 h-5" />
             ) : (
               <Play className="w-5 h-5" />
@@ -301,11 +288,7 @@ export default function DemoPlayer() {
         {/* Status */}
         <div className="text-center mt-4">
           <span className="text-white/40 text-xs">
-            {!isPlaying
-              ? 'Paused - click Play to continue'
-              : isHovering
-                ? 'Hover paused - move mouse away to resume'
-                : 'Auto-playing...'}
+            {isPlaying ? 'Auto-playing...' : 'Paused'}
           </span>
         </div>
 
