@@ -24,10 +24,14 @@ export default function RewindScene() {
         <div className="space-y-4 mb-6">
           <div className="flex justify-between items-center py-3 border-b border-white/5">
             <span className="text-white/50 text-sm">Recovered</span>
-            <span className="text-emerald-400 font-mono font-semibold text-lg">985 USDC</span>
+            <span className="text-emerald-400 font-mono font-semibold text-lg">975 USDC</span>
           </div>
           <div className="flex justify-between items-center py-3 border-b border-white/5">
-            <span className="text-white/50 text-sm">Total Fees</span>
+            <span className="text-white/50 text-sm">Protection Fee</span>
+            <span className="text-white/70 font-mono text-sm">10 USDC (1%)</span>
+          </div>
+          <div className="flex justify-between items-center py-3 border-b border-white/5">
+            <span className="text-white/50 text-sm">Rewind Fee</span>
             <span className="text-white/70 font-mono text-sm">15 USDC (1.5%)</span>
           </div>
         </div>
@@ -41,7 +45,7 @@ export default function RewindScene() {
           </div>
           <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/20 text-center">
             <div className="text-xs text-emerald-400/70 mb-2">With Rewind X</div>
-            <div className="text-emerald-400 font-mono font-bold text-xl">+985</div>
+            <div className="text-emerald-400 font-mono font-bold text-xl">+975</div>
             <div className="text-xs text-white/30 mt-1">USDC saved</div>
           </div>
         </div>
