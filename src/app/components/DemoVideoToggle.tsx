@@ -39,7 +39,7 @@ export default function DemoVideoToggle() {
   const AiIcon = DEMO_CONFIG.ai.icon;
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div id="demo-video" className="max-w-4xl mx-auto scroll-mt-24">
       {/* Toggle Switch */}
       <p className="text-center text-white/40 text-xs font-mono tracking-wider mb-3">
         Choose demo

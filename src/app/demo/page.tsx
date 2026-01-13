@@ -4,10 +4,10 @@ import DemoPlayer from '@/app/components/demo/DemoPlayer';
 
 export const metadata: Metadata = {
   title: 'Demo — Rewind X',
-  description: 'Interactive demo of Rewind X autonomous protection for AI agents. See how policy-gated autonomy protects against address poisoning attacks.',
+  description: 'Interactive demo of Rewind X protected transfers. See how you can rewind crypto transfers before finality.',
   openGraph: {
     title: 'Demo — Rewind X',
-    description: 'Interactive demo of Rewind X autonomous protection for AI agents.',
+    description: 'Interactive demo of Rewind X protected transfers.',
     type: 'website',
   },
 };

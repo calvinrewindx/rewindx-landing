@@ -1,76 +1,101 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { SCENES, getScene } from '@/data/scenario';
-import StepIndicator from './StepIndicator';
-import MainStage from './MainStage';
-import Controls from './Controls';
-import UnderTheHood from './UnderTheHood';
-import ReceiptModal from './ReceiptModal';
+import { ChevronLeft, ChevronRight, Play, Pause, RotateCcw } from 'lucide-react';
+import SendScene from './scenes/SendScene';
+import OopsScene from './scenes/OopsScene';
+import RewindScene from './scenes/RewindScene';
+import DelegateScene from './scenes/DelegateScene';
 
-export type ViewMode = 'clean' | 'terminal';
+const STEPS = [
+  { id: 1, name: 'SEND', label: 'Transfer', duration: 5000 },
+  { id: 2, name: 'DETECT', label: 'Detect', duration: 5000 },
+  { id: 3, name: 'REWIND', label: 'Rewind', duration: 5000 },
+  { id: 4, name: 'MODES', label: 'Modes', duration: 6000 },
+];
+
+const TOTAL_STEPS = STEPS.length;
 
 export default function DemoPlayer() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [viewMode, setViewMode] = useState<ViewMode>('clean');
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [showReceipt, setShowReceipt] = useState(false);
-  const [hoodExpanded, setHoodExpanded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
+  const [stepProgress, setStepProgress] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const totalSteps = SCENES.length;
-  const currentScene = getScene(currentStep);
+  const currentStepData = STEPS[currentStep - 1] || STEPS[0];
+  const shouldAnimate = isPlaying && !isHovering;
 
-  // Autoplay logic with scene durations
+  // Autoplay: progress within step
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!shouldAnimate) return;
 
-    const timer = setTimeout(() => {
-      if (currentStep < totalSteps) {
-        setCurrentStep((prev) => prev + 1);
-      } else {
-        setIsPlaying(false);
-      }
-    }, currentScene.duration * 1000);
+    const stepDuration = currentStepData.duration;
+    const updateInterval = 50;
+    const progressIncrement = (updateInterval / stepDuration) * 100;
 
-    return () => clearTimeout(timer);
-  }, [isPlaying, currentStep, currentScene.duration, totalSteps]);
+    const timer = setInterval(() => {
+      setStepProgress((prev) => {
+        const next = prev + progressIncrement;
+        if (next >= 100) {
+          return 100;
+        }
+        return next;
+      });
+    }, updateInterval);
+
+    return () => clearInterval(timer);
+  }, [shouldAnimate, currentStep, currentStepData.duration]);
+
+  // Move to next step when progress reaches 100
+  useEffect(() => {
+    if (stepProgress >= 100 && shouldAnimate) {
+      setStepProgress(0);
+      setCurrentStep((prev) => (prev < TOTAL_STEPS ? prev + 1 : 1));
+    }
+  }, [stepProgress, shouldAnimate]);
 
   const handleNext = useCallback(() => {
-    if (currentStep < totalSteps) {
+    setStepProgress(0);
+    if (currentStep < TOTAL_STEPS) {
       setCurrentStep((prev) => prev + 1);
+    } else {
+      setCurrentStep(1);
     }
-  }, [currentStep, totalSteps]);
+  }, [currentStep]);
 
   const handleBack = useCallback(() => {
+    setStepProgress(0);
     if (currentStep > 1) {
       setCurrentStep((prev) => prev - 1);
+    } else {
+      setCurrentStep(TOTAL_STEPS);
     }
   }, [currentStep]);
 
   const handleReset = useCallback(() => {
     setCurrentStep(1);
-    setIsPlaying(false);
-    setShowReceipt(false);
-    setHoodExpanded(false);
+    setStepProgress(0);
+    setIsPlaying(true);
   }, []);
 
   const handleTogglePlay = useCallback(() => {
-    if (currentStep === totalSteps && !isPlaying) {
-      // Restart from step 2 (skip intro)
-      setCurrentStep(2);
-      setIsPlaying(true);
-    } else if (currentStep === 1) {
-      // From intro, go directly to step 2 and start playing
-      setCurrentStep(2);
-      setIsPlaying(true);
-    } else {
-      setIsPlaying((prev) => !prev);
-    }
-  }, [currentStep, totalSteps, isPlaying]);
+    setIsPlaying((prev) => !prev);
+  }, []);
 
   const handleGoToStep = useCallback((step: number) => {
     setCurrentStep(step);
+    setStepProgress(0);
     setIsPlaying(false);
+  }, []);
+
+  // Pause on hover - smooth, temporary pause
+  const handleMouseEnter = useCallback(() => {
+    setIsHovering(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovering(false);
   }, []);
 
   // Keyboard navigation
@@ -84,14 +109,13 @@ export default function DemoPlayer() {
         handleBack();
       } else if (e.key === 'r' || e.key === 'R') {
         handleReset();
+      } else if (e.key === 'p' || e.key === 'P') {
+        handleTogglePlay();
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handleBack, handleReset]);
-
-  // Calculate progress percentage
-  const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+  }, [handleNext, handleBack, handleReset, handleTogglePlay]);
 
   // Swipe gesture support for mobile
   const touchStartX = useRef<number | null>(null);
@@ -108,7 +132,9 @@ export default function DemoPlayer() {
   }, []);
 
   const handleTouchEnd = useCallback(() => {
-    if (!touchStartX.current || !touchEndX.current) return;
+    if (!touchStartX.current || !touchEndX.current) {
+      return;
+    }
 
     const distance = touchStartX.current - touchEndX.current;
     const isLeftSwipe = distance > minSwipeDistance;
@@ -124,188 +150,186 @@ export default function DemoPlayer() {
     touchEndX.current = null;
   }, [handleNext, handleBack]);
 
-  // Transition state for smooth animations
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const prevStep = useRef(currentStep);
+  // Total progress: completed steps + current step progress
+  const totalProgress = ((currentStep - 1) / TOTAL_STEPS + (stepProgress / 100) / TOTAL_STEPS) * 100;
 
-  useEffect(() => {
-    if (prevStep.current !== currentStep) {
-      setIsTransitioning(true);
-      const timer = setTimeout(() => setIsTransitioning(false), 300);
-      prevStep.current = currentStep;
-      return () => clearTimeout(timer);
-    }
-  }, [currentStep]);
-
-  // Get step background color from CSS variables
-  const getStepBg = () => {
+  // Render current scene
+  const renderScene = () => {
     switch (currentStep) {
       case 1:
+        return <SendScene />;
       case 2:
+        return <OopsScene />;
       case 3:
-        return '#0a0f1a';
+        return <RewindScene />;
       case 4:
-        return '#1a0a0a';
-      case 5:
-      case 6:
-        return '#0a0a1a';
-      case 7:
-      case 8:
-        return '#0a1a0a';
+        return <DelegateScene />;
       default:
-        return '#0a0f1a';
+        return <SendScene />;
     }
   };
 
   return (
-    <div
-      className="demo-page min-h-screen transition-colors duration-700"
-      data-step={currentStep}
-      style={{ backgroundColor: getStepBg() }}
-    >
-
-      {/* Progress Bar - fixed at top */}
-      <div className="fixed top-0 left-0 right-0 z-40 h-1 bg-black/30">
+    <div className="demo-page min-h-screen bg-[#050505]">
+      {/* Progress Bar - smooth animation */}
+      <div className="fixed top-0 left-0 right-0 z-40 h-1 bg-black/50">
         <div
-          className="h-full transition-all duration-500 ease-out"
-          style={{
-            width: `${progressPercent}%`,
-            background: currentStep >= 7 ? 'linear-gradient(90deg, #22cc66, #4ade80)' :
-                       currentStep >= 4 ? 'linear-gradient(90deg, #ff4444, #ff6b6b)' :
-                       'linear-gradient(90deg, #4488ff, #60a5fa)'
-          }}
+          className="h-full bg-gradient-to-r from-cyan to-violet transition-[width] duration-100 ease-linear"
+          style={{ width: `${totalProgress}%` }}
         />
       </div>
 
-      {/* Gradient Blobs */}
-      <div className="demo-gradient-blob demo-gradient-blob-1" />
-      <div className="demo-gradient-blob demo-gradient-blob-2" />
-      <div className="demo-gradient-blob demo-gradient-blob-3" />
-
-      {/* Background Grid */}
+      {/* Background Effects */}
       <div className="fixed inset-0 grid-bg opacity-20 pointer-events-none" />
+      <div className="fixed top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-cyan/5 blur-[150px] pointer-events-none" />
+      <div className="fixed bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-violet/5 blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-4 pt-24 pb-8 md:pt-28 md:pb-12 demo-main-content">
+      <div className="relative z-10 max-w-2xl mx-auto px-4 pt-24 pb-12 md:pt-28 md:pb-16">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1
+            className="text-2xl md:text-3xl font-bold text-white mb-2"
+            style={{ fontFamily: 'var(--font-space-grotesk)' }}
+          >
+            <span className="gradient-text">Rewind X</span> Demo
+          </h1>
+          <p className="text-white/50 text-sm">
+            See how protected transfers work
+          </p>
+        </div>
+
         {/* Step Counter */}
-        {currentStep > 1 && (
-          <div className="text-center mb-8">
-            <span
-              className="text-sm px-3 py-1 rounded-full"
-              style={{ background: 'rgba(255, 255, 255, 0.05)', border: '1px solid rgba(255, 255, 255, 0.1)', color: 'rgba(255, 255, 255, 0.6)' }}
-            >
-              Step {currentStep}/{totalSteps}
-            </span>
-          </div>
-        )}
+        <div className="text-center mb-6">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/60 text-sm">
+            Step {currentStep} of {TOTAL_STEPS}
+            <span className="text-white/30">·</span>
+            <span className="text-white/80 font-medium">{currentStepData.label}</span>
+          </span>
+        </div>
 
-        {/* View Toggle - hidden on intro */}
-        {currentStep > 1 && (
-          <div className="flex justify-center mb-8">
-            <div className="inline-flex rounded-xl p-1" style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <button
-                onClick={() => setViewMode('clean')}
-                className="px-5 py-2 text-sm rounded-lg transition-all"
-                style={{
-                  background: viewMode === 'clean' ? 'rgba(255,255,255,0.1)' : 'transparent',
-                  color: viewMode === 'clean' ? '#fff' : 'rgba(255,255,255,0.5)',
-                }}
-              >
-                Visual
-              </button>
-              <button
-                onClick={() => setViewMode('terminal')}
-                className="px-5 py-2 text-sm rounded-lg transition-all"
-                style={{
-                  background: viewMode === 'terminal' ? 'rgba(255,255,255,0.1)' : 'transparent',
-                  color: viewMode === 'terminal' ? '#fff' : 'rgba(255,255,255,0.5)',
-                }}
-              >
-                Terminal View
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Main Stage - with swipe support */}
+        {/* Main Stage */}
         <div
+          ref={containerRef}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className={`demo-stage-transition ${isTransitioning ? 'transitioning' : ''}`}
+          className="relative"
         >
-          <MainStage
-            currentStep={currentStep}
-            viewMode={viewMode}
-            scene={currentScene}
-            onShowReceipt={() => setShowReceipt(true)}
-            onPlay={handleTogglePlay}
-            onNext={handleNext}
-          />
+          {renderScene()}
         </div>
 
-        {/* Narration - hidden on intro (step 1 has its own explanation) */}
-        {currentStep > 1 ? (
-          <div className="text-center mt-8 mb-10">
-            <p
-              className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed tracking-wide"
-              style={{ color: 'rgba(255, 255, 255, 0.7)', fontWeight: 400 }}
-            >
-              {currentScene.narration}
-            </p>
-          </div>
-        ) : (
-          <div className="mt-10" />
-        )}
+        {/* Step Indicator Dots with Progress */}
+        <div className="flex items-center justify-center gap-3 mt-8 mb-6">
+          {STEPS.map((step) => {
+            const isActive = step.id === currentStep;
+            const isCompleted = step.id < currentStep;
 
-        {/* Step Indicator */}
-        <StepIndicator
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          onGoToStep={handleGoToStep}
-        />
+            return (
+              <button
+                key={step.id}
+                onClick={() => handleGoToStep(step.id)}
+                className="relative group"
+                aria-label={`Go to step ${step.id}: ${step.label}`}
+              >
+                {/* Dot background */}
+                <div
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    isActive
+                      ? 'w-10 bg-white/10'
+                      : isCompleted
+                      ? 'w-2.5 bg-cyan'
+                      : 'w-2.5 bg-white/20 group-hover:bg-white/30'
+                  }`}
+                />
+                {/* Active dot fill */}
+                {isActive && (
+                  <div
+                    className="absolute top-0 left-0 h-2.5 rounded-full bg-gradient-to-r from-cyan to-violet transition-[width] duration-100 ease-linear"
+                    style={{ width: `${stepProgress}%` }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
 
         {/* Controls */}
-        <Controls
-          currentStep={currentStep}
-          totalSteps={totalSteps}
-          isPlaying={isPlaying}
-          onNext={handleNext}
-          onBack={handleBack}
-          onReset={handleReset}
-          onTogglePlay={handleTogglePlay}
-        />
+        <div className="flex items-center justify-center gap-4">
+          <button
+            onClick={handleBack}
+            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white transition-colors"
+            aria-label="Previous step"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
 
-        {/* Under the Hood - only show from step 4 onwards */}
-        {currentStep >= 4 && (
-          <UnderTheHood
-            expanded={hoodExpanded}
-            onToggle={() => setHoodExpanded(!hoodExpanded)}
-            currentStep={currentStep}
-          />
-        )}
+          <button
+            onClick={handleTogglePlay}
+            className={`p-4 rounded-xl border transition-colors ${
+              shouldAnimate
+                ? 'bg-gradient-to-r from-cyan/20 to-violet/20 border-cyan/30 text-white'
+                : 'bg-white/5 border-white/10 text-white/60 hover:bg-white/10 hover:text-white'
+            }`}
+            aria-label={isPlaying ? 'Pause' : 'Play'}
+          >
+            {shouldAnimate ? (
+              <Pause className="w-5 h-5" />
+            ) : (
+              <Play className="w-5 h-5" />
+            )}
+          </button>
+
+          <button
+            onClick={handleNext}
+            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/60 hover:bg-white/10 hover:text-white transition-colors"
+            aria-label="Next step"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={handleReset}
+            className="p-3 rounded-xl bg-white/5 border border-white/10 text-white/40 hover:bg-white/10 hover:text-white/60 transition-colors"
+            aria-label="Reset demo"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Status */}
+        <div className="text-center mt-4">
+          <span className="text-white/40 text-xs">
+            {!isPlaying
+              ? 'Paused - click Play to continue'
+              : isHovering
+                ? 'Hover paused - move mouse away to resume'
+                : 'Auto-playing...'}
+          </span>
+        </div>
+
+        {/* Keyboard Hints */}
+        <div className="hidden md:flex items-center justify-center gap-4 mt-6 text-white/30 text-xs">
+          <span>← → Navigate</span>
+          <span>·</span>
+          <span>P Play/Pause</span>
+          <span>·</span>
+          <span>R Reset</span>
+        </div>
 
         {/* Legal Disclaimer */}
-        <div className="mt-12 pt-6 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-          <span
-            className="inline-block px-3 py-1 mb-3 rounded-lg text-xs font-medium uppercase tracking-wider"
-            style={{
-              background: 'rgba(0, 212, 255, 0.15)',
-              border: '1px solid rgba(0, 212, 255, 0.3)',
-              color: '#00d4ff',
-            }}
-          >
+        <div className="mt-10 pt-6 text-center border-t border-white/5">
+          <span className="inline-block px-3 py-1 mb-3 rounded-lg text-xs font-medium uppercase tracking-wider bg-cyan/10 border border-cyan/20 text-cyan">
             Simulation
           </span>
-          <p className="text-xs leading-relaxed" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <p className="text-xs text-white/30 leading-relaxed">
             For demonstration purposes only. No real transactions occur.
             <br />
             Not financial advice. Product features may vary.
           </p>
         </div>
       </div>
-
-      {/* Receipt Modal */}
-      <ReceiptModal isOpen={showReceipt} onClose={() => setShowReceipt(false)} />
     </div>
   );
 }

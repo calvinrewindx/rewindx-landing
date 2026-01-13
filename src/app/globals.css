@@ -1541,3 +1541,61 @@ body {
 .animate-bounce-in {
   animation: bounce-in 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
+/* ==========================================================================
+   NEW DEMO SCENES - 4-Step Simplified Demo
+   ========================================================================== */
+
+.demo-scene {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+  padding: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .demo-scene {
+    min-height: 400px;
+    padding: 1rem;
+  }
+}
+
+.demo-card {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .demo-card {
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Only apply hover effects on devices with hover capability (not touch) */
+@media (hover: hover) {
+  .demo-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+  }
+}
+
+.demo-card-warning {
+  border-color: rgba(251, 191, 36, 0.2);
+  box-shadow: 0 0 60px rgba(251, 191, 36, 0.1);
+}
+
+.demo-card-success {
+  border-color: rgba(52, 211, 153, 0.2);
+  box-shadow: 0 0 60px rgba(52, 211, 153, 0.1);
+}
