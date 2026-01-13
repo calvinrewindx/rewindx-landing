@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Twitter, FileText, Sparkles } from "lucide-react";
+import { Linkedin, FileText, Sparkles } from "lucide-react";
 
 export default function CTASection() {
   return (
@@ -34,13 +34,13 @@ export default function CTASection() {
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a
-            href="https://x.com/calvinrewindx"
+            href="https://www.linkedin.com/in/calvin-x-568767399"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary flex items-center gap-2 text-lg py-4 px-8"
           >
-            <Twitter className="w-5 h-5" />
-            Follow Updates on X
+            <Linkedin className="w-5 h-5" />
+            Connect on LinkedIn
           </a>
           <Link
             href="/lightpaper"

@@ -112,12 +112,12 @@ export default function Footer() {
                   <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /contact
                 </a>
                 <a
-                  href="https://x.com/calvinrewindx"
+                  href="https://www.linkedin.com/in/calvin-x-568767399"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
                 >
-                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> x.com/calvinrewindx
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> linkedin
                 </a>
                 <a
                   href="/demo"

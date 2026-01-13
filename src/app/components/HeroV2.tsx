@@ -123,18 +123,18 @@ export default function HeroV2() {
           >
             <span>Partnerships & inquiries</span>
             <span className="text-cyan/50">→</span>
-            <span className="font-mono text-sm">investors.rewindx@proton.me</span>
+            <span className="font-mono text-sm">Contact</span>
           </a>
           <span className="text-white/20 hidden sm:inline">|</span>
           <a
-            href="https://x.com/calvinrewindx"
+            href="https://www.linkedin.com/in/calvin-x-568767399"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-white/40 hover:text-cyan/70 transition-colors text-sm"
           >
-            <span>DMs open</span>
+            <span>Connect</span>
             <span className="text-cyan/50">→</span>
-            <span className="font-mono">@calvinrewindx</span>
+            <span className="font-mono">LinkedIn</span>
           </a>
         </div>
 
