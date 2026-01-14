@@ -52,21 +52,12 @@ export const metadata: Metadata = {
       "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window. Any ERC-20 token.",
     type: "website",
     siteName: "Rewind X Protocol",
-    images: [
-      {
-        url: "/og.png",
-        width: 1536,
-        height: 1024,
-        alt: "Rewind X Protocol - Reversible ERC-20 Transfers",
-      },
-    ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
     description:
       "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window.",
-    images: ["/og.png"],
   },
   metadataBase: new URL("https://rewindx.io"),
 };
