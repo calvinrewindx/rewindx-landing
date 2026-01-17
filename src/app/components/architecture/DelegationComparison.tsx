@@ -22,29 +22,29 @@ const modes = [
     features: [
       "User activates via setDelegate()",
       "1-hour cooldown before active",
-      "Agent auto-rewinds threats",
+      "Delegate executes rewinds under on-chain constraints",
       "Instant disable anytime",
     ],
-    cta: "User-activated AI protection",
+    cta: "User-activated delegated protection",
   },
 ];
 
 const authorizationFlow = [
-  "User calls setDelegate(agent) to enable AI protection",
-  "1-hour security cooldown begins (prevents phishing exploits)",
-  "After cooldown, agent can auto-rewind critical threats",
+  "User calls setDelegate(agent) to enable delegated protection",
+  "1-hour security cooldown begins (anti-phishing / social-engineering protection)",
+  "After cooldown, the delegate may execute rewind() only for sender-created transfers, subject to on-chain limits",
   "User can disable instantly via removeDelegate() (no cooldown)",
-  "Daily limits enforced based on NFT tier",
-  "Agent can only rewind — never transfer or access funds",
+  "Daily limits enforced per NFT tier",
+  "Delegate can only call rewind() — never transfer, redirect, or withdraw funds",
 ];
 
 const securityFeatures = [
-  { icon: ShieldCheck, label: "Non-Custodial", desc: "Agent can only rewind; funds never leave user control" },
-  { icon: KeyRound, label: "Explicit Activation", desc: "User must call setDelegate(); no default delegation" },
+  { icon: ShieldCheck, label: "Non-Custodial", desc: "Funds held by protocol contract; move only via on-chain rules" },
+  { icon: KeyRound, label: "Explicit Activation", desc: "Delegation is opt-in (setDelegate()), never default" },
   { icon: Zap, label: "Instant Revoke", desc: "removeDelegate() takes effect immediately" },
-  { icon: Clock, label: "Cooldown Protection", desc: "1-hour delay prevents social engineering attacks" },
-  { icon: ShieldX, label: "Daily Limits", desc: "Enforced per-tier (3-70 rewinds/day)" },
-  { icon: BadgeCheck, label: "Official Agents", desc: "AgentPass holders must use protocol-approved agents" },
+  { icon: Clock, label: "Cooldown Protection", desc: "1-hour delay prevents rushed/forced delegation changes" },
+  { icon: ShieldX, label: "Daily Limits", desc: "Enforced per tier" },
+  { icon: BadgeCheck, label: "Official Agents", desc: "AgentPass: delegation restricted to protocol allowlist (on-chain enforced)" },
 ];
 
 export default function DelegationComparison() {

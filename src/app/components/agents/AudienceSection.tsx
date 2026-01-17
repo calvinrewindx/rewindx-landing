@@ -152,7 +152,7 @@ export default function AudienceSection() {
 
           {/* Visual Flow */}
           <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
-            {["You Activate", "AI Monitors", "Auto-Rewind"].map(
+            {["You Activate", "AI Monitors", "Delegated Rewind"].map(
               (item, i) => (
                 <div key={item} className="flex items-center gap-4">
                   <span className="glass-card px-5 py-3 text-sm font-medium text-violet">

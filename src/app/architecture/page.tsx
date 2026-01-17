@@ -252,7 +252,7 @@ export default function ArchitecturePage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-cyan text-lg">•</span>
-                <span className="text-white/60">Public deployment intentionally limited pending third-party audit</span>
+                <span className="text-white/60">Not deployed on mainnet yet; controlled validation is the next step</span>
               </li>
             </ul>
             <p className="text-white/50 text-sm mb-4">

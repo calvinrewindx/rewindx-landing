@@ -154,7 +154,12 @@ Critically, no party can extend or shorten the window after creation. The durati
 
 Resolution occurs through one of three paths:
 
-**Sender Reversal:** The sender initiates a rewind while the window is active. The protocol validates the request (window still open, sender is original initiator, limits not exceeded). On success, funds return to the sender's wallet in a single atomic transaction.
+**Sender Reversal:** The sender initiates a rewind through a two-step process:
+
+1. **Request:** Call `requestRewind()` to register intent
+2. **Execute:** After a short security delay, call `executeRewind()` to complete
+
+This design provides a final confirmation moment and reduces front-running risk. The protocol validates the request (window still open, sender is original initiator, limits not exceeded). On success, funds return to the sender's wallet.
 
 **Early Release:** The sender can waive their rewind right before the window expires by calling `releaseTransferEarly()`. This immediately makes the transfer claimable by the recipient, eliminating the remaining wait time. Useful when the recipient confirms receipt and both parties want faster settlement. The sender retains no reversal rights after early release.
 
@@ -323,7 +328,7 @@ Rewind X supports two permission models for agent-driven execution:
 - User explicitly enables AI protection via `setDelegate()`
 - 1-hour security cooldown before activation
 - AI analyzes transfers using a multi-signal scoring system covering address risks (zero/burn addresses, lookalike poisoning), context patterns (phishing, scam language), and behavioral anomalies (unusual amounts, rapid transactions)
-- Transfers exceeding risk threshold trigger auto-rewind
+- Delegate may execute rewinds when risk thresholds are exceeded
 - User can disable instantly anytime via `removeDelegate()`
 - Daily limits enforced (varies by NFT tier)
 - Non-custodial: agent can only rewind, never transfer
@@ -368,7 +373,7 @@ The protocol makes no judgments about transaction legitimacy. It cannot determin
 
 ### Requires Sender Action (Manual Mode)
 
-In Manual Mode, reversals require active sender intervention within the window. Users must monitor their transfers and act within the available window. In Delegated Mode, the AI agent can auto-rewind detected threats on behalf of the user.
+In Manual Mode, reversals require active sender intervention within the window. Users must monitor their transfers and act within the available window. In Delegated Mode, the delegate may execute rewinds on behalf of the user under on-chain constraints.
 
 ### Net Settlement Amounts
 
@@ -446,9 +451,9 @@ Rewind X does not remove finality—it makes finality safer.
 
 **Manual Mode:** The default permission model where users create protected transfers and request rewinds manually. No delegation required.
 
-**Delegated Mode:** A permission model that users must explicitly activate via `setDelegate()`. After a 1-hour security cooldown, the delegated agent can auto-rewind critical threats. Users can disable instantly via `removeDelegate()`.
+**Delegated Mode:** A permission model that users must explicitly activate via `setDelegate()`. After a 1-hour security cooldown, the delegate may execute rewinds under on-chain constraints. Users can disable instantly via `removeDelegate()`.
 
-**AgentPass:** Entry-tier NFT with unlimited supply, designed for broad access to AI-powered protection. Requires use of official protocol agents only.
+**AgentPass:** Entry-tier NFT for delegated protection. Requires protocol-approved official agents only (on-chain enforced).
 
 **Protection Activation Fee:** The fee charged when creating a Protected Transfer. NFT tiers provide discounts on this fee.
 

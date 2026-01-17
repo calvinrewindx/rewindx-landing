@@ -76,7 +76,7 @@ export default function SolutionSection() {
                 <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
                   <Check className="w-4 h-4 text-green-400" />
                 </div>
-                <span className="text-white/50">AI auto-rewinds if threat detected</span>
+                <span className="text-white/50">Delegate can execute rewind under protocol rules</span>
               </div>
             </div>
           </div>

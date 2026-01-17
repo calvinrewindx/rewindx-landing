@@ -21,9 +21,9 @@ const steps = [
   {
     number: "03",
     icon: RotateCcw,
-    title: "Auto-Rewind",
-    description: "If threat exceeds threshold, AI triggers rewind automatically.",
-    note: "You must activate AI protection first.",
+    title: "Delegated Rewind",
+    description: "If threshold exceeded, delegate executes rewind under protocol rules.",
+    note: "You must activate delegation first.",
     color: "cyan",
   },
   {

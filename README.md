@@ -20,7 +20,7 @@
 
 **A simple mistake should not mean permanent loss.**
 
-[Website](https://rewindx.io) · [Twitter/X](https://x.com/calvinrewindx) · [Contact](#-contact)
+[Website](https://rewindx.io) · [Twitter/X](https://x.com/calvinrewindx) · [LinkedIn](https://www.linkedin.com/in/calvin-x-568767399) · [Contact](#-contact)
 
 ---
 
@@ -41,7 +41,7 @@ Rewind X introduces a **deterministic, non-custodial undo window** for ERC-20 tr
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│   SEND ──────► [ 24-48h SAFETY WINDOW ] ──────► FINALIZE       │
+│   SEND ──────► [ 2min-48h SAFETY WINDOW ] ──────► FINALIZE     │
 │                        │                                        │
 │                        ▼                                        │
 │                    REWIND?                                      │
@@ -56,7 +56,7 @@ Rewind X introduces a **deterministic, non-custodial undo window** for ERC-20 tr
 
 | Feature | Description |
 |:-------:|:------------|
-| 🕐 | **24–48h Undo Window** — Deterministic, on-chain safety period |
+| 🕐 | **2min–48h Undo Window** — Deterministic, on-chain safety period |
 | 🔐 | **Non-Custodial** — No admin keys can move funds, no trust required |
 | 🎖️ | **Fragment NFT** — Tamper-evident proof index for rewinds |
 | ⚙️ | **Non-Upgradeable Core** — Safety modules upgradeable only |
@@ -115,6 +115,7 @@ rewindx-landing/
 | 💼 **Investors** | [investors.rewindx@proton.me](mailto:investors.rewindx@proton.me) |
 | 🔧 **Technical** | [contact.rewindx@proton.me](mailto:contact.rewindx@proton.me) |
 | 𝕏 **Twitter** | [@calvinrewindx](https://x.com/calvinrewindx) |
+| 🔗 **LinkedIn** | [Calvin](https://www.linkedin.com/in/calvin-x-568767399) |
 
 </div>
 
@@ -127,7 +128,7 @@ rewindx-landing/
 ```
                               ↺
             ┌─────────────────────────────────┐
-            │   REWIND X PROTOCOL — 2025      │
+            │   REWIND X PROTOCOL — 2026      │
             │        The Undo Layer           │
             └─────────────────────────────────┘
 ```
