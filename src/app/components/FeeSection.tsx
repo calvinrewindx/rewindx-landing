@@ -39,7 +39,7 @@ export default function FeeSection() {
                   textShadow: "0 0 60px rgba(0, 212, 255, 0.3), 0 0 120px rgba(0, 212, 255, 0.1)"
                 }}
               >
-                1–4<span className="text-cyan">%</span>
+                1–3<span className="text-cyan">%</span>
               </h3>
             </div>
 
@@ -53,7 +53,7 @@ export default function FeeSection() {
               <div className="flex items-center gap-2 text-sm">
                 <span className="text-white font-medium">1% base fee</span>
                 <span className="text-white/30">+</span>
-                <span className="text-cyan font-medium">0–3% surcharge</span>
+                <span className="text-cyan font-medium">0–2% surcharge</span>
               </div>
 
               {/* Token Cards */}
@@ -64,7 +64,7 @@ export default function FeeSection() {
                 </div>
                 <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/20">
                   <span className="text-white/60 text-xs">Other tokens</span>
-                  <span className="text-white font-bold">4%</span>
+                  <span className="text-white font-bold">3%</span>
                 </div>
               </div>
             </div>
@@ -110,7 +110,7 @@ export default function FeeSection() {
                   <ul className="space-y-2">
                     <li className="flex items-start gap-2 text-sm">
                       <Check className="w-4 h-4 text-cyan mt-0.5 flex-shrink-0" />
-                      <span className="text-white/50"><span className="text-white/80">Typical cost:</span> 1–4% for normal EOA transfers</span>
+                      <span className="text-white/50"><span className="text-white/80">Typical cost:</span> 1–3% for normal EOA transfers</span>
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <Check className="w-4 h-4 text-cyan mt-0.5 flex-shrink-0" />
