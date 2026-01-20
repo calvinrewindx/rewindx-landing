@@ -43,8 +43,12 @@ export const metadata: Metadata = {
     "ethereum",
   ],
   icons: {
-    icon: "/logov2.png",
-    apple: "/logov2.png",
+    icon: [
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/icon-192.png",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
