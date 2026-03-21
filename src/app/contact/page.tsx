@@ -66,7 +66,7 @@ export default function ContactPage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan"></span>
               </span>
-              <span className="text-white/60 text-sm">Private Development</span>
+              <span className="text-white/60 text-sm">Active Development</span>
             </div>
 
             <h1
@@ -74,10 +74,10 @@ export default function ContactPage() {
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               <span className="text-white">Get in </span>
-              <span className="gradient-text">Touch</span>
+              <span className="text-cyan">Touch</span>
             </h1>
             <p className="text-white/50 text-lg max-w-xl mx-auto">
-              Rewind X is selectively open for qualified inquiries from investors, builders, and security researchers.
+              Rewind X is in active development. We welcome inquiries from investors, builders, and security researchers.
             </p>
           </div>
 
@@ -95,7 +95,7 @@ export default function ContactPage() {
                   className="text-xl font-bold text-white mb-3"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
-                  Investment & Strategic
+                  Investment & Strategic Inquiries
                 </h2>
                 <p className="text-white/50 text-sm mb-6 leading-relaxed">
                   For angels, infrastructure funds, and ecosystem partners evaluating Rewind X in a pre-launch context.
@@ -137,7 +137,7 @@ export default function ContactPage() {
                   For wallet teams, auditors, and security researchers requesting high-level technical information or coordination.
                 </p>
                 <p className="text-white/40 text-xs mb-6 leading-relaxed">
-                  (No source code, integrations, or implementation details shared at this stage.)
+                  No source code, integrations, or implementation details are shared at this stage.
                 </p>
 
                 <CopyableEmail email="contact.rewindx@proton.me" variant="violet" />
@@ -160,7 +160,7 @@ export default function ContactPage() {
                   Updates
                 </h3>
                 <p className="text-white/40 text-sm">
-                  Announcements, demos, and technical progress.
+                  Announcements and technical progress.
                 </p>
               </div>
               <a

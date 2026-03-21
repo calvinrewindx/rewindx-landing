@@ -29,17 +29,15 @@ export default function InvestorInfo() {
                   Early Supporters
                 </span>
                 <h2
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+                  className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
-                  Building the
+                  A <span className="text-cyan">safety layer</span>
                   <br />
-                  <span className="gradient-text">safety layer</span>
-                  <br />
-                  for crypto.
+                  for on-chain transfers.
                 </h2>
                 <p className="text-white/50 text-lg mb-8 max-w-md leading-relaxed">
-                  Exploring aligned early support and strategic partnerships.
+                  Rewind X is preparing for mainnet launch and engaging with early supporters and strategic partners.
                 </p>
 
                 <a
@@ -80,13 +78,12 @@ export default function InvestorInfo() {
                     >
                       <span className="text-cyan">Non-custodial.</span>
                       <br />
-                      <span className="text-violet/70">Deterministic.</span>
+                      <span className="text-violet/70">Rule-based.</span>
                       <br />
                       <span className="text-white">On-chain.</span>
                     </p>
                     <p className="text-white/50 text-base leading-relaxed max-w-md">
-                      A reversibility primitive designed for ecosystem
-                      integration and long-term infrastructure alignment.
+                      A protocol layer for protected ERC-20 transfers, designed for ecosystem integration and long-term infrastructure.
                     </p>
                   </blockquote>
                 </div>

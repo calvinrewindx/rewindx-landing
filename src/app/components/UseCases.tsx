@@ -1,38 +1,38 @@
 "use client";
 
-import { RotateCcw, Building2, Wallet, Bot } from "lucide-react";
+import { RotateCcw, Shield, Wallet, Clock } from "lucide-react";
 
 const useCases = [
   {
     icon: RotateCcw,
-    title: "Retail Error Recovery",
+    title: "Error Recovery",
     description:
-      "Wrong address, wrong amount, wrong token, duplicate payment.",
-    highlight: "Time-bounded chance to undo sender errors.",
+      "Wrong address, wrong amount, wrong token, or duplicate payment.",
+    highlight: "A time-bounded chance to undo sender errors.",
     color: "cyan",
   },
   {
-    icon: Building2,
-    title: "Enterprise Ready",
+    icon: Shield,
+    title: "Protection Before Settlement",
     description:
-      "Multi-sig workflows, role separation, batched payouts, and",
-    highlight: "verifiable on-chain audit trails.",
+      "Address poisoning, phishing, or social engineering can still happen.",
+    highlight: "Rewind X gives senders a limited window to undo before settlement completes.",
     color: "violet",
   },
   {
     icon: Wallet,
     title: "Wallet Compatibility",
     description:
-      "Integrates with EVM wallets and smart account standards.",
+      "Works with standard EVM wallets and compatible smart accounts.",
     highlight: "Non-custodial by default.",
     color: "cyan",
   },
   {
-    icon: Bot,
-    title: "AI Agent Safety",
+    icon: Clock,
+    title: "Configurable Windows",
     description:
-      "Agents execute protected transfers under explicit permissions.",
-    highlight: "Rewind if flagged by policy.",
+      "Choose your protection window from 3 minutes to 24 hours.",
+    highlight: "Extended windows available for eligible tiers.",
     color: "violet",
   },
 ];
@@ -49,10 +49,10 @@ export default function UseCases() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Built for <span className="gradient-text">Everyone</span>
+            Built for <span className="gradient-text">Users & Treasury Workflows</span>
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            From everyday users to treasury operators. A deterministic undo window for ERC-20 transfers.
+            From everyday senders to operational payment flows. A time-bounded undo window for ERC-20 transfers.
           </p>
         </div>
 

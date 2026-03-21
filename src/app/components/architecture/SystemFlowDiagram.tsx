@@ -95,7 +95,7 @@ export default function SystemFlowDiagram() {
           <div className="w-px h-4 bg-gradient-to-b from-white/20 to-white/10" />
           <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/5">
             <Clock className="w-4 h-4 text-white/50" />
-            <span className="text-white/70 text-sm font-mono">Window Active: 2min – 48h</span>
+            <span className="text-white/70 text-sm font-mono">Window Active: 3 min – 24h</span>
           </div>
           <div className="w-px h-4 bg-gradient-to-b from-white/10 to-white/20" />
           <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-white/20" />

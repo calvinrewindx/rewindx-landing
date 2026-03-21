@@ -7,14 +7,15 @@ const tiers = {
   NONE: { label: "No Tier", discount: 0, window: 24 },
   Genesis: { label: "Genesis", discount: 0.1, window: 24 },
   Gatekeeper: { label: "Gatekeeper", discount: 0.2, window: 24 },
-  Enterprise: { label: "Enterprise", discount: 0.3, window: 30 },
-  Prime: { label: "Prime", discount: 0.4, window: 36 },
-  Nexus: { label: "Nexus", discount: 0.5, window: 48 },
 } as const;
 type TierKey = keyof typeof tiers;
 
-const PROTECTION_FEE_BASE = 0.01; // 1% base (RWXT preferred)
-const REWIND_FEE_BASE = 0.015;
+type TokenType = "preferred" | "extended";
+const PROTECTION_FEES: Record<TokenType, number> = {
+  preferred: 0.01, // 1%
+  extended: 0.03,  // 3%
+};
+const REWIND_FEE_BASE = 0.015; // 1.5% flat
 
 function useAnimatedNumber(value: number, duration: number = 300) {
   const [displayValue, setDisplayValue] = useState(value);
@@ -46,17 +47,19 @@ function useAnimatedNumber(value: number, duration: number = 300) {
 }
 
 export default function RewindSimulator() {
-  const [amount, setAmount] = useState<number>(5000);
+  const [amount, setAmount] = useState<number>(500);
   const [tier, setTier] = useState<TierKey>("Genesis");
+  const [tokenType, setTokenType] = useState<TokenType>("preferred");
 
   const calculations = useMemo(() => {
     const tierData = tiers[tier];
     const discount = tierData.discount;
     const windowHours = tierData.window;
+    const baseFee = PROTECTION_FEES[tokenType];
 
-    const protectionFee = amount * PROTECTION_FEE_BASE * (1 - discount);
-    const protectionRate = PROTECTION_FEE_BASE * (1 - discount) * 100;
-    const protectionWithoutDiscount = amount * PROTECTION_FEE_BASE;
+    const protectionFee = amount * baseFee * (1 - discount);
+    const protectionRate = baseFee * (1 - discount) * 100;
+    const protectionWithoutDiscount = amount * baseFee;
     const tierSavings = protectionWithoutDiscount - protectionFee;
 
     // Fee deducted from transfer model (matches contract behavior)
@@ -90,7 +93,7 @@ export default function RewindSimulator() {
       youPayTotal,
       youPayTotalRewind,
     };
-  }, [amount, tier]);
+  }, [amount, tier, tokenType]);
 
   // Animated values
   const animatedAmount = useAnimatedNumber(amount);
@@ -136,10 +139,10 @@ export default function RewindSimulator() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Calculate Your <span className="gradient-text">Protection</span>
+            Calculate Your <span className="text-cyan">Protection</span>
           </h2>
           <p className="text-white/50 text-lg max-w-2xl mx-auto">
-            Illustrative estimate. Execution cost is risk-adjusted.
+            Illustrative estimate based on current protocol fees.
           </p>
         </div>
 
@@ -180,7 +183,7 @@ export default function RewindSimulator() {
                 </div>
                 {/* Quick presets */}
                 <div className="flex gap-2 mt-3">
-                  {[1000, 5000, 10000, 50000].map((preset) => (
+                  {[100, 500, 1000, 5000].map((preset) => (
                     <button
                       key={preset}
                       onClick={() => setAmount(preset)}
@@ -196,11 +199,45 @@ export default function RewindSimulator() {
                 </div>
               </div>
 
+              {/* Token Type Toggle */}
+              <div className="mb-8">
+                <label className="text-white/60 text-sm font-medium block mb-3">
+                  Token Type
+                </label>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setTokenType("preferred")}
+                    className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                      tokenType === "preferred"
+                        ? "bg-cyan/15 text-cyan border border-cyan/30"
+                        : "bg-white/5 text-white/50 border border-white/10 hover:bg-white/10"
+                    }`}
+                  >
+                    Preferred <span className={tokenType === "preferred" ? "text-cyan/70" : "text-white/30"}>1%</span>
+                  </button>
+                  <button
+                    onClick={() => setTokenType("extended")}
+                    className={`flex-1 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                      tokenType === "extended"
+                        ? "bg-violet/15 text-violet border border-violet/30"
+                        : "bg-white/5 text-white/50 border border-white/10 hover:bg-white/10"
+                    }`}
+                  >
+                    Extended <span className={tokenType === "extended" ? "text-violet/70" : "text-white/30"}>3%</span>
+                  </button>
+                </div>
+                <p className="text-white/30 text-[10px] mt-2">
+                  {tokenType === "preferred"
+                    ? "Preferred tokens have lower fees due to stable pricing."
+                    : "Extended tokens include a surcharge for non-preferred assets."}
+                </p>
+              </div>
+
               {/* Tier Selector */}
               <div>
                 <label className="text-white/60 text-sm font-medium block mb-3">
                   NFT Tier
-                  <span className="text-white/30 font-normal ml-2">(Activation Fee Discount)</span>
+                  <span className="text-white/30 font-normal ml-2">(Protection Fee Discount)</span>
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {Object.entries(tiers).map(([key, data]) => (
@@ -256,33 +293,33 @@ export default function RewindSimulator() {
                   <div className="space-y-2.5 mb-5">
                     <div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-white/50">Protection Fee</span>
+                        <span className="text-white/50">Protection Fee ({calculations.protectionRate.toFixed(1)}%)</span>
                         <span className="text-white/70 font-mono" style={{ fontFamily: "var(--font-jetbrains-mono)" }}>
                           {formatCurrencyPrecise(animatedProtectionFee)}
                         </span>
                       </div>
                       {calculations.tierSavings > 0 && (
                         <p className="text-cyan/60 text-xs mt-1">
-                          Tier saves {formatCurrencyPrecise(animatedTierSavings)} on protection
+                          Tier saves {formatCurrencyPrecise(animatedTierSavings)}
                         </p>
                       )}
                     </div>
                     <div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-white/50">Execution Cost (risk-adjusted)</span>
+                        <span className="text-white/50">Execution Fee (1.5%)</span>
                         <span className="text-white/70 font-mono" style={{ fontFamily: "var(--font-jetbrains-mono)" }}>
-                          ~{formatCurrencyPrecise(animatedExecutionCost)}
+                          {formatCurrencyPrecise(animatedExecutionCost)}
                         </span>
                       </div>
                       <p className="text-white/30 text-[10px] mt-1">
-                        Varies by wallet behavior; capped by protocol rules.
+                        Only applies if a rewind is executed.
                       </p>
                     </div>
                     <div className="h-px bg-white/10 my-2" />
                     <div className="flex justify-between text-sm">
                       <span className="text-white/40">Total Fees</span>
                       <span className="text-white/50 font-mono" style={{ fontFamily: "var(--font-jetbrains-mono)" }}>
-                        ~{formatCurrencyPrecise(animatedTotalFees)}
+                        {formatCurrencyPrecise(animatedTotalFees)}
                         <span className="text-white/30 ml-1.5">({calculations.totalRate.toFixed(1)}%)</span>
                       </span>
                     </div>
@@ -324,19 +361,19 @@ export default function RewindSimulator() {
                   <div className="space-y-2.5 mb-5">
                     <div>
                       <div className="flex justify-between text-sm">
-                        <span className="text-white/50">Protection Fee</span>
+                        <span className="text-white/50">Protection Fee ({calculations.protectionRate.toFixed(1)}%)</span>
                         <span className="text-white/70 font-mono" style={{ fontFamily: "var(--font-jetbrains-mono)" }}>
                           {formatCurrencyPrecise(animatedProtectionFee)}
                         </span>
                       </div>
                       {calculations.tierSavings > 0 && (
                         <p className="text-violet/60 text-xs mt-1">
-                          Tier saves {formatCurrencyPrecise(animatedTierSavings)} on protection
+                          Tier saves {formatCurrencyPrecise(animatedTierSavings)}
                         </p>
                       )}
                     </div>
                     <div className="flex justify-between text-sm">
-                      <span className="text-white/50">Execution Cost</span>
+                      <span className="text-white/50">Execution Fee</span>
                       <span className="text-white/30">—</span>
                     </div>
                     <p className="text-white/30 text-[10px] mt-1">
@@ -374,7 +411,7 @@ export default function RewindSimulator() {
 
               {/* Bottom note */}
               <p className="text-white/30 text-xs text-center mt-6">
-                Protection fee is deducted at creation. Execution fee applies only if a rewind is triggered. Finalization is pull-based.
+                Protection fee is deducted at creation. Execution fee (1.5%) applies only if a rewind is triggered.
               </p>
             </div>
           </div>
@@ -388,11 +425,11 @@ export default function RewindSimulator() {
           </div>
           <div className="flex items-center gap-2">
             <Clock className="w-4 h-4 text-violet/60" />
-            <span>Deterministic Windows</span>
+            <span>Fixed Windows</span>
           </div>
           <div className="flex items-center gap-2">
             <RotateCcw className="w-4 h-4 text-cyan/60" />
-            <span>Pull-Based Finalization</span>
+            <span>Flat Fee Model</span>
           </div>
         </div>
       </div>

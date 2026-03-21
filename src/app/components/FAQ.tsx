@@ -7,7 +7,7 @@ const faqs = [
   {
     question: "Is Rewind X custodial?",
     answer:
-      "No. Rewind X is non-custodial: funds are held by smart contracts under deterministic on-chain rules. No admin key can move or redirect user funds. During the active window, only the sender can execute a rewind; after expiry, only the recipient can claim the held amount.",
+      "No. Rewind X is non-custodial: funds are held by smart contracts under deterministic on-chain rules. No admin key can move or redirect user funds. During the active window, only the sender can execute a rewind. After expiry, the transfer moves to settlement and either the sender or recipient can complete it.",
     icon: Shield,
     color: "cyan",
   },
@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "What happens when the rewind window expires?",
     answer:
-      "Windows are configurable from 2 minutes to 48 hours. Users select their preferred duration at transfer creation. NFT tiers unlock extended windows up to 48h. After expiry, the transfer becomes claimable by the recipient. No rewinds are possible beyond the window.",
+      "Windows are configurable from 3 minutes to 24 hours. Users select their preferred duration at transfer creation. After expiry, the transfer moves to settlement and either party can complete it. No rewinds are possible beyond the window.",
     icon: Clock,
     color: "cyan",
   },
@@ -49,44 +49,37 @@ const faqs = [
   {
     question: "What prevents abuse or malicious reversals?",
     answer:
-      "Rewind X includes multiple automated safeguards: daily sender limits, tier-based cooldowns, behavior analysis for fresh wallets, and circuit breakers for abnormal patterns. All protections are deterministic and non-custodial.",
+      "Rewind X uses deterministic protocol rules such as sender limits, cooldowns, and other non-custodial safeguards to reduce abuse. These protections restrict actions under certain conditions, but they do not give the protocol control over user funds.",
     icon: AlertTriangle,
     color: "violet",
   },
   {
-    question: "Can receivers skip the waiting period and claim instantly?",
+    question: "Can the recipient receive early?",
     answer:
-      "No. During the active rewind window, only the sender can act. The recipient cannot claim early. After expiry, the recipient must claim (pull-based) to receive the held amount.",
+      "No. During the active rewind window, only the sender can use sender-side controls. The recipient cannot receive early. After expiry, the transfer moves to settlement and either party can complete it.",
     icon: CheckCircle,
     color: "cyan",
   },
   {
     question: "Can the sender release a transfer early?",
     answer:
-      "Yes. The sender can waive their rewind right before the window expires, making the transfer immediately claimable by the recipient. This is useful when both parties want faster settlement.",
+      "Yes. The sender can release the transfer early during the active window, allowing the recipient to receive it without waiting for the full window to expire. This is useful when both parties want faster settlement.",
     icon: Zap,
     color: "violet",
   },
   {
     question: "What happens if the recipient never claims?",
     answer:
-      "After the window expires, the transfer is finalizable by the recipient (pull-based). If the recipient never finalizes, the net amount remains held under deterministic contract rules until it is finalized. It is not auto-released or returned by the protocol.",
+      "After the window expires, the transfer moves to settlement. Either the sender or recipient can complete it. If neither acts, the held amount remains in place under protocol rules. It is not auto-released or returned by the protocol.",
     icon: Clock,
     color: "violet",
   },
   {
     question: "Which tokens are supported?",
     answer:
-      "Rewind X supports all ERC-20 tokens. Native chain tokens (ETH, BNB, MATIC) require wrapped versions such as WETH or WBNB.",
+      "Rewind X currently supports 38 ERC-20 tokens on BNB Chain, including major stablecoins and popular DeFi assets. Native chain tokens (BNB) require the wrapped version (WBNB).",
     icon: Coins,
     color: "violet",
-  },
-  {
-    question: "What is RWXT used for?",
-    answer:
-      "RWXT is used to acquire optional NFT utility tiers that unlock enhanced protocol parameters: fee discounts on protection activation, extended windows (up to 48h), higher daily limits, batch operations, and team wallet controls for enterprise users.",
-    icon: Zap,
-    color: "cyan",
   },
 ];
 

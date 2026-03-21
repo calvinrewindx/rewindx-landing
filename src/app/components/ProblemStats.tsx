@@ -1,28 +1,28 @@
 "use client";
 
-import { AlertTriangle, Users, Building2 } from "lucide-react";
+import { AlertTriangle, Ban, ShieldAlert } from "lucide-react";
 
 const stats = [
   {
     icon: AlertTriangle,
     value: "Billions",
-    label: "Annual Losses",
-    sublabel: "Irreversible transfers",
+    label: "Lost annually",
+    sublabel: "due to irreversible transfers",
     color: "red",
   },
   {
-    icon: Users,
-    value: "Majority",
-    label: "Fear Mistakes",
-    sublabel: "Permanent errors",
+    icon: Ban,
+    value: "No recourse",
+    label: "Once confirmed",
+    sublabel: "funds are gone",
+    color: "red",
+  },
+  {
+    icon: ShieldAlert,
+    value: "Persistent risk",
+    label: "Even experienced users",
+    sublabel: "make critical mistakes",
     color: "amber",
-  },
-  {
-    icon: Building2,
-    value: "Zero",
-    label: "Recourse Options",
-    sublabel: "For institutions",
-    color: "red",
   },
 ];
 
@@ -39,7 +39,7 @@ export default function ProblemStats() {
             The Problem is Real
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto">
-            Address poisoning, phishing attacks, and fat finger errors cost users billions every year.
+            Address poisoning, phishing attacks, and simple transfer errors result in billions of dollars lost every year.
           </p>
         </div>
 
@@ -48,31 +48,31 @@ export default function ProblemStats() {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className={`glass-card p-6 text-center group transition-all duration-300 ${
+              className={`glass-card p-6 text-center group transition-all duration-300 cursor-default hover:-translate-y-1 ${
                 stat.color === "red"
-                  ? "hover:border-red-500/30"
-                  : "hover:border-amber-500/30"
+                  ? "hover:border-red-500/30 hover:shadow-lg hover:shadow-red-500/10 hover:bg-red-500/[0.03]"
+                  : "hover:border-amber-500/30 hover:shadow-lg hover:shadow-amber-500/10 hover:bg-amber-500/[0.03]"
               }`}
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors ${
+              <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all duration-300 ${
                 stat.color === "red"
-                  ? "bg-red-500/10 border border-red-500/20 group-hover:bg-red-500/20"
-                  : "bg-amber-500/10 border border-amber-500/20 group-hover:bg-amber-500/20"
+                  ? "bg-red-500/10 border border-red-500/20 group-hover:bg-red-500/20 group-hover:scale-110"
+                  : "bg-amber-500/10 border border-amber-500/20 group-hover:bg-amber-500/20 group-hover:scale-110"
               }`}>
-                <stat.icon className={`w-6 h-6 ${
-                  stat.color === "red" ? "text-red-400" : "text-amber-400"
+                <stat.icon className={`w-6 h-6 transition-colors duration-300 ${
+                  stat.color === "red" ? "text-red-400/70 group-hover:text-red-400" : "text-amber-400/70 group-hover:text-amber-400"
                 }`} />
               </div>
               <p
-                className={`text-3xl sm:text-4xl font-bold mb-2 ${
-                  stat.color === "red" ? "text-red-400" : "text-amber-400"
+                className={`text-2xl sm:text-3xl font-bold mb-2 transition-colors duration-300 ${
+                  stat.color === "red" ? "text-red-400/80 group-hover:text-red-400" : "text-amber-400/80 group-hover:text-amber-400"
                 }`}
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {stat.value}
               </p>
-              <p className="text-white/70 font-medium">{stat.label}</p>
-              <p className="text-white/40 text-sm">{stat.sublabel}</p>
+              <p className="text-white/60 font-medium group-hover:text-white/80 transition-colors duration-300">{stat.label}</p>
+              <p className="text-white/30 text-sm group-hover:text-white/50 transition-colors duration-300">{stat.sublabel}</p>
             </div>
           ))}
         </div>
@@ -80,7 +80,7 @@ export default function ProblemStats() {
         {/* Quote */}
         <div className="text-center">
           <p className="text-lg sm:text-xl text-white/60 italic">
-            &ldquo;Finality ≠ Safety. Irreversibility blocks mass adoption.&rdquo;
+            &ldquo;Finality ≠ Safety. Irreversibility limits adoption.&rdquo;
           </p>
         </div>
       </div>

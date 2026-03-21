@@ -9,17 +9,18 @@ const steps = [
     icon: Send,
     title: "Create Protected Transfer",
     description:
-      "Send any ERC-20 using protected mode. Funds enter a time-bounded, contract-held state (non-custodial).",
-    bullets: ["No admin keys can move funds", "Funds are held under deterministic on-chain rules", "State transitions are enforced by fixed on-chain rules"],
+      "Send any supported ERC-20 using protected mode. Funds enter a time-bounded contract-held state under fixed on-chain rules.",
+    bullets: ["No admin keys can move funds", "State transitions follow fixed protocol logic", "Non-custodial by design"],
     color: "cyan",
   },
   {
     number: "02",
     icon: Clock,
-    title: "Active Undo Window (2min–48h)",
+    title: "Active Undo Window",
+    subtitle: "3 min – 24h",
     description:
-      "The sender can initiate a rewind anytime during the active window.",
-    bullets: ["NFT tiers unlock extended windows up to 48h", "After expiry, rewinds are no longer possible; the recipient can finalize (pull-based)"],
+      "During the active window, the sender can initiate a rewind.",
+    bullets: ["Sender-controlled during the window", "Early release by sender remains possible", "After expiry, either party can complete settlement"],
     color: "violet",
   },
   {
@@ -27,8 +28,8 @@ const steps = [
     icon: RotateCcw,
     title: "Execute Rewind",
     description:
-      "The sender initiates the rewind. Automated on-chain checks validate hold time, deterministic rules, and integrity conditions.",
-    bullets: ["Balances update under deterministic logic"],
+      "The sender requests the rewind, waits through the required hold period, and then executes it on-chain.",
+    bullets: ["Hold period enforced on-chain", "Fixed protocol rules", "No manual approvals or operator decisions"],
     color: "cyan",
   },
   {
@@ -36,8 +37,8 @@ const steps = [
     icon: Award,
     title: "On-Chain Proof",
     description:
-      "Each successful rewind mints/updates a Fragment NFT: a tamper-evident audit artifact.",
-    bullets: ["Tamper-evident proof index", "Publicly visible on-chain", "Underlying records/events remain immutable"],
+      "Each successful rewind mints or updates a Rewind Proof NFT: a tamper-evident on-chain record.",
+    bullets: ["Publicly visible on-chain", "Proof of valid rewind activity", "Underlying records and events remain immutable"],
     color: "violet",
   },
 ];
@@ -59,7 +60,7 @@ export default function HowItWorks() {
             How It <span className="gradient-text">Works</span>
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Four deterministic steps to protect your transfers
+            Four steps to protect your transfers
           </p>
         </div>
 
@@ -103,11 +104,18 @@ export default function HowItWorks() {
 
                 {/* Title */}
                 <h3
-                  className="text-lg font-semibold text-white mb-3"
+                  className="text-lg font-semibold text-white mb-1"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   {step.title}
                 </h3>
+                {('subtitle' in step && step.subtitle) && (
+                  <span className={`text-sm font-medium mb-2 block ${
+                    step.color === "cyan" ? "text-cyan" : "text-violet"
+                  }`}>
+                    {step.subtitle}
+                  </span>
+                )}
 
                 {/* Description */}
                 <p className="text-white/50 text-sm leading-relaxed mb-4">

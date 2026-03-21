@@ -1,8 +1,10 @@
 # Rewind X Lightpaper
 
-**The Reversibility Primitive for Blockchain Transfers**
+**Protected ERC-20 Transfers with Time-Bounded Reversibility**
 
-Version 1.4.1 | Classification: PUBLIC | January 2026
+> This describes the V1 Origin Edition. Some features described are planned for future versions.
+
+Version 1.4.2 | Classification: PUBLIC | March 2026
 
 ---
 
@@ -13,15 +15,13 @@ Version 1.4.1 | Classification: PUBLIC | January 2026
 3. [System Overview](#3-system-overview)
 4. [Lifecycle of a Protected Transfer](#4-lifecycle-of-a-protected-transfer)
 5. [Security Model](#5-security-model)
-6. [Fee Model & Integrity Engine](#6-fee-model-integrity-engine)
-7. [Fragment NFT: The Proof Layer](#7-fragment-nft-the-proof-layer)
-8. [RWXT Utility](#8-rwxt-utility)
-9. [Use Cases](#9-use-cases)
-10. [Limitations](#10-limitations)
-11. [Roadmap](#11-roadmap)
-12. [Vision](#12-vision)
-13. [Prior Art & Differentiation](#13-prior-art--differentiation)
-14. [Appendix: Definitions](#14-appendix-definitions)
+6. [Fee Model](#6-fee-model)
+7. [Rewind Proof NFT: The Proof Layer](#7-rewind-proof-nft-the-proof-layer)
+8. [Use Cases](#8-use-cases)
+9. [Limitations](#9-limitations)
+10. [Vision](#10-vision)
+11. [Prior Art & Differentiation](#11-prior-art-differentiation)
+12. [Appendix: Definitions](#12-appendix-definitions)
 
 ---
 
@@ -31,9 +31,9 @@ Rewind X introduces time-bounded reversibility for on-chain token transfers, a c
 
 Billions of dollars in cryptocurrency have been lost permanently due to human error, phishing attacks, and address manipulation. Unlike traditional finance, blockchain offers no recourse. Once a transaction confirms, funds are gone forever.
 
-Rewind X solves this through Protected Transfers: a non-custodial, deterministic mechanism that gives senders a configurable window to reverse transactions before final settlement. Windows range from 2 minutes to 48 hours. The standard maximum is 24 hours; higher NFT tiers unlock extended windows up to 48 hours. Protected transfers settle as net amounts: the Protection Activation Fee is deducted at creation; the recipient receives the net held amount if no rewind occurs. The protocol requires no manual intervention, holds no private keys, and emits tamper-evident on-chain proof signals for reversals, indexed via the Fragment NFT system.
+Rewind X solves this through Protected Transfers: a non-custodial, deterministic mechanism that gives senders a configurable window to reverse transactions before final settlement. Windows range from 3 minutes to 24 hours. Protected transfers settle as net amounts: the Protected Transfer Fee is deducted at creation; the recipient receives the net held amount if no rewind occurs. The protocol requires no manual intervention, holds no private keys, and emits tamper-evident on-chain proof signals for reversals, indexed via the Rewind Proof NFT system.
 
-Rewind X is infrastructure: a protocol-level safety layer that can be used directly by individuals and scaled through integrations with wallets, treasuries, and DeFi applications. As wallets integrate Rewind X, users will see it as a simple "Protected Transfer" option, without custodial intermediaries.
+Rewind X is infrastructure: a protocol-level safety layer that can be used directly by individuals and scaled through integrations with wallets, treasuries, and DeFi applications. As wallets integrate systems like Rewind X, users may experience protected transfers as a simple optional safety layer — without custodial intermediaries.
 
 ---
 
@@ -73,9 +73,9 @@ Every protocol operation follows predetermined logic with no manual intervention
 
 ### Time-Bounded Windows
 
-Reversibility is strictly limited. The standard window is 24 hours; NFT tier holders can extend up to 48 hours. For faster workflows, windows can also be configured in minutes, with a minimum of 2 minutes.
+Reversibility is strictly limited. Windows are configurable from 3 minutes to 24 hours.
 
-The sender's selected window defines the guaranteed period during which a rewind can be executed. For safety, settlement may finalize shortly after the selected window due to deterministic hold and finality buffers that prevent race conditions and flash-style abuse. Once this deterministic boundary is reached, the transfer becomes claimable; the recipient must finalize to receive funds. After expiry, the transfer is irreversible; claim only releases funds. This bounded approach preserves blockchain's finality guarantee while providing a safety buffer.
+The sender's selected window defines the guaranteed period during which a rewind can be executed. For safety, settlement may finalize shortly after the selected window due to deterministic hold and finality buffers that prevent race conditions and flash-style abuse. Once this deterministic boundary is reached, the transfer becomes available for the recipient to receive. After expiry, the transfer is irreversible. This bounded approach preserves blockchain's finality guarantee while providing a safety buffer.
 
 ### Trust-Minimized Controls
 
@@ -83,7 +83,7 @@ Administrative controls are strictly bounded and cannot move user funds, redirec
 
 ### Transparent Proofs
 
-Every reversal emits a tamper-evident on-chain proof trail, indexed by the Fragment NFT system. This creates a verifiable audit trail suitable for compliance requirements, dispute documentation, and forensic analysis.
+Every reversal emits a tamper-evident on-chain proof trail, indexed by the Rewind Proof NFT system. This creates a verifiable audit trail suitable for compliance requirements, dispute documentation, and forensic analysis.
 
 ---
 
@@ -96,24 +96,24 @@ sequenceDiagram
     participant Sender
     participant Protocol
     participant Receiver
-    participant Fragment NFT
+    participant Rewind Proof NFT
 
     Sender->>Protocol: Create Protected Transfer
-    Note over Protocol: Rewind Window Active (2min-48h)
+    Note over Protocol: Rewind Window Active (3min-24h)
     Note over Sender,Receiver: Only sender can act during window
 
     alt Sender Reverses (during window)
         Sender->>Protocol: Execute Rewind
         Protocol->>Sender: Return Funds
-        Protocol->>Fragment NFT: Mint (first) / Update (cumulative stats)
+        Protocol->>Rewind Proof NFT: Mint (first) / Update (cumulative stats)
     else Sender Releases Early
         Sender->>Protocol: Release Transfer Early
-        Note over Protocol: Transfer immediately claimable
-        Receiver->>Protocol: Finalize (claim)
+        Note over Protocol: Transfer immediately available
+        Receiver->>Protocol: Receive
         Protocol->>Receiver: Release Funds
     else Window Expires (no rewind)
-        Note over Protocol: Transfer becomes claimable
-        Receiver->>Protocol: Finalize (claim)
+        Note over Protocol: Transfer becomes available
+        Receiver->>Protocol: Receive
         Protocol->>Receiver: Release Funds
     end
 ```
@@ -122,11 +122,11 @@ sequenceDiagram
 
 When a user initiates a Protected Transfer, tokens enter a time-bounded state. The transfer is recorded on-chain with a unique identifier, the sender's address, the recipient's address, the token and amount, and the window duration.
 
-During the rewind window, only the sender can act. Three outcomes are possible: the sender reverses the transfer, the sender releases early, or the window expires and the transfer becomes claimable by the recipient.
+During the rewind window, only the sender can act. Three outcomes are possible: the sender reverses the transfer, the sender releases early, or the window expires and either party can complete settlement.
 
 ### Multi-Token Support
 
-The protocol operates with any standard ERC-20 token. Users can protect transfers of stablecoins, utility tokens, governance tokens, or any compliant asset.
+The protocol operates with supported ERC-20 tokens with reliable price feeds. V1 supports 38 tokens on BNB Chain, including major stablecoins and popular DeFi assets.
 
 ### Integrity Protections
 
@@ -142,11 +142,11 @@ Every Protected Transfer follows a four-stage lifecycle with deterministic trans
 
 The sender initiates a Protected Transfer by specifying the recipient, token, amount, and desired window duration (hours or minutes). The protocol validates inputs, calculates applicable fees based on the sender's NFT tier, and records the transfer in a non-upgradeable on-chain registry.
 
-At creation, the protocol deducts the Protection Activation Fee from the transfer amount. The net amount is held under deterministic contract rules until claim or rewind.
+At creation, the protocol deducts the Protected Transfer Fee from the transfer amount. The net amount is held under deterministic contract rules until received or rewound.
 
 ### Stage 2: Rewind Window
 
-The rewind window begins immediately upon transfer creation. During this period, the sender retains exclusive reversal rights. No other party (not the receiver, not the protocol, not any external entity) can act. The receiver has no claim or settlement rights until the window expires.
+The rewind window begins immediately upon transfer creation. During this period, the sender retains exclusive reversal rights. No other party (not the receiver, not the protocol, not any external entity) can act. The receiver cannot receive the transfer until the window expires.
 
 Critically, no party can extend or shorten the window after creation. The duration (hours or minutes) is fixed at initiation and enforced deterministically by on-chain logic.
 
@@ -161,13 +161,13 @@ Resolution occurs through one of three paths:
 
 This design provides a final confirmation moment and reduces front-running risk. The protocol validates the request (window still open, sender is original initiator, limits not exceeded). On success, funds return to the sender's wallet.
 
-**Early Release:** The sender can waive their rewind right before the window expires by calling `releaseTransferEarly()`. This immediately makes the transfer claimable by the recipient, eliminating the remaining wait time. Useful when the recipient confirms receipt and both parties want faster settlement. The sender retains no reversal rights after early release.
+**Early Release:** The sender can release the transfer at any time during the active window by calling `releaseTransferEarly()`. This immediately allows the recipient to receive the transfer, eliminating the remaining wait time. Useful when both parties want faster settlement. The sender retains no reversal rights after early release.
 
-**Window Expiry:** If the rewind window reaches its deterministic settlement boundary without sender action, the transfer becomes claimable. The recipient must call finalize (technically: `claim()`) to receive funds. Claim releases the net held amount; no additional fee is charged at claim. This is pull-based by design. Settlement is irreversible once claimed. After expiry, funds remain claimable until the recipient finalizes.
+**Window Expiry:** If the rewind window reaches its deterministic settlement boundary without sender action, the transfer moves to settlement. Either the sender or recipient can complete settlement (technically: `claim()`). No additional fee is charged at this step. Settlement is irreversible once completed. After expiry, funds remain available until either party acts.
 
-### Stage 4: Fragment NFT Proof
+### Stage 4: Rewind Proof NFT
 
-On a sender's first successful rewind, the protocol mints a Fragment NFT to the sender. Subsequent rewinds by that sender update the same token's cumulative stats and refresh the latest rewind record (overwritten on each update); the token does not store a full rewind history. Fragment NFTs are transferable and function as transferable proof objects (not identity badges). If a Fragment is transferred, the sender's primary fragment mapping is cleared—subsequent rewinds by that sender will mint a new Fragment instead of updating the transferred token.
+On a sender's first successful rewind, the protocol mints a Rewind Proof NFT to the sender. Subsequent rewinds by that sender update the same token's cumulative stats and refresh the latest rewind record (overwritten on each update); the token does not store a full rewind history. Rewind Proof NFTs are transferable and function as transferable proof objects (not identity badges). If a Rewind Proof is transferred, the sender's primary mapping is cleared—subsequent rewinds by that sender will mint a new Rewind Proof instead of updating the transferred token.
 
 ---
 
@@ -185,7 +185,7 @@ The protocol contains no privileged/admin functions capable of moving user funds
 
 ### Signature-Based Authorization
 
-Certain safety-critical actions in Rewind X require explicit user consent, such as reversing a transfer or granting limited delegation rights.
+Certain safety-critical actions in Rewind X require explicit user consent, such as reversing a transfer.
 
 This consent is expressed through a digital signature. A signature is a one-time, explicit confirmation that a user agrees to a specific action under clearly defined conditions. It does not grant ongoing access, custody, or control over funds.
 
@@ -201,7 +201,7 @@ All state-changing operations follow the CEI pattern, preventing reentrancy atta
 
 The protocol implements multi-layer protections against systematic abuse. These operate deterministically based on on-chain behavior patterns.
 
-### Circuit Breaker Mechanisms
+### Predefined Safety Mechanisms
 
 Automated safeguards can pause specific protocol functions if anomalous conditions are detected. These operate transparently according to predefined parameters, not manual intervention.
 
@@ -211,47 +211,37 @@ The protocol is intended to undergo comprehensive external security auditing bef
 
 ---
 
-## 6. Fee Model & Integrity Engine
+## 6. Fee Model
 
 The protocol employs a two-component fee structure designed to align incentives and protect against systematic abuse.
 
 ### Fee Components
 
-**Protection Activation Fee:** Charged when creating a Protected Transfer and deducted from the transfer amount. NFT tiers provide deterministic discounts on this fee.
+**Protected Transfer Fee (1–3%):** Charged when creating a Protected Transfer and deducted from the transfer amount. 1% for preferred supported tokens, up to 3% for extended / non-preferred supported tokens. NFT tiers provide discounts on this fee.
 
-**Rewind Fee:** Charged only if a rewind is actually executed. This fee is separate from the activation fee and is not discounted by NFT tiers. Rewind fees are determined by the protocol's on-chain integrity engine based on wallet behavior patterns.
-
-### Integrity Engine
-
-The protocol includes a risk-based integrity engine that adjusts rewind fees according to on-chain behavior:
-
-- Established, low-risk wallets pay the standard base rate for rewind execution.
-- New or anomalous wallets may temporarily incur higher rewind fees.
-- The maximum rewind fee is strictly bounded by protocol design.
-- All adjustments are determined by deterministic, rule-based logic with no manual intervention.
-
-The integrity engine operates transparently on-chain. It does not block transactions. It adjusts fee levels to discourage patterns associated with abuse while preserving access for legitimate users.
-
-### Scoring Logic
-
-The exact scoring formulas and heuristics used by the integrity engine are not documented publicly. This is intentional: exposing precise logic would enable adversarial optimization. Only the high-level behavior, risk-based fee adjustment with bounded maximums, is described here.
+**Rewind Execution Fee (1.5%):** Charged only if a rewind is actually executed. This is a flat fee that applies equally to all users. It is separate from the transfer fee and is not discounted by NFT tiers. Calculated on-chain with fixed rules, no exceptions.
 
 ### NFT Tier Fee Benefits
 
-NFT tiers affect the Protection Activation Fee only:
+NFT tiers affect the Protected Transfer Fee only:
 
-- Genesis through Nexus tiers provide increasing discounts on activation fees.
-- Additional tier benefits include extended windows (up to 48h), higher daily limits, and reduced cooldowns.
+- Rewind Proof: 0% discount (auto-mint after first rewind)
+- Genesis: 10% discount (auto-mint after 3 rewinds of $10+)
+- Gatekeeper: 20% discount (auto-mint after 10 rewinds of $10+ each)
+
+The Rewind Execution Fee (1.5%) is separate and not discounted.
+
+Advanced fee models may be introduced in future versions.
 
 ---
 
-## 7. Fragment NFT: The Proof Layer
+## 7. Rewind Proof NFT: The Proof Layer
 
-Fragment NFTs serve as the protocol's tamper-evident proof index system.
+Rewind Proof NFTs serve as the protocol's tamper-evident proof index system.
 
 ### Purpose
 
-Fragment NFTs provide a cumulative, tamper-evident proof index for rewind activity. Because Fragments are transferable, the NFT represents a verifiable proof object rather than an identity credential of the current holder. For technical details on minting, updates, and transfer behavior, see Stage 4: Fragment NFT Proof.
+Rewind Proof NFTs provide a cumulative, tamper-evident proof index for rewind activity. Because they are transferable, the NFT represents a verifiable proof object rather than an identity credential of the current holder. For technical details on minting, updates, and transfer behavior, see Stage 4: Rewind Proof NFT.
 
 ### Why NFT Format
 
@@ -259,46 +249,17 @@ The NFT standard provides several advantages for proof-of-action records: standa
 
 ### Data Contained
 
-Each Fragment NFT stores the latest rewind metadata (e.g., transfer ID, timestamp, amount) and cumulative statistics. The latest rewind fields are overwritten on each update, while cumulative stats continue to accumulate. Full verification remains possible on-chain via the underlying protected transfer records and emitted events.
+Each Rewind Proof NFT stores the latest rewind metadata (e.g., transfer ID, timestamp, amount) and cumulative statistics. The latest rewind fields are overwritten on each update, while cumulative stats continue to accumulate. Full verification remains possible on-chain via the underlying protected transfer records and emitted events.
 
 ### Use Cases
 
-Fragment NFTs enable multiple use cases: corporate audit trails for treasury operations, compliance documentation for regulated entities, dispute evidence for counterparty disagreements, and historical records for tax or legal purposes.
+Rewind Proof NFTs enable multiple use cases: corporate audit trails for treasury operations, compliance documentation for regulated entities, dispute evidence for counterparty disagreements, and historical records for tax or legal purposes.
 
-Fragment NFTs are publicly verifiable on-chain. Organizations can consolidate proof NFTs by transferring them to dedicated compliance or audit wallets, while verification remains possible for any third party directly on-chain.
-
----
-
-## 8. RWXT Utility
-
-RWXT is the protocol's native utility token. RWXT is used to acquire optional NFT utility tiers that unlock enhanced protocol parameters: fee discounts on protection activation, extended windows, higher limits, and operational features for advanced users.
-
-### Protocol Access
-
-RWXT-based NFT tiers reduce the Protection Activation Fee when creating Protected Transfers.
-
-### NFT Tier Access
-
-The six-tier NFT system requires RWXT for purchases. Tiers include AgentPass (entry tier with unlimited supply for AI protection), Genesis, Gatekeeper, Enterprise, Prime, and Nexus. Each tier provides concrete on-chain benefits:
-
-- Protection Activation Fee discounts (10%–50% depending on tier)
-- Extended rewind windows (up to 48 hours)
-- Increased daily transfer limits
-- Reduced cooldowns between operations
-
-NFT tiers do not affect rewind execution fees, which are determined by the integrity engine.
-
-### Governance Participation
-
-Optional governance (if introduced) will be off-chain and tier-weighted. No voting rights, profit rights, or ownership rights are granted.
-
-### Regulatory Positioning
-
-RWXT is designed as a utility token for protocol access features. RWXT-based NFT tiers reduce only the Protection Activation Fee. The Rewind Fee remains independent. RWXT is not designed to function as, and should not be considered, an investment vehicle. No profit promises, yield, or return expectations are implied.
+Rewind Proof NFTs are publicly verifiable on-chain. Organizations can consolidate proof NFTs by transferring them to dedicated compliance or audit wallets, while verification remains possible for any third party directly on-chain.
 
 ---
 
-## 9. Use Cases
+## 8. Use Cases
 
 ### Retail Error Recovery
 
@@ -312,34 +273,15 @@ Corporate treasuries and DAO multi-sigs can add a safety layer to outgoing payme
 
 Wallet providers can integrate Protected Transfers as a safety feature, differentiating their product through user protection capabilities. Users can opt into reversibility for transfers where the additional security outweighs the settlement delay.
 
-### AI Agent Safety
+### AI Agent Safety (Planned)
 
-As autonomous AI agents begin executing on-chain transactions, Protected Transfers provide a critical safety layer. Human oversight can catch and reverse erroneous agent actions within the window period.
+Future versions may explore additional execution safety modes for automated workflows.
 
-Rewind X supports two permission models for agent-driven execution:
-
-**Manual Mode (Default)**
-- User creates protected transfers
-- User requests rewinds manually
-- Full control, no delegation needed
-- Works for all users
-
-**Delegated Mode (User Must Activate)**
-- User explicitly enables AI protection via `setDelegate()`
-- 1-hour security cooldown before activation
-- AI analyzes transfers using a multi-signal scoring system covering address risks (zero/burn addresses, lookalike poisoning), context patterns (phishing, scam language), and behavioral anomalies (unusual amounts, rapid transactions)
-- Delegate may execute rewinds when risk thresholds are exceeded
-- User can disable instantly anytime via `removeDelegate()`
-- Daily limits enforced (varies by NFT tier)
-- Non-custodial: agent can only rewind, never transfer
-
-The protocol does not require trusting an agent: reversibility is enforced on-chain, and the sender retains deterministic recovery rights within the window. Autonomy becomes a permission choice, not a custody tradeoff.
-
-Both modes use the same protocol. You decide: keep full control or enable AI protection.
+V1 operates in Manual Mode only: users create protected transfers and request rewinds manually with full control.
 
 ### Compliance-Friendly Layer
 
-Regulated entities can document reversal history through Fragment NFTs, providing audit trails for compliance reporting and regulatory examination.
+Regulated entities can document reversal history through Rewind Proof NFTs, providing audit trails for compliance reporting and regulatory examination.
 
 ### Enterprise Payouts
 
@@ -347,13 +289,13 @@ Organizations processing high-volume payments (payroll, vendor payments, dividen
 
 ---
 
-## 10. Limitations
+## 9. Limitations
 
 Rewind X is not a universal solution. Understanding its boundaries is essential for appropriate use.
 
 ### Native Tokens Not Supported
 
-The protocol operates with ERC-20 tokens only. Native blockchain tokens (ETH, BNB, MATIC) cannot be protected through the current implementation.
+The protocol operates with supported ERC-20 tokens only. Native blockchain tokens (BNB) require wrapped versions (WBNB).
 
 ### Sender-Only Reversal
 
@@ -365,7 +307,7 @@ Windows have maximum durations. Once expired, finality is absolute. The protocol
 
 ### Minimum Window Granularity
 
-Protected Transfers have a minimum rewind window of 2 minutes. This prevents "instant reversibility" patterns that could enable abuse while still supporting faster workflows compared to hour-level windows.
+Protected Transfers have a minimum rewind window of 3 minutes and a maximum of 24 hours. This prevents "instant reversibility" patterns that could enable abuse while still supporting faster workflows.
 
 ### No Fraud Adjudication
 
@@ -373,41 +315,21 @@ The protocol makes no judgments about transaction legitimacy. It cannot determin
 
 ### Requires Sender Action (Manual Mode)
 
-In Manual Mode, reversals require active sender intervention within the window. Users must monitor their transfers and act within the available window. In Delegated Mode, the delegate may execute rewinds on behalf of the user under on-chain constraints.
+Reversals require active sender intervention within the window. Users must monitor their transfers and act within the available window.
 
 ### Net Settlement Amounts
 
 If a rewind is executed, the sender recovers the net held amount (held under deterministic contract rules) minus protocol fees. If no rewind occurs, the recipient receives the net held amount (after the protection fee is deducted at creation).
 
-### Claim Liveness
+### Receive Liveness
 
-If a recipient never finalizes after window expiry, funds remain held under deterministic contract rules until claimed. The protocol does not auto-release or return unclaimed funds; settlement remains pull-based by design.
-
----
-
-## 11. Roadmap
-
-### Current Status
-
-Landing page and interactive demo active. Protocol architecture complete. Core contracts complete with verified on-chain proof generation.
-
-### Pre-Mainnet
-
-Prepare for external security audit (scope and partner selection) prior to mainnet launch. Final contract optimization. Documentation completion. Community building and early adopter onboarding.
-
-### Mainnet Launch
-
-Currently targeted for 2026, subject to audit completion and market conditions. Initial deployment on EVM-compatible mainnet. Launch of NFT utility tiers and initial liquidity provisioning on DEXs.
-
-### Post-Launch
-
-Post-launch development will focus on documentation improvements and optional integrations based on partner demand. Analytics dashboard for protocol activity. Multi-chain expansion to additional EVM-compatible networks. Optional advanced features may be introduced based on audits and demand.
+If neither party acts after window expiry, funds remain held under deterministic contract rules until settlement is completed. The protocol does not auto-release or return funds.
 
 ---
 
-## 12. Vision
+## 10. Vision
 
-Rewind X introduces the first non-custodial, protocol-level reversibility for ERC-20 transfers on public blockchains.
+Rewind X introduces non-custodial, protocol-level reversibility for ERC-20 transfers on public blockchains.
 
 The goal is not to replace blockchain finality. It is to make finality safer. By providing a bounded window for human review and error correction, the protocol removes a critical barrier to mainstream cryptocurrency adoption.
 
@@ -417,7 +339,7 @@ The technical capability exists. The demand is clear. What remains is execution:
 
 ---
 
-## 13. Prior Art & Differentiation
+## 11. Prior Art & Differentiation
 
 Rewind X builds on the idea of reversible transfers with an implementation designed for real decentralized infrastructure. Earlier approaches, such as custodial recovery services, backend-driven approval flows, or token-specific custody contracts, either required trust in intermediaries or broke core decentralization guarantees.
 
@@ -431,35 +353,27 @@ Rewind X does not remove finality—it makes finality safer.
 
 ---
 
-## 14. Appendix: Definitions
+## 12. Appendix: Definitions
 
 **Protected Transfer:** A token transfer initiated through Rewind X that includes a time-bounded reversal window before final settlement.
 
-**Rewind Window:** The configurable period (default 24 hours; minimum 2 minutes; up to 48 hours with NFT tiers) during which the sender can rewind a Protected Transfer.
+**Rewind Window:** The configurable period (3 minutes to 24 hours) during which the sender can rewind a Protected Transfer.
 
 **Rewind:** The action of reversing a Protected Transfer, returning funds to the original sender.
 
-**Fragment NFT:** A transferable on-chain proof object minted to a sender on their first successful rewind and updated on subsequent rewinds. It stores cumulative stats plus the latest rewind record; underlying transfer records and events remain the source of truth. Transferability allows consolidation in audit/compliance wallets and does not imply identity or reputation of the current holder.
+**Rewind Proof NFT:** A transferable on-chain proof object minted to a sender on their first successful rewind and updated on subsequent rewinds. It stores cumulative stats plus the latest rewind record; underlying transfer records and events remain the source of truth. Transferability allows consolidation in audit/compliance wallets and does not imply identity or reputation of the current holder.
 
 **Deterministic Settlement:** The protocol's guarantee that transfer outcomes depend solely on on-chain conditions with no manual intervention or subjective judgment.
 
 **Non-Custodial:** The protocol architecture where user funds are never held by or accessible to the protocol team or any third party outside deterministic smart contract logic.
 
-**Finalization:** The irreversible completion of a Protected Transfer, triggered when the recipient calls finalize (technically: `claim()`) after window expiry or early release. Settlement is always pull-based.
+**Settlement:** The irreversible completion of a Protected Transfer, triggered when either the sender or recipient calls receive (technically: `claim()`) after window expiry or early release.
 
-**Early Release:** The sender's option to waive their rewind right before the window expires via `releaseTransferEarly()`. Makes the transfer immediately claimable by the recipient without waiting for window expiry.
+**Early Release:** The sender's option to release the transfer at any time during the active window via `releaseTransferEarly()`. Makes the transfer immediately available for the recipient without waiting for window expiry.
 
-**Manual Mode:** The default permission model where users create protected transfers and request rewinds manually. No delegation required.
+**Protected Transfer Fee (1–3%):** The fee charged when creating a Protected Transfer. 1% for preferred tokens, up to 3% for extended tokens. NFT tiers provide discounts on this fee.
 
-**Delegated Mode:** A permission model that users must explicitly activate via `setDelegate()`. After a 1-hour security cooldown, the delegate may execute rewinds under on-chain constraints. Users can disable instantly via `removeDelegate()`.
-
-**AgentPass:** Entry-tier NFT for delegated protection. Requires protocol-approved official agents only (on-chain enforced).
-
-**Protection Activation Fee:** The fee charged when creating a Protected Transfer. NFT tiers provide discounts on this fee.
-
-**Rewind Fee:** The fee charged when executing a rewind. This fee is determined by the integrity engine and is not discounted by NFT tiers.
-
-**Integrity Engine:** The protocol's on-chain risk assessment system that adjusts rewind fees based on wallet behavior patterns. Established wallets pay standard rates; new or anomalous wallets may temporarily incur higher fees.
+**Rewind Execution Fee (1.5%):** A flat fee charged when executing a rewind. This fee is not discounted by NFT tiers.
 
 ---
 
@@ -467,7 +381,7 @@ Rewind X does not remove finality—it makes finality safer.
 
 This document is informational and does not constitute financial, legal, or investment advice. Timelines and features may adjust based on audits, security reviews, and partner integrations.
 
-RWXT is designed as a utility token for protocol access features. RWXT does not grant access to developer toolchains or guaranteed future features, and is not required to use the protocol. Regulatory classification may vary by jurisdiction. Users are responsible for compliance with applicable laws in their jurisdiction.
+Rewind functionality is limited to defined protocol conditions and time windows and does not guarantee recovery in all cases.
 
 Cryptocurrency involves significant risk including potential loss of principal. Conduct independent research and consult qualified advisors before participating in any blockchain protocol.
 

@@ -11,41 +11,41 @@
 
 <img src="public/logov2.png" alt="Rewind X" width="360" />
 
-### Reversible Transfer Layer for ERC-20 Tokens
+### Protected ERC-20 Transfers with Time-Bounded Reversibility
 
-![Version](https://img.shields.io/badge/Version-1.1.0-cyan?style=for-the-badge)
-[![Status](https://img.shields.io/badge/Status-Private_Development-blueviolet?style=for-the-badge)](https://rewindx.io)
-[![Chain](https://img.shields.io/badge/Chain-EVM_Compatible-00d4aa?style=for-the-badge&logo=ethereum&logoColor=white)](https://ethereum.org)
+![Version](https://img.shields.io/badge/Version-1.0_Origin-cyan?style=for-the-badge)
+[![Status](https://img.shields.io/badge/Status-Pre--Launch-blueviolet?style=for-the-badge)](https://rewindx.io)
+[![Chain](https://img.shields.io/badge/Chain-BNB_Chain-F0B90B?style=for-the-badge&logo=binance&logoColor=white)](https://www.bnbchain.org)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
 
 **A simple mistake should not mean permanent loss.**
 
-[Website](https://rewindx.io) · [Twitter/X](https://x.com/calvinrewindx) · [LinkedIn](https://www.linkedin.com/in/calvin-x-568767399) · [Contact](#-contact)
+[Website](https://rewindx.io) · [LinkedIn](https://www.linkedin.com/in/calvin-x-568767399) · [Contact](#-contact)
 
 ---
 
 </div>
 
-## ⚡ The Problem
+## The Problem
 
-> **$2.8B+ lost annually** to irreversible transfer errors, wallet typos, and human mistakes on EVM chains.
+> Billions lost annually to irreversible transfer errors, address poisoning, and human mistakes on-chain.
 >
 > Once sent, it's gone. Until now.
 
 <br>
 
-## 🔮 What is Rewind X?
+## What is Rewind X?
 
-Rewind X introduces a **deterministic, non-custodial undo window** for ERC-20 transfers.
+Rewind X introduces a **non-custodial, time-bounded safety window** for ERC-20 transfers.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│   SEND ──────► [ 2min-48h SAFETY WINDOW ] ──────► FINALIZE     │
+│   SEND ──────► [ 3min-24h SAFETY WINDOW ] ──────► SETTLE       │
 │                        │                                        │
 │                        ▼                                        │
 │                    REWIND?                                      │
-│                   ↺ Cancel                                      │
+│                   ↺ Undo                                        │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
@@ -56,57 +56,63 @@ Rewind X introduces a **deterministic, non-custodial undo window** for ERC-20 tr
 
 | Feature | Description |
 |:-------:|:------------|
-| 🕐 | **2min–48h Undo Window** — Deterministic, on-chain safety period |
-| 🔐 | **Non-Custodial** — No admin keys can move funds, no trust required |
-| 🎖️ | **Fragment NFT** — Tamper-evident proof index for rewinds |
-| ⚙️ | **Non-Upgradeable Core** — Safety modules upgradeable only |
-| 🔌 | **Wallet-Ready** — Built for integrations & infrastructure |
+| 🕐 | **3 min – 24h Window** — Time-bounded, on-chain safety period |
+| 🔐 | **Non-Custodial** — No admin keys can move funds |
+| 🎖️ | **Rewind Proof NFT** — On-chain proof of successful rewinds |
+| ⚙️ | **17 Contracts** — Core ledger non-upgradeable |
+| 💰 | **Flat Fees** — 1-3% protection + 1.5% rewind (if used) |
+| 🪙 | **38 Tokens** — Chainlink-priced assets on BNB Chain |
 
 </div>
 
 <br>
 
-## 🛡️ Trust Model
+## Trust Model
 
 ```
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
 ║   ✓  No custody of user funds — ever                          ║
 ║   ✓  No admin keys can move or redirect balances              ║
-║   ✓  All actions are rule-based smart contract executions     ║
+║   ✓  All actions follow fixed on-chain rules                  ║
 ║   ✓  Emergency pause only — balances always remain in place   ║
-║   ✓  Fully auditable, fully deterministic                     ║
+║   ✓  Sender or recipient can complete settlement              ║
 ║                                                                ║
 ╚════════════════════════════════════════════════════════════════╝
 ```
 
 <br>
 
-## 📂 Repository Contents
+## Repository Contents
 
-This repository contains the **public marketing assets** for the Rewind X landing page.
+This repository contains the **landing page** for the Rewind X protocol (V1 Origin Edition).
 
 ```
 rewindx-landing/
 ├── src/
 │   └── app/
-│       ├── components/     # React components
-│       ├── contact/        # Contact page
+│       ├── components/        # React components
+│       ├── architecture/      # Architecture page
+│       ├── lightpaper/        # Lightpaper page
+│       ├── contact/           # Contact page
+│       ├── terms/             # Terms of Use
+│       ├── privacy/           # Privacy Policy
 │       └── ...
+├── content/
+│   └── Rewind_X_Lightpaper_PUBLIC_v1.4.md
 ├── public/
-│   ├── logov2.png          # Primary logo
-│   ├── tokenlogo.png       # RWXT token icon
-│   ├── tokens/             # Token icons (USDC, USDT, etc.)
+│   ├── logov2.png             # Primary logo
+│   ├── og-image.png           # OpenGraph image
+│   ├── tokens/                # Token icons
 │   └── ...
-└── next.config.ts          # Next.js configuration
+└── next.config.ts             # Next.js configuration (static export)
 ```
 
-> ⚠️ **Note:** Smart contracts are **not** included in this repository.
-> They remain private until audit completion and mainnet readiness.
+> Smart contracts are **not** included in this repository.
 
 <br>
 
-## 📬 Contact
+## Contact
 
 <div align="center">
 
@@ -114,7 +120,6 @@ rewindx-landing/
 |:-------:|:--------|
 | 💼 **Investors** | [investors.rewindx@proton.me](mailto:investors.rewindx@proton.me) |
 | 🔧 **Technical** | [contact.rewindx@proton.me](mailto:contact.rewindx@proton.me) |
-| 𝕏 **Twitter** | [@calvinrewindx](https://x.com/calvinrewindx) |
 | 🔗 **LinkedIn** | [Calvin](https://www.linkedin.com/in/calvin-x-568767399) |
 
 </div>
@@ -125,14 +130,6 @@ rewindx-landing/
 
 <div align="center">
 
-```
-                              ↺
-            ┌─────────────────────────────────┐
-            │   REWIND X PROTOCOL — 2026      │
-            │        The Undo Layer           │
-            └─────────────────────────────────┘
-```
-
-<sub>Built for the future of safe transfers.</sub>
+<sub>Rewind X — Non-custodial · Rule-based · On-chain</sub>
 
 </div>

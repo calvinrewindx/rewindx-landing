@@ -30,7 +30,7 @@ export default function ProtocolFlowchart() {
           </div>
           <div className="flex-1 p-4 rounded-xl bg-white/[0.03] border border-white/10">
             <p className="text-white text-sm font-medium">Rewind Window Active</p>
-            <p className="text-white/40 text-xs">2min-48h deterministic window</p>
+            <p className="text-white/40 text-xs">3 min – 24h window</p>
           </div>
         </div>
 
@@ -53,33 +53,33 @@ export default function ProtocolFlowchart() {
             <div className="p-3 rounded-lg bg-white/5 border border-white/10 text-center">
               <Clock className="w-4 h-4 text-white/50 mx-auto mb-2" />
               <p className="text-white/60 text-xs font-medium">Expiry or Early Release</p>
-              <p className="text-white/30 text-[10px]">Becomes claimable</p>
+              <p className="text-white/30 text-[10px]">Becomes available</p>
             </div>
 
             {/* Step 3: Recipient Finalizes */}
             <div className="p-3 rounded-lg bg-violet/10 border border-violet/20 text-center">
               <CheckCircle className="w-4 h-4 text-violet mx-auto mb-2" />
-              <p className="text-violet text-xs font-medium">Recipient Finalizes</p>
-              <p className="text-white/30 text-[10px]">Pull-based claim</p>
+              <p className="text-violet text-xs font-medium">Settlement</p>
+              <p className="text-white/30 text-[10px]">Sender or recipient</p>
             </div>
           </div>
 
           {/* Disclaimer */}
           <p className="text-white/30 text-[10px] text-center mt-4">
-            After expiry or early release, claim is required to release funds.
+            After expiry or early release, either party can complete settlement.
           </p>
         </div>
 
         {/* Arrow */}
         <div className="w-0.5 h-6 bg-gradient-to-b from-white/20 to-cyan/50" />
 
-        {/* Step 4: Fragment NFT (only for rewinds) */}
+        {/* Step 4: Rewind Proof NFT (only for rewinds) */}
         <div className="flex items-center gap-4 w-full max-w-md">
           <div className="w-12 h-12 rounded-xl bg-cyan/20 border border-cyan/30 flex items-center justify-center flex-shrink-0">
             <Award className="w-5 h-5 text-cyan" />
           </div>
           <div className="flex-1 p-4 rounded-xl bg-white/[0.03] border border-white/10">
-            <p className="text-white text-sm font-medium">Fragment NFT: Mint (first) / Update (cumulative)</p>
+            <p className="text-white text-sm font-medium">Rewind Proof NFT: Mint (first) / Update (cumulative)</p>
             <p className="text-white/40 text-xs">Transferable proof index (rewinds only)</p>
           </div>
         </div>

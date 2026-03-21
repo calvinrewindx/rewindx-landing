@@ -2,35 +2,6 @@
 
 import { Shield, Zap, Clock, RotateCcw, CheckCircle, Lock, ArrowRight, Wallet } from "lucide-react";
 
-const rails = [
-  {
-    title: "Protected Rail",
-    subtitle: "Rewind X Layer",
-    icon: Shield,
-    color: "cyan",
-    features: [
-      { icon: Clock, text: "Time-bounded window (2min–48h)" },
-      { icon: RotateCcw, text: "Sender can rewind" },
-      { icon: Shield, text: "Mistake mitigation" },
-      { icon: CheckCircle, text: "Proof on rewind" },
-    ],
-    useCase: "Safety-critical transfers",
-  },
-  {
-    title: "Final Rail",
-    subtitle: "DEX / Trading",
-    icon: Zap,
-    color: "violet",
-    features: [
-      { icon: Zap, text: "Immediate finality" },
-      { icon: Lock, text: "No rewind possible" },
-      { icon: ArrowRight, text: "Full composability" },
-      { icon: CheckCircle, text: "Liquidity & trading" },
-    ],
-    useCase: "Trading and DeFi interactions",
-  },
-];
-
 export default function ExecutionRails() {
   return (
     <div className="my-10">
@@ -49,77 +20,75 @@ export default function ExecutionRails() {
         </div>
       </div>
 
-      {/* Fork Arrows */}
+      {/* Arrow */}
       <div className="flex justify-center mb-6">
-        <div className="flex items-end gap-16">
-          <div className="flex flex-col items-center">
-            <div className="w-px h-8 bg-gradient-to-b from-white/20 to-cyan/50" />
-            <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-cyan/50" />
+        <div className="flex flex-col items-center">
+          <div className="w-px h-8 bg-gradient-to-b from-white/20 to-cyan/50" />
+          <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-cyan/50" />
+        </div>
+      </div>
+
+      {/* Protected Rail — V1 Active */}
+      <div className="max-w-md mx-auto mb-6">
+        <div className="p-6 rounded-2xl border border-cyan/30 bg-cyan/5 hover:border-cyan/50 transition-all duration-300">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-14 h-14 rounded-xl flex items-center justify-center bg-cyan/20">
+              <Shield className="w-7 h-7 text-cyan" />
+            </div>
+            <div>
+              <h3
+                className="text-xl font-bold text-cyan"
+                style={{ fontFamily: "var(--font-space-grotesk)" }}
+              >
+                Protected Rail
+              </h3>
+              <span className="text-white/40 text-sm">V1 — Active</span>
+            </div>
           </div>
-          <div className="flex flex-col items-center">
-            <div className="w-px h-8 bg-gradient-to-b from-white/20 to-violet/50" />
-            <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[8px] border-t-violet/50" />
+
+          <ul className="space-y-3 mb-6">
+            {[
+              { icon: Clock, text: "Time-bounded window (3 min – 24h)" },
+              { icon: RotateCcw, text: "Sender can rewind during window" },
+              { icon: Shield, text: "Mistake and scam mitigation" },
+              { icon: CheckCircle, text: "Rewind Proof NFT on execution" },
+            ].map((feature) => (
+              <li key={feature.text} className="flex items-center gap-3">
+                <feature.icon className="w-4 h-4 text-cyan/70" />
+                <span className="text-white/70 text-sm">{feature.text}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div className="p-3 rounded-lg text-center text-sm font-medium bg-cyan/10 text-cyan border border-cyan/20">
+            Safety-critical transfers
           </div>
         </div>
       </div>
 
-      {/* Rails Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {rails.map((rail) => (
-          <div
-            key={rail.title}
-            className={`
-              p-6 rounded-2xl border transition-all duration-300
-              ${rail.color === 'cyan'
-                ? 'bg-cyan/5 border-cyan/30 hover:border-cyan/50'
-                : 'bg-violet/5 border-violet/30 hover:border-violet/50'}
-            `}
-          >
-            {/* Header */}
-            <div className="flex items-center gap-4 mb-6">
-              <div className={`
-                w-14 h-14 rounded-xl flex items-center justify-center
-                ${rail.color === 'cyan' ? 'bg-cyan/20' : 'bg-violet/20'}
-              `}>
-                <rail.icon className={`w-7 h-7 ${rail.color === 'cyan' ? 'text-cyan' : 'text-violet'}`} />
-              </div>
-              <div>
-                <h3
-                  className={`text-xl font-bold ${rail.color === 'cyan' ? 'text-cyan' : 'text-violet'}`}
-                  style={{ fontFamily: "var(--font-space-grotesk)" }}
-                >
-                  {rail.title}
-                </h3>
-                <span className="text-white/40 text-sm">{rail.subtitle}</span>
-              </div>
+      {/* Final Rail — Planned */}
+      <div className="max-w-md mx-auto">
+        <div className="p-5 rounded-2xl border border-dashed border-white/15 bg-white/[0.02]">
+          <div className="flex items-center gap-4 mb-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-violet/10 border border-violet/20">
+              <Zap className="w-5 h-5 text-violet/60" />
             </div>
-
-            {/* Features */}
-            <ul className="space-y-3 mb-6">
-              {rail.features.map((feature) => (
-                <li key={feature.text} className="flex items-center gap-3">
-                  <feature.icon className={`w-4 h-4 ${rail.color === 'cyan' ? 'text-cyan/70' : 'text-violet/70'}`} />
-                  <span className="text-white/70 text-sm">{feature.text}</span>
-                </li>
-              ))}
-            </ul>
-
-            {/* Use Case */}
-            <div className={`
-              p-3 rounded-lg text-center text-sm font-medium
-              ${rail.color === 'cyan'
-                ? 'bg-cyan/10 text-cyan border border-cyan/20'
-                : 'bg-violet/10 text-violet border border-violet/20'}
-            `}>
-              {rail.useCase}
+            <div>
+              <h3 className="text-base font-semibold text-white/60" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                Final Rail
+              </h3>
+              <span className="text-violet/50 text-xs font-medium">Planned — DEX / Trading</span>
             </div>
           </div>
-        ))}
+          <p className="text-white/40 text-sm">
+            Immediate finality for trading and DeFi interactions. No rewind possible. Full composability.
+          </p>
+        </div>
       </div>
 
       {/* Note */}
       <p className="text-center text-white/40 text-sm mt-8 max-w-lg mx-auto">
-        Users choose the appropriate rail based on use case. The Final Rail preserves DeFi composability and market finality.
+        V1 supports the Protected Rail. The Final Rail is planned for a future version to support DEX and DeFi composability.
       </p>
     </div>
   );

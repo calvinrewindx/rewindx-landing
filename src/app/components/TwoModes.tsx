@@ -1,6 +1,14 @@
 "use client";
 
-import { User, Bot, Shield, Clock, Zap, RotateCcw, Check } from "lucide-react";
+import { User, Shield, Clock, RotateCcw, Check, KeyRound } from "lucide-react";
+
+const guarantees = [
+  { icon: Shield, text: "Non-custodial — no private keys stored" },
+  { icon: RotateCcw, text: "Funds move only under on-chain rules" },
+  { icon: Clock, text: "Configurable protection window (3 min – 24h)" },
+  { icon: User, text: "Rewind execution is sender-controlled" },
+  { icon: Check, text: "On-chain proof via Rewind Proof NFT" },
+];
 
 export default function TwoModes() {
   return (
@@ -14,139 +22,62 @@ export default function TwoModes() {
             className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            &ldquo;Same protocol.{" "}
-            <span className="gradient-text">Two permission models.</span>
+            &ldquo;Your keys. Your transfers.{" "}
+            <span className="text-cyan">Your undo button.</span>
             &rdquo;
           </blockquote>
         </div>
 
-        {/* Two Modes Table */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {/* Manual Mode */}
-          <div className="glass-card p-8">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 rounded-xl bg-cyan/10 border border-cyan/30 flex items-center justify-center">
-                <User className="w-6 h-6 text-cyan" />
-              </div>
-              <h3
-                className="text-xl font-semibold text-white"
-                style={{ fontFamily: "var(--font-space-grotesk)" }}
-              >
-                Manual Mode
-              </h3>
+        {/* Your Control */}
+        <div className="glass-card p-8 max-w-2xl mx-auto mb-8 group hover:border-cyan/30 transition-all duration-300">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-12 h-12 rounded-xl bg-cyan/10 border border-cyan/30 flex items-center justify-center group-hover:bg-cyan/20 group-hover:scale-105 transition-all duration-300">
+              <User className="w-6 h-6 text-cyan" />
             </div>
-            <p className="text-cyan/70 text-sm mb-6">You control everything</p>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <span className="text-cyan mt-1">•</span>
-                <span className="text-white/70">Create protected transfers</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-cyan mt-1">•</span>
-                <span className="text-white/70">Rewind anytime yourself</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-cyan mt-1">•</span>
-                <span className="text-white/70">No delegation needed</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-cyan mt-1">•</span>
-                <span className="text-white/70">Full manual control</span>
-              </li>
-            </ul>
-            <div className="mt-6 pt-4 border-t border-white/10">
-              <p className="text-white/50 text-sm flex items-center gap-2">
-                <User className="w-4 h-4" />
-                You sign every rewind
-              </p>
-            </div>
+            <h3
+              className="text-xl font-semibold text-white"
+              style={{ fontFamily: "var(--font-space-grotesk)" }}
+            >
+              Your Control
+            </h3>
           </div>
-
-          {/* Delegated Mode */}
-          <div className="glass-card p-8 border-violet/20">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 rounded-xl bg-violet/10 border border-violet/30 flex items-center justify-center">
-                <Bot className="w-6 h-6 text-violet" />
-              </div>
-              <h3
-                className="text-xl font-semibold text-white"
-                style={{ fontFamily: "var(--font-space-grotesk)" }}
-              >
-                Delegated Mode
-              </h3>
-            </div>
-            <p className="text-violet/70 text-sm mb-6">AI monitors and rewinds for you</p>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <span className="text-violet mt-1">•</span>
-                <span className="text-white/70">You create transfers normally</span>
+          <p className="text-cyan/70 text-sm mb-6">You stay in control of every protected transfer.</p>
+          <ul className="space-y-3">
+            {[
+              "Create protected transfers",
+              "Rewind anytime within your window (3 min – 24h)",
+              "Release early to allow immediate settlement",
+              "All actions require your explicit signature",
+            ].map((item, i) => (
+              <li key={i} className="flex items-center gap-3 p-2 -mx-2 rounded-lg hover:bg-white/[0.03] transition-colors">
+                <span className="text-cyan">•</span>
+                <span className="text-white/70">{item}</span>
               </li>
-              <li className="flex items-start gap-3">
-                <span className="text-violet mt-1">•</span>
-                <span className="text-white/70">AI detects threats automatically</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-violet mt-1">•</span>
-                <span className="text-white/70">AI triggers rewind if needed</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-violet mt-1">•</span>
-                <span className="text-white/70">Works while you sleep</span>
-              </li>
-            </ul>
-            <div className="mt-6 pt-4 border-t border-white/10">
-              <p className="text-white/50 text-sm flex items-center gap-2">
-                <Shield className="w-4 h-4" />
-                You must activate first · Disable anytime
-              </p>
-            </div>
+            ))}
+          </ul>
+          <div className="mt-6 pt-4 border-t border-white/10">
+            <p className="text-white/50 text-sm flex items-center gap-2">
+              <KeyRound className="w-4 h-4 text-cyan/60" />
+              You sign every transaction.
+            </p>
           </div>
-        </div>
-
-        {/* Tagline */}
-        <div className="text-center mb-8">
-          <p
-            className="text-xl sm:text-2xl font-bold text-white"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            Autonomy = <span className="text-cyan">Permissions</span>, not{" "}
-            <span className="text-white/50">Custody</span>.
-          </p>
-          <p className="text-white/50 text-sm mt-3">
-            Both modes use the same protocol. You decide: keep full control or enable AI protection.
-          </p>
         </div>
 
         {/* Security Guarantees */}
-        <div className="glass-card p-6 max-w-3xl mx-auto">
+        <div className="glass-card p-6 max-w-3xl mx-auto hover:border-white/20 transition-all duration-300">
           <p className="text-white/40 text-xs uppercase tracking-wider mb-4 text-center font-mono">
-            Security Guarantees (Delegated Mode)
+            Security Guarantees
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-cyan flex-shrink-0" />
-              <span className="text-white/60 text-sm">You must enable it first</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-cyan flex-shrink-0" />
-              <span className="text-white/60 text-sm">1-hour activation cooldown</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Zap className="w-4 h-4 text-cyan flex-shrink-0" />
-              <span className="text-white/60 text-sm">Instant revoke anytime</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <RotateCcw className="w-4 h-4 text-cyan flex-shrink-0" />
-              <span className="text-white/60 text-sm">Daily limits (3-70/day)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-cyan flex-shrink-0" />
-              <span className="text-white/60 text-sm">Non-custodial: rewind only</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Check className="w-4 h-4 text-cyan flex-shrink-0" />
-              <span className="text-white/60 text-sm">On-chain proof (Fragment NFT)</span>
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {guarantees.map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/[0.03] transition-colors group/item"
+              >
+                <item.icon className="w-4 h-4 text-cyan/50 flex-shrink-0 group-hover/item:text-cyan transition-colors duration-300" />
+                <span className="text-white/50 text-sm group-hover/item:text-white/70 transition-colors duration-300">{item.text}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>

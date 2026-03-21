@@ -1,32 +1,34 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import SubpageHeader from "../components/SubpageHeader";
+
+export const metadata: Metadata = {
+  title: "Rewind X — Architecture Overview",
+  description: "Technical overview of the Rewind X protocol, including lifecycle, security model, and system design.",
+};
 import ReadingProgress from "../components/ReadingProgress";
 import SystemFlowDiagram from "../components/architecture/SystemFlowDiagram";
-import DelegationComparison from "../components/architecture/DelegationComparison";
 import ExecutionRails from "../components/architecture/ExecutionRails";
 
 const tocItems = [
   { id: "system-flow", label: "System Flow" },
-  { id: "module-groups", label: "Module Groups" },
-  { id: "delegation-layer", label: "Delegation Layer" },
-  { id: "execution-rails", label: "Execution Rails" },
-  { id: "system-invariants", label: "System Invariants" },
-  { id: "control-surface", label: "Control Surface" },
-  { id: "verification-status", label: "Verification Status" },
+  { id: "modules", label: "Modules" },
+  { id: "execution-model", label: "Execution Model" },
+  { id: "invariants", label: "Invariants" },
+  { id: "controls", label: "Controls" },
+  { id: "status", label: "Status" },
 ];
 
 const moduleGroups = [
-  { layer: "Transfer Interface", func: "Protected transfer creation, claiming, rewind execution. Supports any ERC-20." },
-  { layer: "State Ledger", func: "Canonical transfer states and lifecycle transitions." },
+  { layer: "Transfer Interface", func: "Protected transfer creation, claiming, rewind execution. Supports ERC-20 tokens on BNB Chain." },
+  { layer: "State Ledger", func: "Single source of truth for all transfer states and lifecycle transitions." },
   { layer: "Risk & Enforcement", func: "Deterministic limits, cooldowns, rule-based integrity checks. No discretionary overrides." },
   { layer: "Fees & Accounting", func: "Bounded fee computation and revenue distribution." },
-  { layer: "Proof & Utility", func: "On-chain rewind attestation. Tier-based parameter constraints." },
-  { layer: "Final Rail", func: "DEX-compatible wrapper. Transfers are irreversible to preserve DeFi composability." },
-  { layer: "Delegation Layer", func: "Enables AI agents to execute rewinds on behalf of users (explicit activation required)." },
+  { layer: "Proof & Utility", func: "On-chain rewind attestation (Rewind Proof NFT). Tier-based parameter constraints." },
 ];
 
 const invariants = [
-  "A transfer resolves to finalized OR rewound — never both, never neither",
+  "A transfer resolves to either finalized or rewound — never both, never neither",
   "Only the original sender can trigger a rewind",
   "After window expiry, finalization is irreversible",
   "No privileged actor can redirect or seize user balances",
@@ -43,39 +45,24 @@ const controls = [
 export default function ArchitecturePage() {
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 border-b border-white/5 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex items-center h-16">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-white/60 hover:text-cyan transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm">Back to Home</span>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <SubpageHeader title="Architecture" />
 
-      {/* Reading Progress */}
       <ReadingProgress />
 
-      {/* Content */}
       <div className="pt-24 pb-20 px-6">
         <div className="max-w-4xl mx-auto">
           {/* Title */}
           <h1
-            className="text-4xl font-bold gradient-text mb-4"
+            className="text-4xl font-bold text-white mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Rewind X — Architecture Overview
+            Rewind X — <span className="text-cyan">Architecture</span>
           </h1>
           <p className="text-white/60 text-lg mb-4">
-            Deterministic, non-custodial infrastructure for reversible ERC-20 transfers.
+            Deterministic, non-custodial infrastructure for protected ERC-20 transfers.
           </p>
           <p className="text-white/40 text-sm italic mb-10">
-            Deterministic means: all state transitions follow fixed on-chain rules — no human discretion and no off-chain decisioning.
+            Deterministic means all state transitions follow fixed on-chain rules — no human decisions.
           </p>
 
           {/* Table of Contents */}
@@ -112,13 +99,13 @@ export default function ArchitecturePage() {
 
           <hr className="border-white/10 my-10" />
 
-          {/* Module Groups */}
-          <section id="module-groups">
+          {/* Modules */}
+          <section id="modules">
             <h2
               className="text-2xl font-bold text-white mb-6 pb-2 border-b border-white/10"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Module Groups
+              Modules
             </h2>
             <div className="overflow-x-auto">
               <table className="w-full border border-white/10 rounded-xl overflow-hidden">
@@ -142,40 +129,27 @@ export default function ArchitecturePage() {
 
           <hr className="border-white/10 my-10" />
 
-          {/* Delegation Layer */}
-          <section id="delegation-layer">
+          {/* Execution Model */}
+          <section id="execution-model">
             <h2
               className="text-2xl font-bold text-white mb-6 pb-2 border-b border-white/10"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Delegation Layer
+              Execution Model
             </h2>
             <p className="text-white/60 mb-6">
-              The protocol supports two permission models for rewind execution:
+              Rewind X introduces a protected execution window (3 min – 24h) for operational transfers. All state transitions are deterministic and on-chain.
             </p>
-            <DelegationComparison />
-          </section>
-
-          <hr className="border-white/10 my-10" />
-
-          {/* Execution Rails */}
-          <section id="execution-rails">
-            <h2
-              className="text-2xl font-bold text-white mb-6 pb-2 border-b border-white/10"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
-              Execution Rails Overview
-            </h2>
-            <p className="text-white/60 mb-6">
-              Rewind X introduces a protected execution window for operational transfers, while preserving strict finality for market and DeFi-critical flows.
+            <p className="text-white/40 text-sm italic mb-6">
+              V1 supports the Protected Rail only. A Final Rail (DEX-compatible, irreversible) is planned for a future version.
             </p>
             <ExecutionRails />
           </section>
 
           <hr className="border-white/10 my-10" />
 
-          {/* System Invariants */}
-          <section id="system-invariants">
+          {/* Invariants */}
+          <section id="invariants">
             <h2
               className="text-2xl font-bold text-white mb-6 pb-2 border-b border-white/10"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -194,8 +168,8 @@ export default function ArchitecturePage() {
 
           <hr className="border-white/10 my-10" />
 
-          {/* Control Surface */}
-          <section id="control-surface">
+          {/* Controls */}
+          <section id="controls">
             <h2
               className="text-2xl font-bold text-white mb-6 pb-2 border-b border-white/10"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -233,18 +207,18 @@ export default function ArchitecturePage() {
 
           <hr className="border-white/10 my-10" />
 
-          {/* Verification Status */}
-          <section id="verification-status">
+          {/* Status */}
+          <section id="status">
             <h2
               className="text-2xl font-bold text-white mb-6 pb-2 border-b border-white/10"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Verification Status
+              System Status
             </h2>
             <ul className="space-y-3 mb-6">
               <li className="flex items-start gap-3">
                 <span className="text-cyan text-lg">•</span>
-                <span className="text-white/60">~20 coordinated contracts</span>
+                <span className="text-white/60">17 coordinated contracts</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-cyan text-lg">•</span>
@@ -252,14 +226,11 @@ export default function ArchitecturePage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-cyan text-lg">•</span>
-                <span className="text-white/60">Not deployed on mainnet yet; controlled validation is the next step</span>
+                <span className="text-white/60">Mainnet deployment pending final validation and audit</span>
               </li>
             </ul>
-            <p className="text-white/50 text-sm mb-4">
-              A deeper walkthrough (design + threat model) is available on request for qualified reviewers.
-            </p>
             <p className="text-white/50 text-sm mb-6">
-              Audit process and deployment roadmap available upon request.
+              A detailed walkthrough, threat model, and audit materials are available for qualified reviewers upon request.
             </p>
             <Link
               href="/contact"
@@ -273,12 +244,11 @@ export default function ArchitecturePage() {
 
           {/* Disclaimer */}
           <p className="text-white/30 text-sm italic text-center">
-            This document describes architecture intent and invariants. It does not represent a production deployment.
+            This document outlines the system architecture and core invariants. It does not represent a production deployment.
           </p>
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="border-t border-white/5 py-8 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-white/30 text-sm">

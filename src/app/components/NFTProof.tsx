@@ -4,12 +4,9 @@ import { useState } from "react";
 import { Award, RotateCcw, Shield, Layers, CheckCircle, FileCheck, Eye, ChevronDown } from "lucide-react";
 
 const nftTiers = [
-  { name: "AgentPass", discount: "", window: "", note: "AI Protection" },
-  { name: "Genesis", discount: "10%", window: "max 24h" },
-  { name: "Gatekeeper", discount: "20%", window: "max 24h" },
-  { name: "Enterprise", discount: "30%", window: "max 30h" },
-  { name: "Prime", discount: "40%", window: "max 36h" },
-  { name: "Nexus", discount: "50%", window: "max 48h" },
+  { name: "Rewind Proof", discount: "0%", window: "max 24h", note: "Auto-mint after first rewind" },
+  { name: "Genesis", discount: "10%", window: "max 24h", note: "After 3 rewinds ($10+)" },
+  { name: "Gatekeeper", discount: "20%", window: "max 24h", note: "After 10 rewinds ($10+ each)" },
 ];
 
 // Note: Discounts apply to Protection Activation Fee only
@@ -28,7 +25,7 @@ export default function NFTProof() {
         <div className="text-center mb-16">
           <span className="inline-flex items-center gap-2 text-cyan text-sm font-medium mb-4 px-4 py-2 rounded-full bg-cyan/10 border border-cyan/20">
             <Award className="w-4 h-4" />
-            Fragment NFT
+            Rewind Proof NFT
           </span>
           <h2
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
@@ -82,7 +79,7 @@ export default function NFTProof() {
                             className="text-white text-base font-semibold mb-1"
                             style={{ fontFamily: "var(--font-space-grotesk)" }}
                           >
-                            Rewind X Fragment #1
+                            Rewind Proof #1
                           </h3>
                           <span className="text-white/50 text-xs">Proof-of-Rewind · On-Chain</span>
                         </div>
@@ -91,7 +88,7 @@ export default function NFTProof() {
                         <div className="flex-1 space-y-2">
                           <div className="flex justify-between items-center py-2 border-b border-white/10">
                             <span className="text-white/40 text-xs">TYPE</span>
-                            <span className="text-white font-mono text-sm">Fragment</span>
+                            <span className="text-white font-mono text-sm">Rewind Proof</span>
                           </div>
                           <div className="flex justify-between items-center py-2 border-b border-white/10">
                             <span className="text-white/40 text-xs">REWIND COUNT</span>
@@ -99,7 +96,7 @@ export default function NFTProof() {
                           </div>
                           <div className="flex justify-between items-center py-2 border-b border-white/10">
                             <span className="text-white/40 text-xs">TOTAL VOLUME</span>
-                            <span className="text-white/70 font-mono text-[10px]">7840 USDC, 196 USDT, 980 RWXT</span>
+                            <span className="text-white/70 font-mono text-[10px]">7,840 USDC · 196 USDT</span>
                           </div>
                           <div className="flex justify-between items-center py-2 border-b border-white/10">
                             <span className="text-white/40 text-xs">VALID REWINDS</span>
@@ -136,7 +133,7 @@ export default function NFTProof() {
                             className="text-white/90 text-xs font-semibold tracking-[0.2em]"
                             style={{ fontFamily: "var(--font-space-grotesk)" }}
                           >
-                            FRAGMENT DETAILS
+                            REWIND PROOF DETAILS
                           </span>
                           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan/20 to-violet/20 flex items-center justify-center border border-white/10">
                             <FileCheck className="w-5 h-5 text-white" />
@@ -148,7 +145,7 @@ export default function NFTProof() {
                           Tamper-evident Proof Index. On-chain audit trail for reversals.
                         </p>
 
-                        {/* What each Fragment contains */}
+                        {/* What each Rewind Proof contains */}
                         <div className="flex-1">
                           <p className="text-white/40 text-xs mb-3 uppercase tracking-wider">Tracked Data:</p>
                           <ul className="space-y-2">
@@ -166,14 +163,14 @@ export default function NFTProof() {
                             </li>
                             <li className="flex items-center gap-2 text-white/70 text-sm">
                               <span className="w-1 h-1 rounded-full bg-violet" />
-                              Fee Discount (0% for Fragments)
+                              Fee Discount (0% for Rewind Proof)
                             </li>
                           </ul>
                         </div>
 
                         {/* Note */}
                         <p className="text-white/40 text-[11px] mt-auto pt-3 border-t border-white/5">
-                          Fragments are an updatable index; underlying transfer records and events remain immutable. No fee discounts.
+                          Rewind Proofs are an updatable index; underlying transfer records and events remain immutable. No fee discounts.
                         </p>
                       </div>
                     </div>
@@ -200,7 +197,7 @@ export default function NFTProof() {
               Tamper-Evident Audit Trail
             </h3>
             <p className="text-white/50 mb-8 leading-relaxed">
-              Updated with each successful execution. No fee discounts. Fragments are proof, not utility.
+              Updated with each successful execution. No fee discounts. Rewind Proofs are proof, not utility.
             </p>
 
             {/* Feature List */}
@@ -231,7 +228,7 @@ export default function NFTProof() {
                 </div>
                 <div>
                   <h4 className="text-white font-semibold mb-1">Publicly Verifiable</h4>
-                  <p className="text-white/50 text-sm">On-chain audit trail. Inspect any Fragment via block explorer or OpenSea.</p>
+                  <p className="text-white/50 text-sm">On-chain audit trail. Inspect any Rewind Proof via block explorer or NFT wallet.</p>
                 </div>
               </div>
             </div>
@@ -294,36 +291,8 @@ export default function NFTProof() {
                     ))}
                 </div>
                 <p className="text-white/40 text-xs mt-3 text-center">
-                  Discounts apply to Protection Activation Fees only. Rewind execution fees are risk-based and not discounted.
+                  Discounts apply to the protected transfer fee only. The rewind execution fee (1.5%) is separate and not discounted.
                 </p>
-                <p className="text-white/40 text-xs mt-2 text-center">
-                  <span className="text-violet">AgentPass</span> enables AI protection; window depends on your utility tier.
-                </p>
-
-                {/* Enterprise+ capabilities note */}
-                <div className="mt-4 p-4 rounded-xl bg-gradient-to-r from-violet/[0.08] to-cyan/[0.05] border border-white/10">
-                  <div className="flex items-start gap-3">
-                    <Layers className="w-5 h-5 text-violet flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p className="text-white/70 text-sm font-medium mb-2">
-                        Gatekeeper+ tiers unlock:
-                      </p>
-                      <ul className="space-y-1 mb-3">
-                        <li className="flex items-center gap-2 text-white/50 text-xs">
-                          <CheckCircle className="w-3 h-3 text-cyan" />
-                          Batch execution
-                        </li>
-                        <li className="flex items-center gap-2 text-white/50 text-xs">
-                          <CheckCircle className="w-3 h-3 text-cyan" />
-                          Team-based flows
-                        </li>
-                      </ul>
-                      <p className="text-white/30 text-[11px]">
-                        Core transfer rules remain on-chain and deterministic.
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

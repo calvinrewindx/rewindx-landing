@@ -1,7 +1,14 @@
+import type { Metadata } from "next";
 import { readFileSync, existsSync } from "fs";
 import { join } from "path";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Rewind X — Lightpaper",
+  description: "Technical overview of protected ERC-20 transfers, rewind windows, fees, and the security model behind Rewind X.",
+};
+import SubpageHeader from "../components/SubpageHeader";
 import ProtocolFlowchart from "../components/ProtocolFlowchart";
 import ReadingProgress from "../components/ReadingProgress";
 import ScrollMemory from "../components/ScrollMemory";
@@ -31,7 +38,6 @@ export default function DocsPage() {
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
       .trim();
   };
 
@@ -64,26 +70,27 @@ export default function DocsPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 border-b border-white/5">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="flex items-center h-16">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-white/60 hover:text-cyan transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm">Back to Home</span>
-            </Link>
-          </div>
-        </div>
-      </header>
+      {/* Inline script: save & restore scroll position before React hydration */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(){
+              var key='lp-pos';
+              window.addEventListener('scroll',function(){sessionStorage.setItem(key,window.scrollY)},{passive:true});
+              window.addEventListener('beforeunload',function(){sessionStorage.setItem(key,window.scrollY)});
+              var pos=sessionStorage.getItem(key);
+              if(pos&&parseInt(pos)>100){window.scrollTo(0,parseInt(pos))}
+            })();
+          `,
+        }}
+      />
+      <SubpageHeader title="Lightpaper" />
 
       {/* Reading Progress Bar */}
       <ReadingProgress />
 
-      {/* Scroll Memory (saves position, back-to-top button) */}
-      <ScrollMemory storageKey="lp-pos" />
+      {/* Back to top button */}
+      <ScrollMemory />
 
       {/* Content */}
       <div id="lp-content" className="pt-24 pb-20 px-6">

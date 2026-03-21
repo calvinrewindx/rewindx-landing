@@ -1,7 +1,6 @@
 import Header from "./components/Header";
 import HeroV2 from "./components/HeroV2";
 import ReadingProgress from "./components/ReadingProgress";
-import WhatYouJustWatched from "./components/WhatYouJustWatched";
 import TwoModes from "./components/TwoModes";
 import ProblemStats from "./components/ProblemStats";
 import WhatIsRewindX from "./components/WhatIsRewindX";
@@ -25,9 +24,6 @@ export default function Home() {
       <Header />
       <ReadingProgress />
       <HeroV2 />
-      <ScrollReveal>
-        <WhatYouJustWatched />
-      </ScrollReveal>
       <ScrollReveal delay={100}>
         <TwoModes />
       </ScrollReveal>

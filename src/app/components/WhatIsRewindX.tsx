@@ -6,9 +6,9 @@ const features = [
   {
     icon: Clock,
     title: "Protected Transfers",
-    subtitle: "2min–48h Window",
+    subtitle: "3 min – 24h Window",
     description:
-      "Every protected transfer enters a time-bounded state. The sender remains fully in control during this window. NFT holders may unlock extended windows (up to 48h).",
+      "Every protected transfer enters a time-bounded state. The sender remains fully in control during this window.",
   },
   {
     icon: Cpu,
@@ -19,10 +19,10 @@ const features = [
   },
   {
     icon: User,
-    title: "Non-Custodial Control",
-    subtitle: "Full Authority",
+    title: "Non-Custodial Design",
+    subtitle: "No Discretionary Control",
     description:
-      "Funds never leave the sender's authority. The protocol never holds custody and cannot intervene.",
+      "The protocol is non-custodial by design. No operator can intervene or take control of user funds.",
   },
 ];
 
@@ -90,7 +90,7 @@ export default function WhatIsRewindX() {
               <ul className="space-y-2 text-white/60 text-sm">
                 <li>Preventive safety layer</li>
                 <li>Deterministic on-chain rules</li>
-                <li>Sender-initiated only</li>
+                <li>Sender-initiated protection</li>
               </ul>
             </div>
             {/* IS NOT */}
@@ -100,9 +100,9 @@ export default function WhatIsRewindX() {
                 What it is not
               </h4>
               <ul className="space-y-2 text-white/60 text-sm">
-                <li>Not insurance or recovery</li>
+                <li>Not insurance or fund recovery</li>
                 <li>Not custodial</li>
-                <li>Not changing finality</li>
+                <li>Not a manual chargeback system</li>
               </ul>
             </div>
           </div>

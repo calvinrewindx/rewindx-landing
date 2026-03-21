@@ -1,71 +1,27 @@
 "use client";
 
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUp } from "lucide-react";
 
 interface ScrollMemoryProps {
-  storageKey: string;
+  storageKey?: string;
   showBackToTop?: boolean;
 }
 
-export default function ScrollMemory({ storageKey, showBackToTop = true }: ScrollMemoryProps) {
+export default function ScrollMemory({ showBackToTop = true }: ScrollMemoryProps) {
   const [showButton, setShowButton] = useState(false);
-  const lastSaveTime = useRef(0);
-  const THROTTLE_MS = 250;
 
-  // Throttled save scroll position
-  const saveScrollPosition = useCallback(() => {
-    const now = Date.now();
-    if (now - lastSaveTime.current < THROTTLE_MS) return;
-
-    lastSaveTime.current = now;
-    localStorage.setItem(storageKey, String(window.scrollY));
-  }, [storageKey]);
-
-  // Restore scroll position (only if no anchor in URL)
-  useEffect(() => {
-    // Disable browser's automatic scroll restoration
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-
-    const hasAnchor = window.location.hash.length > 0;
-    const saved = localStorage.getItem(storageKey);
-
-    if (!hasAnchor && saved) {
-      const position = parseInt(saved, 10);
-      if (position > 100) {
-        requestAnimationFrame(() => {
-          window.scrollTo(0, position);
-        });
-      }
-    }
-  }, [storageKey]);
-
-  // Listen to scroll events
   useEffect(() => {
     const handleScroll = () => {
-      saveScrollPosition();
       setShowButton(window.scrollY > 400);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [saveScrollPosition]);
-
-  // Save on page leave (no throttle)
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      localStorage.setItem(storageKey, String(window.scrollY));
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [storageKey]);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    localStorage.removeItem(storageKey);
   };
 
   if (!showBackToTop || !showButton) return null;

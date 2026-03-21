@@ -1,16 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, Shield, Link2, Coins, Bot } from "lucide-react";
+import { ArrowRight, Shield, Link2, Coins } from "lucide-react";
 import CtrlZAnimation from "./CtrlZAnimation";
-import DemoVideoToggle from "./DemoVideoToggle";
+import HeroFlow from "./HeroFlow";
 
 export default function HeroV2() {
   const [displayText, setDisplayText] = useState("");
   const [phase, setPhase] = useState<"typing" | "cursor" | "done">("typing");
   const fullText = "REWIND";
 
-  // Typing effect
   useEffect(() => {
     let index = 0;
     const timer = setInterval(() => {
@@ -20,42 +19,38 @@ export default function HeroV2() {
       } else {
         clearInterval(timer);
         setPhase("cursor");
-        // Show X with bounce after cursor blinks
         setTimeout(() => setPhase("done"), 600);
       }
     }, 120);
     return () => clearInterval(timer);
   }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
+      {/* Background — Clean dark */}
       <div className="absolute inset-0 bg-[#0a0a0f]" />
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-cyan/8 via-violet/5 to-transparent blur-[100px]" />
-      <div className="absolute bottom-0 left-1/4 w-[600px] h-[400px] rounded-full bg-violet/5 blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-cyan/3 blur-[150px]" />
+      <div className="absolute inset-0 grid-bg opacity-20" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-24 md:pt-20">
 
         {/* Brand */}
-        <div className="mb-6">
+        <div className="mb-8">
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest uppercase"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-widest uppercase font-mono"
             style={{
               fontFamily: "var(--font-space-grotesk)",
-              color: "#00b8d9",
-              textShadow: "0 0 25px rgba(0, 212, 255, 0.25), 0 0 50px rgba(0, 212, 255, 0.15)",
+              color: "#ffffff",
               minHeight: "1.2em"
             }}
           >
             {displayText}
             {phase === "typing" && <span className="animate-blink text-cyan">|</span>}
             {phase === "cursor" && <span className="animate-blink text-cyan">|</span>}
-            {phase === "done" && <span className="gradient-text animate-bounce-in"> X</span>}
+            {phase === "done" && <span className="text-cyan animate-bounce-in"> X</span>}
           </h2>
           <div className="mt-3 flex justify-center">
             <div
-              className={`h-px bg-gradient-to-r from-transparent via-cyan to-transparent transition-all duration-700 ${
+              className={`h-px bg-cyan/40 transition-all duration-700 ${
                 phase === "done" ? "w-48 sm:w-64 md:w-80" : "w-0"
               }`}
             />
@@ -67,74 +62,73 @@ export default function HeroV2() {
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-4"
           style={{ fontFamily: "var(--font-space-grotesk)" }}
         >
-          <span className="gradient-text">Ctrl+Z</span>{" "}
+          <span className="text-cyan">Ctrl+Z</span>{" "}
           <span className="text-white">for Crypto.</span>
         </h1>
 
         {/* Subheadline */}
-        <p className="text-lg sm:text-xl text-white/70 max-w-2xl mx-auto mb-6 leading-relaxed">
-          The <span className="gradient-text font-semibold">first</span> <span className="text-cyan">reversible</span> transfer layer for <span className="text-cyan">ERC-20</span> tokens.
+        <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-8 leading-relaxed">
+          Protected ERC-20 transfers with a time-bounded undo window.
         </p>
+
         {/* Animation */}
-        <div className="mb-6">
+        <div className="mb-8">
           <CtrlZAnimation size="md" />
         </div>
 
-        {/* Badges */}
-        <div className="flex flex-wrap items-center justify-center gap-3 mb-8">
-          <span className="badge">
-            <Shield className="w-3.5 h-3.5 text-cyan" />
+        {/* Flow Diagram — Animated */}
+        <HeroFlow phase={phase} />
+
+        {/* Trust Badges */}
+        <div className="flex flex-wrap items-center justify-center gap-3 mb-10">
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-white/60 text-xs font-mono">
+            <Shield className="w-3.5 h-3.5 text-cyan/70" />
             Non-custodial
           </span>
-          <span className="badge">
-            <Link2 className="w-3.5 h-3.5 text-violet" />
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-white/60 text-xs font-mono">
+            <Link2 className="w-3.5 h-3.5 text-cyan/70" />
             On-chain
           </span>
-          <span className="badge">
-            <Coins className="w-3.5 h-3.5 text-cyan" />
-            Any ERC-20
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] text-white/60 text-xs font-mono">
+            <Coins className="w-3.5 h-3.5 text-cyan/70" />
+            ERC-20 compatible
           </span>
-          <span className="badge">
-            <Bot className="w-3.5 h-3.5 text-violet" />
-            AI Protection
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-yellow-500/20 bg-yellow-500/[0.03] text-yellow-500/70 text-xs font-mono">
+            Built on BNB Chain
           </span>
         </div>
 
-        {/* CTA */}
+        {/* CTAs */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <a href="/demo" className="btn-primary flex items-center gap-2">
-            Try Interactive Demo
+          <a href="#how-it-works" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-cyan/30 bg-cyan/[0.08] text-cyan hover:bg-cyan/[0.15] transition-colors text-sm font-medium">
+            How it works
             <ArrowRight className="w-4 h-4" />
           </a>
-          <a href="#features" className="btn-secondary flex items-center gap-2">
+          <a href="#features" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 bg-white/[0.03] text-white/60 hover:text-white/80 hover:bg-white/[0.06] transition-colors text-sm font-medium">
             What is Rewind X?
-            <ArrowRight className="w-4 h-4" />
           </a>
         </div>
-
-        {/* Video */}
-        <DemoVideoToggle />
 
         {/* Contact */}
-        <div className="mt-12 text-center flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
+        <div className="text-center flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 text-white/40 hover:text-cyan/70 transition-colors text-base"
+            className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 transition-colors text-sm font-mono"
           >
             <span>Partnerships & inquiries</span>
-            <span className="text-cyan/50">→</span>
-            <span className="font-mono text-sm">Contact</span>
+            <span className="text-cyan/40">→</span>
+            <span>Contact</span>
           </a>
-          <span className="text-white/20 hidden sm:inline">|</span>
+          <span className="text-white/10 hidden sm:inline">|</span>
           <a
             href="https://www.linkedin.com/in/calvin-x-568767399"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white/40 hover:text-cyan/70 transition-colors text-sm"
+            className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 transition-colors text-sm font-mono"
           >
-            <span>Connect</span>
-            <span className="text-cyan/50">→</span>
-            <span className="font-mono">LinkedIn</span>
+            <span>Follow</span>
+            <span className="text-cyan/40">→</span>
+            <span>LinkedIn</span>
           </a>
         </div>
 

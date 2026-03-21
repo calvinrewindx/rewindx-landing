@@ -61,7 +61,7 @@ export default function Footer() {
                   <span className="text-cyan/50">custody:</span> non_custodial
                 </div>
                 <div className="font-mono text-xs text-white/30">
-                  <span className="text-cyan/50">execution:</span> deterministic
+                  <span className="text-cyan/50">execution:</span> on_chain
                 </div>
               </div>
             </div>
@@ -120,18 +120,6 @@ export default function Footer() {
                   <span className="text-cyan/30 group-hover:text-cyan/50">→</span> linkedin
                 </a>
                 <a
-                  href="/demo"
-                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
-                >
-                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /demo
-                </a>
-                <a
-                  href="/agents"
-                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
-                >
-                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /agents
-                </a>
-                <a
                   href="/lightpaper"
                   className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
                 >
@@ -143,6 +131,18 @@ export default function Footer() {
                 >
                   <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /architecture
                 </a>
+                <a
+                  href="/terms"
+                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
+                >
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /terms
+                </a>
+                <a
+                  href="/privacy"
+                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
+                >
+                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /privacy
+                </a>
               </div>
             </div>
           </div>
@@ -151,7 +151,7 @@ export default function Footer() {
           <div className="mt-10 flex items-center justify-center gap-4">
             <div className="flex-1 h-px bg-gradient-to-r from-transparent to-cyan/20" />
             <div className="font-mono text-[9px] text-cyan/30 tracking-[0.2em] px-4 border-l border-r border-cyan/20">
-              NON-CUSTODIAL · DETERMINISTIC · ON-CHAIN
+              NON-CUSTODIAL · RULE-BASED · ON-CHAIN
             </div>
             <div className="flex-1 h-px bg-gradient-to-l from-transparent to-cyan/20" />
           </div>
@@ -160,16 +160,16 @@ export default function Footer() {
         {/* Legal & Copyright */}
         <div className="mt-6 text-center space-y-1">
           <p className="font-mono text-[9px] text-white/30 tracking-wider">
-            © 2025 Rewind X Protocol
+            © 2026 Rewind X Protocol
           </p>
           <p className="font-mono text-[9px] text-white/30 tracking-wider">
             An independent software project · Not affiliated with similarly named entities
           </p>
           <p className="font-mono text-[9px] text-white/30 tracking-wider">
-            Informational only · No financial services or token offerings
+            Informational only · Not financial advice · No financial services or token offerings
           </p>
           <p className="font-mono text-[9px] text-white/30 tracking-wider">
-            RWXT is a utility token for protocol access · Not investment advice · No guaranteed returns
+            Rewind X is non-custodial and does not store private keys or control user assets
           </p>
         </div>
       </div>

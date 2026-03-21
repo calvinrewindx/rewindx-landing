@@ -28,19 +28,19 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
+  title: "Rewind X — Undo Mistakes on Crypto Transfers",
   description:
-    "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window. Any ERC-20 token.",
+    "Protected crypto transfers with a built-in undo window. Non-custodial. On-chain. Built on BNB Chain.",
   keywords: [
-    "crypto",
+    "protected transfers",
     "ERC-20",
-    "reversible transfers",
-    "undo",
+    "rewind",
     "non-custodial",
+    "on-chain",
+    "BNB Chain",
     "DeFi",
     "blockchain",
     "smart contracts",
-    "ethereum",
   ],
   icons: {
     icon: [
@@ -50,20 +50,24 @@ export const metadata: Metadata = {
     shortcut: "/icon-192.png",
     apple: "/apple-touch-icon.png",
   },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
+    title: "Rewind X — Undo Mistakes on Crypto Transfers",
     description:
-      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window. Any ERC-20 token.",
+      "Protected crypto transfers with a built-in undo window. Non-custodial. On-chain. Built on BNB Chain.",
     type: "website",
-    siteName: "Rewind X Protocol",
-    images: [{ url: "/logov2.png" }],
+    siteName: "Rewind X",
+    images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
-    card: "summary",
-    title: "Rewind X — Undo Crypto Mistakes Before They're Permanent",
+    card: "summary_large_image",
+    title: "Rewind X — Undo Mistakes on Crypto Transfers",
     description:
-      "Stop losing crypto to mistakes. The first safety layer that lets you reverse transfers. Configurable undo window.",
-    images: ["/logov2.png"],
+      "Protected crypto transfers with a built-in undo window. Non-custodial. On-chain. Built on BNB Chain.",
+    images: ["/og-image.png"],
   },
   metadataBase: new URL("https://rewindx.io"),
 };

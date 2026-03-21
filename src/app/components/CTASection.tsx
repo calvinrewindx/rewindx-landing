@@ -14,7 +14,7 @@ export default function CTASection() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan/10 border border-cyan/20 mb-8">
           <Sparkles className="w-4 h-4 text-cyan" />
-          <span className="text-cyan text-sm font-medium">Coming Soon</span>
+          <span className="text-cyan text-sm font-medium">Launching Soon</span>
         </div>
 
         {/* Headline */}
@@ -27,8 +27,11 @@ export default function CTASection() {
         </h2>
 
         {/* Subtext */}
-        <p className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-          Rewind X is currently in private development. Follow updates and technical progress as we move toward mainnet readiness.
+        <p className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
+          Rewind X is preparing for mainnet launch.
+        </p>
+        <p className="text-white/40 text-base max-w-xl mx-auto mb-10">
+          Be among the first to access protected transfers.
         </p>
 
         {/* CTA Buttons */}
@@ -53,7 +56,7 @@ export default function CTASection() {
 
         {/* Trust Line */}
         <p className="text-white/30 text-sm mt-12">
-          Non-custodial · Deterministic · Fully On-Chain
+          Non-custodial · On-chain · Built on BNB Chain
         </p>
       </div>
     </section>
