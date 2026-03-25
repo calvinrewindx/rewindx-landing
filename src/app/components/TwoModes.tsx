@@ -3,7 +3,7 @@
 import { User, Shield, Clock, RotateCcw, Check, KeyRound } from "lucide-react";
 
 const guarantees = [
-  { icon: Shield, text: "Non-custodial — no private keys stored" },
+  { icon: Shield, text: "No private keys stored — funds held by smart contract" },
   { icon: RotateCcw, text: "Funds move only under on-chain rules" },
   { icon: Clock, text: "Configurable protection window (3 min – 24h)" },
   { icon: User, text: "Rewind execution is sender-controlled" },

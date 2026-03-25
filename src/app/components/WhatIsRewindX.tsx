@@ -22,7 +22,7 @@ const features = [
     title: "Non-Custodial Design",
     subtitle: "No Discretionary Control",
     description:
-      "The protocol is non-custodial by design. No operator can intervene or take control of user funds.",
+      "Funds are held by the smart contract under predefined rules. No operator can intervene or take control of user funds.",
   },
 ];
 

@@ -13,7 +13,7 @@ const principles = [
     icon: Wallet,
     title: "Non-Custodial by Design",
     description:
-      "Funds remain under smart contract control. No admin key can move user funds.",
+      "Funds are held by the smart contract under predefined rules. No admin key can move user funds.",
   },
   {
     icon: KeyRound,

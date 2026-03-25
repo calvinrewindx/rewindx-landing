@@ -169,7 +169,7 @@ export default function Footer() {
             Informational only · Not financial advice · No financial services or token offerings
           </p>
           <p className="font-mono text-[9px] text-white/30 tracking-wider">
-            Rewind X is non-custodial and does not store private keys or control user assets
+            Rewind X does not store private keys. Funds are held by smart contracts under predefined rules
           </p>
         </div>
       </div>

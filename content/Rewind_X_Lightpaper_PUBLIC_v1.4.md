@@ -167,7 +167,7 @@ This design provides a final confirmation moment and reduces front-running risk.
 
 ### Stage 4: Rewind Proof NFT
 
-On a sender's first successful rewind, the protocol mints a Rewind Proof NFT to the sender. Subsequent rewinds by that sender update the same token's cumulative stats and refresh the latest rewind record (overwritten on each update); the token does not store a full rewind history. Rewind Proof NFTs are transferable and function as transferable proof objects (not identity badges). If a Rewind Proof is transferred, the sender's primary mapping is cleared—subsequent rewinds by that sender will mint a new Rewind Proof instead of updating the transferred token.
+On a sender's first successful rewind, the protocol mints a Rewind Proof NFT to the sender. Subsequent rewinds by that sender update the same token's cumulative stats and refresh the latest rewind record (overwritten on each update); the token does not store a full rewind history. Rewind Proof NFTs are transferable and function as transferable proof objects (not identity badges). If a Rewind Proof is transferred, the sender's primary mapping is cleared. Subsequent rewinds by that sender will mint a new Rewind Proof instead of updating the transferred token.
 
 ---
 
@@ -205,9 +205,13 @@ The protocol implements multi-layer protections against systematic abuse. These 
 
 Automated safeguards can pause specific protocol functions if anomalous conditions are detected. These operate transparently according to predefined parameters, not manual intervention.
 
-### External Audit Commitment
+### External Review
 
-The protocol is intended to undergo comprehensive external security auditing before mainnet deployment, subject to partner selection and funding timeline. Audit reports will be published publicly. Post-launch, a bug bounty program will provide ongoing security incentives.
+V1 has undergone 12 months of continuous internal security review combining automated analysis, manual testing, and fork-based mainnet simulation.
+
+An independent external audit is planned once real-world usage and funding support a full engagement.
+
+For details, see the [Security Overview](/security).
 
 ---
 
@@ -349,7 +353,7 @@ Rewind X differs in several essential ways:
 - **Protocol-native, not application-layer:** Works at the transfer level, not as a wrapper or separate custody contract.
 - **Integration-ready:** Usable directly by individuals, and designed to scale through wallet, treasury, and DeFi integrations.
 
-Rewind X does not remove finality—it makes finality safer.
+Rewind X does not remove finality. It makes finality safer.
 
 ---
 

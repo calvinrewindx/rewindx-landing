@@ -76,10 +76,20 @@ export default function DocsPage() {
           __html: `
             (function(){
               var key='lp-pos';
-              window.addEventListener('scroll',function(){sessionStorage.setItem(key,window.scrollY)},{passive:true});
-              window.addEventListener('beforeunload',function(){sessionStorage.setItem(key,window.scrollY)});
-              var pos=sessionStorage.getItem(key);
-              if(pos&&parseInt(pos)>100){window.scrollTo(0,parseInt(pos))}
+              var saving=false;
+              function save(){if(!saving){saving=true;sessionStorage.setItem(key,String(window.scrollY));saving=false}}
+              window.addEventListener('scroll',save,{passive:true});
+              window.addEventListener('beforeunload',save);
+              if(!window.location.hash){
+                var pos=sessionStorage.getItem(key);
+                if(pos&&parseInt(pos)>100){
+                  var p=parseInt(pos);
+                  window.scrollTo(0,p);
+                  requestAnimationFrame(function(){window.scrollTo(0,p)});
+                  document.addEventListener('DOMContentLoaded',function(){window.scrollTo(0,p)});
+                  window.addEventListener('load',function(){window.scrollTo(0,p)});
+                }
+              }
             })();
           `,
         }}
