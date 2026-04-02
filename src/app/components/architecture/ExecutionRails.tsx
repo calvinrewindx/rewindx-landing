@@ -66,29 +66,9 @@ export default function ExecutionRails() {
         </div>
       </div>
 
-      {/* Final Rail — Planned */}
-      <div className="max-w-md mx-auto">
-        <div className="p-5 rounded-2xl border border-dashed border-white/15 bg-white/[0.02]">
-          <div className="flex items-center gap-4 mb-3">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-violet/10 border border-violet/20">
-              <Zap className="w-5 h-5 text-violet/60" />
-            </div>
-            <div>
-              <h3 className="text-base font-semibold text-white/60" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                Final Rail
-              </h3>
-              <span className="text-violet/50 text-xs font-medium">Planned — DEX / Trading</span>
-            </div>
-          </div>
-          <p className="text-white/40 text-sm">
-            Immediate finality for trading and DeFi interactions. No rewind possible. Full composability.
-          </p>
-        </div>
-      </div>
-
       {/* Note */}
-      <p className="text-center text-white/40 text-sm mt-8 max-w-lg mx-auto">
-        V1 supports the Protected Rail. The Final Rail is planned for a future version to support DEX and DeFi composability.
+      <p className="text-center text-white/40 text-sm mt-8">
+        V1 operates the Protected Rail only.
       </p>
     </div>
   );

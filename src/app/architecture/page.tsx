@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import SubpageHeader from "../components/SubpageHeader";
 
 export const metadata: Metadata = {
@@ -59,10 +58,10 @@ export default function ArchitecturePage() {
             Rewind X — <span className="text-cyan">Architecture</span>
           </h1>
           <p className="text-white/60 text-lg mb-4">
-            Deterministic, non-custodial infrastructure for protected ERC-20 transfers.
+            Non-custodial infrastructure for protected ERC-20 transfers on BNB Chain.
           </p>
           <p className="text-white/40 text-sm italic mb-10">
-            Deterministic means all state transitions follow fixed on-chain rules — no human decisions.
+            All state transitions follow fixed on-chain rules — no human decisions.
           </p>
 
           {/* Table of Contents */}
@@ -140,9 +139,6 @@ export default function ArchitecturePage() {
             <p className="text-white/60 mb-6">
               Rewind X introduces a protected execution window (3 min – 24h) for operational transfers. All state transitions are deterministic and on-chain.
             </p>
-            <p className="text-white/40 text-sm italic mb-6">
-              V1 supports the Protected Rail only. A Final Rail (DEX-compatible, irreversible) is planned for a future version.
-            </p>
             <ExecutionRails />
           </section>
 
@@ -218,7 +214,7 @@ export default function ArchitecturePage() {
             <ul className="space-y-3 mb-6">
               <li className="flex items-start gap-3">
                 <span className="text-cyan text-lg">•</span>
-                <span className="text-white/60">17 coordinated contracts</span>
+                <span className="text-white/60">17 production-ready contracts</span>
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-cyan text-lg">•</span>
@@ -226,26 +222,14 @@ export default function ArchitecturePage() {
               </li>
               <li className="flex items-start gap-3">
                 <span className="text-cyan text-lg">•</span>
-                <span className="text-white/60">Mainnet deployment pending final validation and audit</span>
+                <span className="text-white/60">Mainnet deployment in preparation. Internal security review completed. External audit planned post-validation.</span>
               </li>
             </ul>
-            <p className="text-white/50 text-sm mb-6">
-              A detailed walkthrough, threat model, and audit materials are available for qualified reviewers upon request.
+            <p className="text-white/50 text-sm">
+              For technical questions: <a href="mailto:contact.rewindx@proton.me" className="text-cyan hover:text-cyan/80 transition-colors">contact.rewindx@proton.me</a>
             </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-cyan/30 bg-cyan/10 text-cyan hover:bg-cyan/20 transition-colors text-sm font-medium"
-            >
-              Request Access
-            </Link>
           </section>
 
-          <hr className="border-white/10 my-10" />
-
-          {/* Disclaimer */}
-          <p className="text-white/30 text-sm italic text-center">
-            This document outlines the system architecture and core invariants. It does not represent a production deployment.
-          </p>
         </div>
       </div>
 

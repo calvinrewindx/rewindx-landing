@@ -75,7 +75,9 @@ Every protocol operation follows predetermined logic with no manual intervention
 
 Reversibility is strictly limited. Windows are configurable from 3 minutes to 24 hours.
 
-The sender's selected window defines the guaranteed period during which a rewind can be executed. For safety, settlement may finalize shortly after the selected window due to deterministic hold and finality buffers that prevent race conditions and flash-style abuse. Once this deterministic boundary is reached, the transfer becomes available for the recipient to receive. After expiry, the transfer is irreversible. This bounded approach preserves blockchain's finality guarantee while providing a safety buffer.
+Under normal operation, rewind windows are fixed at creation and enforced deterministically. The sender can release a transfer early, immediately making it available to the recipient. The protocol includes an emergency window extension capability for exceptional circumstances. If used, extensions are recorded on-chain for transparency. No party can shorten a window against the sender's will.
+
+For safety, a short deterministic buffer exists near the end of the rewind window to reduce race conditions between last-second rewinds and settlement claims. Once this deterministic boundary is reached, the transfer becomes available for the recipient to receive. After expiry, the transfer is irreversible. This bounded approach preserves blockchain's finality guarantee while providing a safety buffer.
 
 ### Trust-Minimized Controls
 
@@ -148,7 +150,7 @@ At creation, the protocol deducts the Protected Transfer Fee from the transfer a
 
 The rewind window begins immediately upon transfer creation. During this period, the sender retains exclusive reversal rights. No other party (not the receiver, not the protocol, not any external entity) can act. The receiver cannot receive the transfer until the window expires.
 
-Critically, no party can extend or shorten the window after creation. The duration (hours or minutes) is fixed at initiation and enforced deterministically by on-chain logic.
+The window duration is fixed at initiation and enforced deterministically by on-chain logic. The sender may release the transfer early (see Stage 3). The protocol includes an emergency window extension capability. If used, this can delay settlement timing, but does not allow anyone to move, redirect, or seize funds. Extensions are recorded on-chain.
 
 ### Stage 3: Resolution
 
@@ -207,7 +209,7 @@ Automated safeguards can pause specific protocol functions if anomalous conditio
 
 ### External Review
 
-V1 has undergone 12 months of continuous internal security review combining automated analysis, manual testing, and fork-based mainnet simulation.
+V1 has undergone extensive internal security review combining automated analysis, manual testing, and fork-based mainnet simulation.
 
 An independent external audit is planned once real-world usage and funding support a full engagement.
 
@@ -224,6 +226,12 @@ The protocol employs a two-component fee structure designed to align incentives 
 **Protected Transfer Fee (1–3%):** Charged when creating a Protected Transfer and deducted from the transfer amount. 1% for preferred supported tokens, up to 3% for extended / non-preferred supported tokens. NFT tiers provide discounts on this fee.
 
 **Rewind Execution Fee (1.5%):** Charged only if a rewind is actually executed. This is a flat fee that applies equally to all users. It is separate from the transfer fee and is not discounted by NFT tiers. Calculated on-chain with fixed rules, no exceptions.
+
+### Value-Neutral Rewind Adjustment
+
+Rewinds return the original value basis, not always the original token quantity. If the token price has increased since transfer creation, the sender receives fewer tokens so that the returned amount remains aligned with the original value at creation time. If the token price has decreased or remained stable, the sender receives the original token quantity.
+
+This prevents "free option" exploitation, where a sender could otherwise rewind only after unfavorable price moves and allow favorable transfers to settle.
 
 ### NFT Tier Fee Benefits
 
@@ -321,9 +329,17 @@ The protocol makes no judgments about transaction legitimacy. It cannot determin
 
 Reversals require active sender intervention within the window. Users must monitor their transfers and act within the available window.
 
+### Value-Neutral Returns
+
+Rewinds may return fewer tokens than were originally sent if the token price increased after transfer creation. This is an intended design choice to preserve the original value basis and reduce abuse.
+
 ### Net Settlement Amounts
 
-If a rewind is executed, the sender recovers the net held amount (held under deterministic contract rules) minus protocol fees. If no rewind occurs, the recipient receives the net held amount (after the protection fee is deducted at creation).
+If a rewind is executed, the sender recovers the value-adjusted amount minus the rewind execution fee. If no rewind occurs, the recipient receives the net held amount (after the protection fee is deducted at creation).
+
+### Oracle Dependency
+
+Rewind execution depends on reliable oracle data for price-aware operations. If price feeds are temporarily unavailable, rewinds may be delayed until oracle service resumes. Transfers still follow their normal settlement path.
 
 ### Receive Liveness
 

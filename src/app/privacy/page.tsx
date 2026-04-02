@@ -74,15 +74,16 @@ export default function PrivacyPage() {
 
           <Sub title="2.2 Browser storage (localStorage / sessionStorage)">
             <p>This interface uses browser storage strictly for product functionality.</p>
-            <p>What is stored locally in your browser:</p>
+            <p>What may be stored locally in your browser:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Cached on-chain data (transfer states, rewind details) — temporary, 24h TTL</li>
+              <li>Cached on-chain data (transfer states, rewind details) — temporary, 4h TTL</li>
+              <li>Recently used recipient addresses — automatically stored locally after successful transfers for convenience, with a 14-day retention period</li>
               <li>Transaction references (TX hashes) — for UI state continuity</li>
               <li>NFT display state — for interface rendering</li>
               <li>Session flow state — tab-scoped, deleted automatically when tab closes</li>
             </ul>
-            <p><strong className="text-white/80">This data never leaves your browser.</strong> It is not sent to any server, not used for tracking, and not shared with any third party.</p>
-            <p>This interface does not use analytics, advertising, or marketing cookies. Browser storage is used only where technically necessary for core product functionality.</p>
+            <p><strong className="text-white/80">This browser-stored data stays on your device and is not sent to any Rewind X backend server for analytics, marketing, or profiling purposes.</strong></p>
+            <p>This interface does not use analytics, advertising, or marketing cookies. Browser storage is used only where technically necessary for core product functionality and convenience features.</p>
           </Sub>
 
           <Sub title="2.3 Blockchain data">
@@ -158,13 +159,16 @@ export default function PrivacyPage() {
             <li><strong className="text-white/80">Right to object</strong> — object to processing based on legitimate interest</li>
             <li><strong className="text-white/80">Right to lodge a complaint</strong> — file a complaint with your national data protection authority</li>
           </ul>
+          <p>Please note that blockchain transaction data is public by nature and cannot be deleted or modified through this interface.</p>
           <p>For privacy-related questions, contact us at: <a href="mailto:contact.rewindx@proton.me" className="underline text-cyan hover:text-cyan/80">contact.rewindx@proton.me</a></p>
         </Section>
 
         <Section num={8} title="Data retention">
           <ul className="list-disc pl-5 space-y-1">
             <li><strong className="text-white/80">Cloudflare logs:</strong> Retained according to Cloudflare&apos;s own practices</li>
-            <li><strong className="text-white/80">Browser storage:</strong> Stored locally, cleared by TTL or when you clear browser data</li>
+            <li><strong className="text-white/80">Transfer cache and similar locally cached interface data:</strong> Up to 4 hours</li>
+            <li><strong className="text-white/80">Recently used recipient addresses stored locally for convenience:</strong> Up to 14 days</li>
+            <li><strong className="text-white/80">Session storage:</strong> Deleted automatically when the browser tab is closed</li>
             <li><strong className="text-white/80">Blockchain data:</strong> Permanent by nature of public blockchain infrastructure</li>
           </ul>
         </Section>

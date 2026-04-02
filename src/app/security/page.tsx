@@ -244,7 +244,23 @@ export default function SecurityPage() {
                   </div>
                 ))}
               </div>
-              <p>An independent external audit is planned as the protocol matures.</p>
+              <p className="mt-4 mb-2 text-white/80 font-medium">Known token-related edge cases include:</p>
+              <div className="space-y-2">
+                {[
+                  "Fee-on-transfer behavior",
+                  "Blacklistable tokens (USDC, USDT)",
+                  "Pausable tokens",
+                  "Non-standard decimals",
+                  "Non-standard ERC-20 return behavior",
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 p-2.5 rounded-lg border border-amber-500/10 bg-amber-500/[0.02] hover:border-amber-500/20 transition-colors">
+                    <AlertTriangle className="w-4 h-4 text-amber-400/60 flex-shrink-0 mt-0.5" />
+                    <span className="text-white/70 text-sm">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-white/50 text-sm mt-3">These cases can affect settlement, rewind execution, or accounting behavior.</p>
+              <p className="mt-4">An independent external audit is planned as the protocol matures.</p>
             </div>
           </section>
 

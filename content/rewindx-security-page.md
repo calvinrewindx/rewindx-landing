@@ -94,6 +94,15 @@ This architectural simplicity is intentional. It reduces exposure to several com
 - The protocol is released as an early public version (V1)
 - Some edge cases may only emerge under real-world usage
 
+Known token-related edge cases include:
+- Fee-on-transfer behavior
+- Blacklistable tokens (USDC, USDT)
+- Pausable tokens
+- Non-standard decimals
+- Non-standard ERC-20 return behavior
+
+These cases can affect settlement, rewind execution, or accounting behavior.
+
 An independent external audit is planned as the protocol matures.
 
 ---
