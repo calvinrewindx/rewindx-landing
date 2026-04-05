@@ -46,12 +46,13 @@ export default function PrivacyPage() {
           <div className="h-[2px] bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
           <div className="p-6">
             <h1 className="text-xl font-black text-white/90">Privacy Policy</h1>
-            <p className="text-xs mt-1 text-white/30">Last updated: March 2026</p>
+            <p className="text-xs mt-1 text-white/30">Last updated: April 2026</p>
           </div>
         </div>
 
         <Section num={1} title="Overview">
           <p>Rewind X is a non-custodial web interface for interacting with smart contracts deployed on public blockchain networks.</p>
+          <p>This interface is not intended for use by persons under the age of 18.</p>
           <p>This Privacy Policy explains what limited data is processed when you use this interface, and why.</p>
           <p>This interface does not collect personal data for marketing, analytics, or profiling purposes. Data processing is limited to what is technically necessary to operate the interface.</p>
         </Section>

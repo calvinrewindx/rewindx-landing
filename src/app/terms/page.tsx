@@ -35,7 +35,7 @@ export default function TermsPage() {
           <div className="h-[2px] bg-gradient-to-r from-transparent via-cyan/40 to-transparent" />
           <div className="p-6">
             <h1 className="text-xl font-black text-white/90">Terms of Use</h1>
-            <p className="text-xs mt-1 mb-4 text-white/30">Last updated: March 2026</p>
+            <p className="text-xs mt-1 mb-4 text-white/30">Last updated: April 2026</p>
             <p className="text-sm font-medium text-white/90">Welcome to Rewind X.</p>
             <p className="text-sm leading-[1.75] mt-2 text-white/70">
               By accessing or using this interface, you agree to the following terms. If you do not agree, do not use the interface.
@@ -91,8 +91,8 @@ export default function TermsPage() {
         </Section>
 
         <Section num={6} title="Error Monitoring">
-          <p>To maintain stability and improve the interface, limited technical error monitoring may be used, such as application error logs or diagnostics.</p>
-          <p>No private keys, wallet secrets, or transaction signing data are collected by the interface through such monitoring.</p>
+          <p>Technical error monitoring tools may be activated in the future to maintain stability and improve the interface.</p>
+          <p>If such tools are activated, the related data processing will be described in the Privacy Policy before activation.</p>
         </Section>
 
         <Section num={7} title="No Financial Advice">
@@ -100,7 +100,7 @@ export default function TermsPage() {
           <p>Nothing provided through Rewind X constitutes financial, investment, legal, or tax advice.</p>
         </Section>
 
-        <Section num={8} title="Availability and Jurisdiction">
+        <Section num={8} title="Availability and Legal Restrictions">
           <p>Use of this interface may be restricted or prohibited under the laws or regulations of certain jurisdictions.</p>
           <p>You are solely responsible for ensuring that your use of the interface is lawful where you access it.</p>
         </Section>
@@ -122,7 +122,56 @@ export default function TermsPage() {
           </ul>
         </Section>
 
-        <Section num={11} title="Updates to These Terms">
+        <Section num={11} title="Age Requirement">
+          <p>You must be at least 18 years old to use this interface.</p>
+          <p>By accessing or using the interface, you represent and warrant that you are at least 18 years of age.</p>
+        </Section>
+
+        <Section num={12} title="No Independent External Audit">
+          <p>The protocol has not undergone an independent external security audit.</p>
+          <p>By using the interface, you acknowledge and accept this risk.</p>
+        </Section>
+
+        <Section num={13} title="Emergency Controls">
+          <p>The protocol may include emergency pause or safety control functionality for security purposes.</p>
+          <p>In a paused state, normal protocol operations may be temporarily restricted. Balances remain in place according to smart contract logic unless and until normal operation resumes.</p>
+        </Section>
+
+        <Section num={14} title="Fees">
+          <p>Use of the protocol may involve protocol fees, interface-disclosed fees, and blockchain network fees.</p>
+          <p>Any applicable fees are presented through the interface or determined by protocol smart contract logic. You are solely responsible for reviewing and accepting any such fees before confirming a transaction.</p>
+        </Section>
+
+        <Section num={15} title="Sanctions and Restricted Persons">
+          <p>You may not use the interface if you are subject to economic or trade sanctions, located in a comprehensively sanctioned jurisdiction, or otherwise prohibited from using the interface under applicable laws or regulations.</p>
+          <p>You may not use the interface in connection with any unlawful activity, including sanctions evasion or the facilitation of prohibited transactions.</p>
+        </Section>
+
+        <Section num={16} title="Prohibited Uses">
+          <p>You agree not to use the interface or protocol for any unlawful, abusive, or harmful purpose, including but not limited to money laundering, sanctions evasion, fraud, market manipulation, wash trading, or attempts to interfere with or misuse the protocol.</p>
+          <p>You also agree not to use the interface in a manner that could damage, disable, overburden, or impair the operation of the interface or related systems.</p>
+        </Section>
+
+        <Section num={17} title="Indemnification">
+          <p>To the maximum extent permitted by law, you agree to indemnify, defend, and hold harmless the operators, developers, and contributors associated with the interface from and against any claims, liabilities, damages, losses, and expenses, including reasonable legal costs, arising out of or related to your use of the interface, your violation of these Terms, your violation of any applicable law or regulation, or your infringement of the rights of any third party.</p>
+        </Section>
+
+        <Section num={18} title="Intellectual Property">
+          <p>The interface, branding, design, text, graphics, and other content made available through the interface are protected by applicable intellectual property laws.</p>
+          <p>Except as otherwise expressly stated, no part of the interface or related materials may be copied, reproduced, modified, distributed, or used for commercial purposes without prior written permission from the relevant rights holder.</p>
+        </Section>
+
+        <Section num={19} title="Token Compatibility">
+          <p>The interface and protocol do not guarantee compatibility with every token, wallet, or smart contract implementation.</p>
+          <p>Certain token designs, including non-standard or modified token behavior, may result in unexpected outcomes. You are solely responsible for determining whether a particular asset or transaction type is suitable for use with the protocol.</p>
+        </Section>
+
+        <Section num={20} title="Governing Law and Jurisdiction">
+          <p>These Terms of Use shall be governed by and construed in accordance with the laws of England and Wales.</p>
+          <p>Any dispute, claim, or controversy arising out of or relating to these Terms or the use of the interface shall be subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+        </Section>
+
+        <Section num={21} title="Updates to These Terms">
           <p>These Terms of Use may be updated from time to time.</p>
           <p>Updated terms become effective upon publication on the website or interface. Continued use after publication constitutes acceptance of the updated terms.</p>
         </Section>
