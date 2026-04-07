@@ -30,7 +30,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Rewind X — Undo Mistakes on Crypto Transfers",
   description:
-    "Protected crypto transfers with a built-in undo window. Non-custodial. On-chain. Built on BNB Chain.",
+    "Rewind X — send crypto with a safety window. Protected transfers on BNB Chain with a rewind window (3 min–24h). Non-custodial. On-chain.",
   keywords: [
     "protected transfers",
     "ERC-20",
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Rewind X — Undo Mistakes on Crypto Transfers",
     description:
-      "Protected crypto transfers with a built-in undo window. Non-custodial. On-chain. Built on BNB Chain.",
+      "Rewind X — send crypto with a safety window. Protected transfers on BNB Chain with a rewind window (3 min–24h). Non-custodial. On-chain.",
     type: "website",
     siteName: "Rewind X",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rewind X — Undo Mistakes on Crypto Transfers",
     description:
-      "Protected crypto transfers with a built-in undo window. Non-custodial. On-chain. Built on BNB Chain.",
+      "Rewind X — send crypto with a safety window. Protected transfers on BNB Chain with a rewind window (3 min–24h). Non-custodial. On-chain.",
     images: ["/og-image.png"],
   },
   metadataBase: new URL("https://rewindx.io"),
