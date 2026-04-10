@@ -235,7 +235,7 @@ export default function SecurityPage() {
               <div className="space-y-2">
                 {[
                   "This is an internal review, not an independent external audit",
-                  "The protocol is released as an early public version (V1)",
+                  "The protocol is released as an initial public version (V1)",
                   "Some edge cases may only emerge under real-world usage",
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3 p-2.5 rounded-lg border border-amber-500/10 bg-amber-500/[0.02]">

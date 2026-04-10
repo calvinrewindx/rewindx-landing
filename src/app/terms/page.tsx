@@ -61,8 +61,8 @@ export default function TermsPage() {
           <p>No party associated with this interface can access, recover, or reverse transactions except where such outcomes are explicitly defined by protocol smart contract logic.</p>
         </Section>
 
-        <Section num={3} title="Early Version Notice">
-          <p>This interface represents an early public release of the protocol. Features and functionality may change, be modified, or be removed over time.</p>
+        <Section num={3} title="Version Notice">
+          <p>This interface represents the initial public release of the protocol interface. Features and functionality may change, be modified, or be removed over time.</p>
           <p>Interface updates do not by themselves alter the behavior of already deployed smart contracts.</p>
           <p>Users should review available documentation before interacting with the system. Use of the interface and protocol occurs at your own discretion and responsibility.</p>
         </Section>

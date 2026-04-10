@@ -91,7 +91,7 @@ This architectural simplicity is intentional. It reduces exposure to several com
 ## Known Limitations
 
 - This is an internal review, not an independent external audit
-- The protocol is released as an early public version (V1)
+- The protocol is released as an initial public version (V1)
 - Some edge cases may only emerge under real-world usage
 
 Known token-related edge cases include:
