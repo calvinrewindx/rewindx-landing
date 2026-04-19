@@ -71,7 +71,7 @@ export default function SecurityPage() {
               Overview
             </h2>
             <div className="text-white/70 text-sm leading-relaxed space-y-4">
-              <p>Rewind X is designed as a <span className="text-white font-medium">non-custodial</span> transaction safety layer. Funds are held by the smart contract under predefined rules. <span className="text-cyan">No individual or organization</span> can access or redirect these funds.</p>
+              <p>Rewind X is designed as a <span className="text-white font-medium">non-custodial</span> transaction safety layer. Funds are held by the smart contract under predefined rules. <span className="text-cyan">No individual or organization</span> can access or redirect these funds under normal protocol operation.</p>
               <p>All transfers follow <span className="text-cyan">deterministic rules</span> enforced by smart contracts. Reversibility is <span className="text-white font-medium">time-bounded</span> and strictly controlled by the original sender. The protocol enforces all rules on-chain without reliance on off-chain execution or discretionary control.</p>
             </div>
           </section>

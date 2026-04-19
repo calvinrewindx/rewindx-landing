@@ -2,7 +2,7 @@
 
 ## Overview
 
-Rewind X is designed as a non-custodial transaction safety layer. Funds are held by the smart contract under predefined rules. No individual or organization can access or redirect these funds.
+Rewind X is designed as a non-custodial transaction safety layer. Funds are held by the smart contract under predefined rules. No individual or organization can access or redirect these funds under normal protocol operation.
 
 All transfers follow deterministic rules enforced by smart contracts. Reversibility is time-bounded and strictly controlled by the original sender. The protocol enforces all rules on-chain without reliance on off-chain execution or discretionary control.
 

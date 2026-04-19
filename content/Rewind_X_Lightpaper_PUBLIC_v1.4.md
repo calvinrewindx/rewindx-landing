@@ -128,7 +128,7 @@ During the rewind window, only the sender can act. Three outcomes are possible: 
 
 ### Multi-Token Support
 
-The protocol operates with supported ERC-20 tokens with reliable price feeds. V1 supports 38 tokens on BNB Chain, including major stablecoins and popular DeFi assets.
+The protocol operates with supported ERC-20 tokens with reliable price feeds. V1 supports 34 tokens on BNB Chain, including major stablecoins and popular DeFi assets.
 
 ### Integrity Protections
 
@@ -385,7 +385,7 @@ Rewind X does not remove finality. It makes finality safer.
 
 **Deterministic Settlement:** The protocol's guarantee that transfer outcomes depend solely on on-chain conditions with no manual intervention or subjective judgment.
 
-**Non-Custodial:** The protocol architecture where user funds are never held by or accessible to the protocol team or any third party outside deterministic smart contract logic.
+**Non-Custodial:** The protocol architecture where user funds are not held by or accessible to the protocol team or any third party outside deterministic smart contract logic under normal operation.
 
 **Settlement:** The irreversible completion of a Protected Transfer, triggered when either the sender or recipient calls receive (technically: `claim()`) after window expiry or early release.
 

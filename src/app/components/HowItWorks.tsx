@@ -10,7 +10,7 @@ const steps = [
     title: "Create Protected Transfer",
     description:
       "Send any supported ERC-20 using protected mode. Funds enter a time-bounded contract-held state under fixed on-chain rules.",
-    bullets: ["No admin keys can move funds", "State transitions follow fixed protocol logic", "Non-custodial by design"],
+    bullets: ["No admin can move or redirect user funds", "State transitions follow fixed protocol logic", "Non-custodial by design"],
     color: "cyan",
   },
   {

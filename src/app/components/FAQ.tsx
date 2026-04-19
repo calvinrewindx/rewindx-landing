@@ -77,7 +77,7 @@ const faqs = [
   {
     question: "Which tokens are supported?",
     answer:
-      "Rewind X currently supports 38 ERC-20 tokens on BNB Chain, including major stablecoins and popular DeFi assets. Native chain tokens (BNB) require the wrapped version (WBNB).",
+      "Rewind X currently supports 34 ERC-20 tokens on BNB Chain, including major stablecoins and popular DeFi assets. Native chain tokens (BNB) require the wrapped version (WBNB).",
     icon: Coins,
     color: "violet",
   },

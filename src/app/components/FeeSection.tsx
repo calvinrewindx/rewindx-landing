@@ -308,7 +308,7 @@ export default function FeeSection() {
                 { icon: Users, text: "Fair", desc: "costs only apply when needed", color: "cyan" },
                 { icon: Shield, text: "Deters abuse", desc: "abnormal behavior becomes expensive", color: "violet" },
                 { icon: TrendingUp, text: "Predictable", desc: "fees are fixed and on-chain", color: "cyan" },
-                { icon: Lock, text: "Bounded", desc: "maximum cost is always known", color: "violet" },
+                { icon: Lock, text: "Bounded", desc: "maximum cost is bounded and known in advance", color: "violet" },
               ].map((item, i) => (
                 <div
                   key={i}

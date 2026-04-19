@@ -79,7 +79,7 @@ export default function SecurityPrinciples() {
             </div>
 
             <p className="text-white/60 text-center mb-6">
-              Rewind X prevents mistakes before final settlement. It is not insurance, and it does not recover lost funds.
+              Rewind X offers a time-bounded window to reverse mistakes before final settlement. It is not insurance, and it does not recover lost funds.
             </p>
 
             <div className="space-y-3">

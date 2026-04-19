@@ -11,9 +11,7 @@ const allTokens = [
   { symbol: "USDT", logo: `${TW}/0x55d398326f99059fF775485246999027B3197955/logo.png`, category: "Stablecoins" },
   { symbol: "USDC", logo: "/tokens/usdc.png", category: "Stablecoins" },
   { symbol: "DAI", logo: "/tokens/dai.png", category: "Stablecoins" },
-  { symbol: "BUSD", logo: `${TW}/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56/logo.png`, category: "Stablecoins" },
   { symbol: "TUSD", logo: `${TW}/0x40af3827F39D0EAcBF4A168f8D4ee67c121D11c9/logo.png`, category: "Stablecoins" },
-  { symbol: "VAI", logo: `${TW}/0x4BD17003473389A42DAF6a0a729f6Fdb328BbBd7/logo.png`, category: "Stablecoins" },
   // Major
   { symbol: "WBNB", logo: `${TW}/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c/logo.png`, category: "Major" },
   { symbol: "BTCB", logo: `${TW}/0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c/logo.png`, category: "Major" },
@@ -47,8 +45,6 @@ const allTokens = [
   { symbol: "CFX", logo: "https://assets.coingecko.com/coins/images/13079/small/3vuYMbjN.png", category: "DeFi" },
   // Other
   { symbol: "AXS", logo: `${TW}/0x715D400F88C167884bbCc41C5FeA407ed4D2f8A0/logo.png`, category: "Other" },
-  { symbol: "TWT", logo: `${TW}/0x4B0F1812e5Df2A09796481Ff14017e6005508003/logo.png`, category: "Other" },
-  { symbol: "BETH", logo: `${TW}/0x250632378E573c6Be1AC2f97Fcdf00515d0Aa91B/logo.png`, category: "Other" },
 ];
 
 const categories = ["Stablecoins", "Major", "DeFi", "Other"];
@@ -83,7 +79,7 @@ export default function MultiTokenPreview() {
             Works with supported ERC-20 tokens on BNB Chain. No custom integration required.
           </p>
           <p className="text-white/40 text-xs sm:text-sm mt-2">
-            Currently supports <span className="text-cyan font-medium">38 tokens</span> · Chainlink price feeds
+            Currently supports <span className="text-cyan font-medium">34 tokens</span> · Chainlink price feeds
           </p>
         </div>
 
@@ -104,13 +100,13 @@ export default function MultiTokenPreview() {
               <span className="text-white/50 text-[9px] sm:text-[11px] font-mono">{token.symbol}</span>
             </div>
           ))}
-          {/* +32 more tokens */}
+          {/* +28 more tokens */}
           <div
             className="flex flex-col items-center gap-1.5 sm:gap-2 cursor-pointer group"
             onClick={() => setIsOpen(!isOpen)}
           >
             <div className="w-11 h-11 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center border border-dashed border-white/20 sm:border-2 bg-white/[0.02] group-hover:border-cyan/40 transition-all duration-300">
-              <span className="text-white/40 text-[10px] sm:text-sm font-mono group-hover:text-cyan/60 transition-colors">+32</span>
+              <span className="text-white/40 text-[10px] sm:text-sm font-mono group-hover:text-cyan/60 transition-colors">+28</span>
             </div>
             <span className="text-white/30 text-[9px] sm:text-[11px] font-mono group-hover:text-white/50 transition-colors">more tokens</span>
           </div>
@@ -129,7 +125,7 @@ export default function MultiTokenPreview() {
             onClick={() => setIsOpen(!isOpen)}
             className="inline-flex items-center gap-2 text-white/40 hover:text-white/60 transition-colors text-xs sm:text-sm"
           >
-            <span>{isOpen ? "Hide tokens" : "View all 38 supported tokens"}</span>
+            <span>{isOpen ? "Hide tokens" : "View all 34 supported tokens"}</span>
             <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
           </button>
         </div>
