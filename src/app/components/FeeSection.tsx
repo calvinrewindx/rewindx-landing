@@ -115,11 +115,11 @@ export default function FeeSection() {
             <ul className="space-y-1.5">
               <li className="flex items-start gap-2 text-xs">
                 <Check className="w-3.5 h-3.5 text-violet mt-0.5 flex-shrink-0" />
-                <span className="text-white/60">Flat <span className="text-white/90">1.5%</span> for all users</span>
+                <span className="text-white/60"><span className="text-white/90">1.5%</span> per rewind execution</span>
               </li>
               <li className="flex items-start gap-2 text-xs">
                 <Check className="w-3.5 h-3.5 text-violet mt-0.5 flex-shrink-0" />
-                <span className="text-white/60">Calculated on-chain · No overrides</span>
+                <span className="text-white/60">Calculated on-chain · Hard-capped by contract</span>
               </li>
               <li className="flex items-start gap-2 text-xs">
                 <Check className="w-3.5 h-3.5 text-violet mt-0.5 flex-shrink-0" />
