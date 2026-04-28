@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -39,13 +38,13 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-[#050505] pt-20 px-6">
       <div className="max-w-2xl mx-auto space-y-5 pb-12">
         {/* Back */}
-        <Link
+        <a
           href="/"
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all text-white/70 bg-white/[0.03] border border-white/[0.08] hover:border-cyan/30 hover:bg-cyan/[0.05]"
         >
           <ArrowLeft size={15} className="text-cyan" />
           <span className="text-sm font-medium">Back</span>
-        </Link>
+        </a>
 
         {/* Header */}
         <div className="rounded-2xl overflow-hidden bg-white/[0.02] backdrop-blur-sm border border-cyan/10">
