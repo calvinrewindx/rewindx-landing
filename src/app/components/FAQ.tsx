@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, HelpCircle, Shield, Clock, Wallet, Lock, Users, Coins, CheckCircle, AlertTriangle, Zap, ArrowRight } from "lucide-react";
+import { ChevronDown, HelpCircle, Shield, ShieldOff, Clock, Wallet, Users, Coins, AlertTriangle, ArrowRight, Percent, Mail } from "lucide-react";
 
 const faqs = [
   {
@@ -28,58 +28,44 @@ const faqs = [
   {
     question: "Does the recipient receive the full amount?",
     answer:
-      "Protected transfers settle as net amounts: the protection fee is deducted at creation, so the recipient receives the held (net) amount. If a rewind is executed, the sender recovers the held amount minus the rewind execution fee.",
+      "This depends on the fee mode you choose. Fee deducted: the protection fee is taken from the transfer amount, so the recipient receives less than you entered. Fee added on top: you pay the protection fee separately, so the recipient receives exactly what you entered. If a rewind is executed, the sender recovers the held amount minus the rewind execution fee. The exact amounts are shown before you confirm.",
     icon: Coins,
     color: "violet",
   },
   {
-    question: "Does Rewind X modify Ethereum or BNB Chain finality?",
+    question: "Why are protection fees higher than standard transfers?",
     answer:
-      "No. Rewind X operates entirely at the application layer. Chain finality is unchanged. The protocol simply adds a deterministic safety window before final settlement.",
-    icon: Lock,
-    color: "violet",
+      "Standard transfers settle immediately with no protection or recovery option. Protected transfers add a review window, deterministic rewind logic, and on-chain proof. Protection fees range from 1% to 3% depending on token category. The 1.5% rewind execution fee applies only when you actively execute a rewind. Token category depends on liquidity, oracle reliability, and operational risk. Use protected transfers when the cost of being wrong on a specific transaction would be higher than the protection fee.",
+    icon: Percent,
+    color: "cyan",
   },
   {
-    question: "Do I need a special wallet or custom integration?",
+    question: "Do I need a special wallet?",
     answer:
-      "No. Any EVM-compatible wallet can interact with Rewind X. Protected transfers work using standard ERC-20 approvals and do not require allowlists or special infrastructure.",
+      "No special wallet is required. Rewind X is designed to work with standard EVM-compatible wallets. Protected transfers use standard ERC-20 approvals and do not require allowlists or custom infrastructure.",
     icon: Wallet,
     color: "cyan",
   },
   {
-    question: "What prevents abuse or malicious reversals?",
+    question: "What prevents abuse?",
     answer:
-      "Rewind X uses deterministic protocol rules such as sender limits, cooldowns, and other non-custodial safeguards to reduce abuse. These protections restrict actions under certain conditions, but they do not give the protocol control over user funds.",
+      "Rewind X uses bounded rewind windows, fixed execution rules, and protocol-level constraints (sender limits, cooldowns) instead of open-ended reversals. These protections restrict actions under specific conditions but do not give the protocol control over user funds. It is designed as preventive transaction safety, not unlimited rollback.",
     icon: AlertTriangle,
-    color: "violet",
-  },
-  {
-    question: "Can the recipient receive early?",
-    answer:
-      "No. During the active rewind window, only the sender can use sender-side controls. The recipient cannot receive early. After expiry, the transfer moves to settlement and either party can complete it.",
-    icon: CheckCircle,
-    color: "cyan",
-  },
-  {
-    question: "Can the sender release a transfer early?",
-    answer:
-      "Yes. The sender can release the transfer early during the active window, allowing the recipient to receive it without waiting for the full window to expire. This is useful when both parties want faster settlement.",
-    icon: Zap,
-    color: "violet",
-  },
-  {
-    question: "What happens if the recipient never claims?",
-    answer:
-      "After the window expires, the transfer moves to settlement. Either the sender or recipient can complete it. If neither acts, the held amount remains in place under protocol rules. It is not auto-released or returned by the protocol.",
-    icon: Clock,
     color: "violet",
   },
   {
     question: "Which tokens are supported?",
     answer:
-      "Rewind X currently supports 34 ERC-20 tokens on BNB Chain, including major stablecoins and popular DeFi assets. Native chain tokens (BNB) require the wrapped version (WBNB).",
+      "Rewind X currently supports 34 ERC-20 tokens on BNB Chain, including major stablecoins (USDT, USDC, DAI) and popular DeFi assets (WBNB, ETH, BTCB, and more). Native chain tokens (BNB) require the wrapped version (WBNB).",
     icon: Coins,
     color: "violet",
+  },
+  {
+    question: "Is Rewind X insurance?",
+    answer:
+      "No. Rewind X is not insurance and does not guarantee fund recovery. It is a technical mechanism that provides a time-limited rewind window, enforced by smart contract logic. A rewind is only possible while the window is open and the transfer is still pending. Once a transfer is received, expires, or is otherwise finalized on-chain, no rewind is possible.",
+    icon: ShieldOff,
+    color: "cyan",
   },
 ];
 
@@ -89,116 +75,148 @@ export default function FAQ() {
   return (
     <section className="section relative py-24 sm:py-32">
       {/* Background */}
-      <div className="absolute inset-0 grid-bg opacity-20" />
+      <div className="absolute inset-0 grid-bg opacity-[0.15]" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-cyan/5 blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[400px] h-[400px] rounded-full bg-violet/[0.04] blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="inline-flex items-center gap-2 text-cyan text-sm font-medium mb-4 px-4 py-2 rounded-full bg-cyan/10 border border-cyan/20">
-            <HelpCircle className="w-4 h-4" />
-            Common Questions
-          </span>
+          <p className="text-cyan/70 text-[10px] uppercase tracking-[0.3em] font-mono mb-3">
+            FAQ · {String(faqs.length).padStart(2, "0")} Questions
+          </p>
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Frequently Asked <span className="gradient-text">Questions</span>
+            Frequently Asked <span className="text-cyan">Questions</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          <p className="text-white/50 text-base max-w-xl mx-auto">
             Everything you need to know about Rewind X
           </p>
         </div>
 
-        {/* FAQ Grid - 2 columns on larger screens */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className={`glass-card overflow-hidden transition-all duration-300 hover:border-white/20 ${
-                openIndex === index ? "lg:col-span-2" : ""
-              }`}
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-start gap-4 p-5 text-left"
-              >
-                {/* Icon */}
-                <div
-                  className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                    faq.color === "cyan"
-                      ? "bg-cyan/10 border border-cyan/30"
-                      : "bg-violet/10 border border-violet/30"
-                  }`}
-                >
-                  <faq.icon
-                    className={`w-5 h-5 ${
-                      faq.color === "cyan" ? "text-cyan" : "text-violet"
-                    }`}
-                  />
-                </div>
+        {/* FAQ Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+            const isCyan = faq.color === "cyan";
+            const Icon = faq.icon;
 
-                {/* Question */}
-                <div className="flex-1 min-w-0">
-                  <span
-                    className="text-white font-medium text-base block pr-4"
-                    style={{ fontFamily: "var(--font-space-grotesk)" }}
-                  >
-                    {faq.question}
-                  </span>
-                </div>
-
-                {/* Chevron */}
-                <ChevronDown
-                  className={`w-5 h-5 flex-shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180 text-cyan" : "text-white/40"
-                  }`}
-                />
-              </button>
-
-              {/* Answer */}
+            return (
               <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? "max-h-96 pb-5" : "max-h-0"
+                key={index}
+                className={`relative rounded-2xl border bg-white/[0.02] backdrop-blur-sm overflow-hidden transition-all duration-300 ${
+                  isOpen ? "lg:col-span-2" : ""
+                } ${
+                  isOpen
+                    ? isCyan
+                      ? "border-cyan/30 bg-cyan/[0.03] shadow-[0_0_30px_-10px_rgba(0,212,255,0.25)]"
+                      : "border-violet/30 bg-violet/[0.03] shadow-[0_0_30px_-10px_rgba(139,92,246,0.25)]"
+                    : "border-white/10 hover:border-white/20"
                 }`}
               >
-                <p className="px-5 pl-[4.5rem] text-white/60 text-sm leading-relaxed">
-                  {faq.answer}
-                </p>
+                {/* Accent line on left when open */}
+                {isOpen && (
+                  <div
+                    className={`absolute left-0 top-0 bottom-0 w-0.5 ${
+                      isCyan ? "bg-cyan" : "bg-violet"
+                    }`}
+                  />
+                )}
+
+                <button
+                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  className="w-full flex items-center gap-4 p-5 text-left group"
+                >
+                  {/* Q-Number */}
+                  <span
+                    className={`hidden sm:block flex-shrink-0 font-mono text-[11px] tracking-wider w-8 ${
+                      isOpen
+                        ? isCyan
+                          ? "text-cyan/80"
+                          : "text-violet/80"
+                        : "text-white/30"
+                    }`}
+                    style={{ fontFamily: "var(--font-jetbrains-mono)" }}
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+
+                  {/* Icon */}
+                  <div
+                    className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                      isOpen
+                        ? isCyan
+                          ? "bg-gradient-to-br from-cyan/30 to-cyan/10 border border-cyan/40 shadow-[0_0_20px_-5px_rgba(0,212,255,0.5)]"
+                          : "bg-gradient-to-br from-violet/30 to-violet/10 border border-violet/40 shadow-[0_0_20px_-5px_rgba(139,92,246,0.5)]"
+                        : isCyan
+                          ? "bg-cyan/[0.08] border border-cyan/20 group-hover:bg-cyan/[0.12]"
+                          : "bg-violet/[0.08] border border-violet/20 group-hover:bg-violet/[0.12]"
+                    }`}
+                  >
+                    <Icon className={`w-4 h-4 ${isCyan ? "text-cyan" : "text-violet"}`} />
+                  </div>
+
+                  {/* Question */}
+                  <div className="flex-1 min-w-0">
+                    <span
+                      className={`block pr-4 font-medium text-sm sm:text-base transition-colors ${
+                        isOpen ? "text-white" : "text-white/85 group-hover:text-white"
+                      }`}
+                      style={{ fontFamily: "var(--font-space-grotesk)" }}
+                    >
+                      {faq.question}
+                    </span>
+                  </div>
+
+                  {/* Chevron */}
+                  <ChevronDown
+                    className={`w-5 h-5 flex-shrink-0 transition-all duration-300 ${
+                      isOpen
+                        ? `rotate-180 ${isCyan ? "text-cyan" : "text-violet"}`
+                        : "text-white/40 group-hover:text-white/60"
+                    }`}
+                  />
+                </button>
+
+                {/* Answer */}
+                <div
+                  className={`grid transition-all duration-300 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-5 pb-5 sm:pl-[4.75rem]">
+                      <div
+                        className={`h-px w-full mb-4 ${
+                          isCyan
+                            ? "bg-gradient-to-r from-cyan/30 via-cyan/10 to-transparent"
+                            : "bg-gradient-to-r from-violet/30 via-violet/10 to-transparent"
+                        }`}
+                      />
+                      <p className="text-white/65 text-sm leading-relaxed">{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16">
+        {/* Bottom CTA — Inline, minimal */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-3 text-sm">
+          <span className="text-white/40 inline-flex items-center gap-2">
+            <HelpCircle className="w-4 h-4" />
+            Still have questions?
+          </span>
           <a
             href="/contact"
-            className="group relative block max-w-2xl mx-auto"
+            className="group inline-flex items-center gap-1.5 text-cyan/80 hover:text-cyan transition-colors font-medium"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan/20 via-violet/20 to-cyan/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="relative glass-card p-8 border border-white/10 group-hover:border-cyan/30 transition-all duration-300 flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan/20 to-violet/20 border border-white/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <HelpCircle className="w-7 h-7 text-cyan" />
-                </div>
-                <div className="text-center sm:text-left">
-                  <h3
-                    className="text-xl font-semibold text-white mb-1"
-                    style={{ fontFamily: "var(--font-space-grotesk)" }}
-                  >
-                    Still have questions?
-                  </h3>
-                  <p className="text-white/50 text-sm">
-                    Get in touch
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2 px-6 py-3 rounded-xl bg-white/5 border border-white/10 group-hover:bg-cyan/10 group-hover:border-cyan/30 transition-all duration-300">
-                <span className="text-white font-medium">Contact</span>
-                <ArrowRight className="w-5 h-5 text-cyan group-hover:translate-x-1 transition-transform duration-300" />
-              </div>
-            </div>
+            <Mail className="w-3.5 h-3.5" />
+            Get in touch
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </a>
         </div>
       </div>

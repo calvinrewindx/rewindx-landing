@@ -89,7 +89,7 @@ export default function UserStory() {
                   1
                 </div>
                 <div className="flex-1 pt-1">
-                  <p className="text-white/80">You copy a poisoned address from transaction history</p>
+                  <p className="text-white/80">You send to a poisoned address</p>
                 </div>
               </div>
 
@@ -101,8 +101,8 @@ export default function UserStory() {
                 <div className="flex-1 pt-1">
                   <p className="text-white/80">
                     {hasRewindX
-                      ? 'Transfer enters your protection window (3 min – 24h)'
-                      : 'Transaction confirms instantly on-chain'}
+                      ? 'Transfer enters the rewind window (3 min – 24h)'
+                      : 'Transaction is final immediately'}
                   </p>
                 </div>
               </div>
@@ -115,8 +115,8 @@ export default function UserStory() {
                 <div className="flex-1 pt-1">
                   <p className="text-white/80">
                     {hasRewindX
-                      ? 'You notice the mistake and execute rewind'
-                      : 'You realize the mistake. Too late.'}
+                      ? 'You notice and execute rewind in time'
+                      : 'You notice. Too late.'}
                   </p>
                 </div>
               </div>
@@ -127,7 +127,7 @@ export default function UserStory() {
               <div className="flex items-center justify-between">
                 <span className="text-white/60 text-sm">Result</span>
                 <span className={`text-lg font-bold transition-colors duration-500 ${hasRewindX ? 'text-cyan' : 'text-red-400'}`}>
-                  {hasRewindX ? '✓ Funds Recovered' : '✗ Funds Lost Forever'}
+                  {hasRewindX ? '✓ Funds Recovered' : '✗ Funds Lost'}
                 </span>
               </div>
             </div>

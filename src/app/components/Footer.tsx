@@ -126,12 +126,6 @@ export default function Footer() {
                   <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /lightpaper
                 </a>
                 <a
-                  href="/architecture"
-                  className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
-                >
-                  <span className="text-cyan/30 group-hover:text-cyan/50">→</span> /architecture
-                </a>
-                <a
                   href="/terms"
                   className="group block font-mono text-xs text-white/30 hover:text-cyan/70 transition-colors"
                 >
@@ -154,6 +148,15 @@ export default function Footer() {
               NON-CUSTODIAL · RULE-BASED · ON-CHAIN
             </div>
             <div className="flex-1 h-px bg-gradient-to-l from-transparent to-cyan/20" />
+          </div>
+        </div>
+
+        {/* Risk Disclosure */}
+        <div className="mt-8 max-w-3xl mx-auto">
+          <div className="p-4 rounded-lg border border-white/[0.06] bg-white/[0.02]">
+            <p className="text-[10px] text-white/40 leading-relaxed text-center">
+              Rewind X is not insurance. It provides a time-limited rewind window, not a guarantee of fund recovery. Use protected transfers based on your own assessment of transaction risk.
+            </p>
           </div>
         </div>
 

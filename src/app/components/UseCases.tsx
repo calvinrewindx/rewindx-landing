@@ -1,6 +1,6 @@
 "use client";
 
-import { RotateCcw, Shield, Wallet, Clock } from "lucide-react";
+import { RotateCcw, Shield, Clock } from "lucide-react";
 
 const useCases = [
   {
@@ -8,7 +8,7 @@ const useCases = [
     title: "Error Recovery",
     description:
       "Wrong address, wrong amount, wrong token, or duplicate payment.",
-    highlight: "A time-bounded chance to undo sender errors.",
+    highlight: "A short rewind window helps reduce irreversible sending mistakes.",
     color: "cyan",
   },
   {
@@ -16,24 +16,16 @@ const useCases = [
     title: "Protection Before Settlement",
     description:
       "Address poisoning, phishing, or social engineering can still happen.",
-    highlight: "Rewind X gives senders a limited window to undo before settlement completes.",
+    highlight: "Transfers are not instantly final, which gives operations more review time.",
     color: "violet",
-  },
-  {
-    icon: Wallet,
-    title: "Wallet Compatibility",
-    description:
-      "Works with standard EVM wallets and compatible smart accounts.",
-    highlight: "Non-custodial by default.",
-    color: "cyan",
   },
   {
     icon: Clock,
     title: "Configurable Windows",
     description:
       "Choose your protection window from 3 minutes to 24 hours.",
-    highlight: "Extended windows available for eligible tiers.",
-    color: "violet",
+    highlight: "Protection windows can be tuned to different transaction contexts.",
+    color: "cyan",
   },
 ];
 
@@ -49,7 +41,7 @@ export default function UseCases() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Built for <span className="gradient-text">Users & Treasury Workflows</span>
+            Built for <span className="text-cyan">Real-World Transfers</span>
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
             From everyday senders to operational payment flows. A time-bounded undo window for ERC-20 transfers.
@@ -57,7 +49,7 @@ export default function UseCases() {
         </div>
 
         {/* Use Case Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {useCases.map((useCase, index) => (
             <div
               key={index}

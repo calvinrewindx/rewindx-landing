@@ -1,7 +1,4 @@
-"use client";
-
-import Link from "next/link";
-import { Linkedin, FileText, Sparkles } from "lucide-react";
+import { FileText, Sparkles, ArrowRight } from "lucide-react";
 
 export default function CTASection() {
   return (
@@ -10,7 +7,7 @@ export default function CTASection() {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan/5 to-transparent" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-cyan/10 to-violet/10 blur-[150px]" />
 
-      <div className="relative z-10 max-w-4xl mx-auto text-center">
+      <div className="relative z-10 max-w-3xl mx-auto text-center px-6">
         {/* Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan/10 border border-cyan/20 mb-8">
           <Sparkles className="w-4 h-4 text-cyan" />
@@ -27,36 +24,28 @@ export default function CTASection() {
         </h2>
 
         {/* Subtext */}
-        <p className="text-white/60 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
-          Rewind X is preparing for mainnet launch.
-        </p>
-        <p className="text-white/40 text-base max-w-xl mx-auto mb-10">
-          Be among the first to access protected transfers.
+        <p className="text-white/60 text-lg sm:text-xl max-w-xl mx-auto mb-10 leading-relaxed">
+          Rewind X is preparing for mainnet launch on BNB Chain.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        {/* Single Primary CTA */}
+        <div className="flex justify-center mb-12">
           <a
-            href="https://www.linkedin.com/in/calvin-x-568767399"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary flex items-center gap-2 text-lg py-4 px-8"
-          >
-            <Linkedin className="w-5 h-5" />
-            Connect on LinkedIn
-          </a>
-          <Link
             href="/lightpaper"
-            className="btn-secondary flex items-center gap-2"
+            className="btn-primary inline-flex items-center gap-2 text-base py-4 px-8"
           >
             <FileText className="w-4 h-4" />
             Read Lightpaper
-          </Link>
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
 
         {/* Trust Line */}
-        <p className="text-white/30 text-sm mt-12">
-          Non-custodial · On-chain · Built on BNB Chain
+        <p
+          className="text-white/40 text-sm font-mono"
+          style={{ fontFamily: "var(--font-jetbrains-mono)" }}
+        >
+          Non-custodial · 34 tokens · 3 min – 24h windows
         </p>
       </div>
     </section>

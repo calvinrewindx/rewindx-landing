@@ -4,7 +4,7 @@
 
 > This describes the V1 Origin Edition. Some features described are planned for future versions.
 
-Version 1.4.2 | Classification: PUBLIC | March 2026
+Version 1.4.3 | Classification: PUBLIC | April 2026
 
 ---
 
@@ -31,7 +31,7 @@ Rewind X introduces time-bounded reversibility for on-chain token transfers, a c
 
 Billions of dollars in cryptocurrency have been lost permanently due to human error, phishing attacks, and address manipulation. Unlike traditional finance, blockchain offers no recourse. Once a transaction confirms, funds are gone forever.
 
-Rewind X solves this through Protected Transfers: a non-custodial, deterministic mechanism that gives senders a configurable window to reverse transactions before final settlement. Windows range from 3 minutes to 24 hours. Protected transfers settle as net amounts: the Protected Transfer Fee is deducted at creation; the recipient receives the net held amount if no rewind occurs. The protocol requires no manual intervention, holds no private keys, and emits tamper-evident on-chain proof signals for reversals, indexed via the Rewind Proof NFT system.
+Rewind X solves this through Protected Transfers: a non-custodial, deterministic mechanism that gives senders a configurable window to reverse transactions before final settlement. Windows range from 3 minutes to 24 hours. A Protected Transfer Fee is charged at creation, applied either by deducting it from the transfer amount or by adding it on top of the transfer amount, depending on the sender's chosen fee mode. The protocol requires no manual intervention, holds no private keys, and emits tamper-evident on-chain proof signals for reversals, indexed via the Rewind Proof NFT system.
 
 Rewind X is infrastructure: a protocol-level safety layer that can be used directly by individuals and scaled through integrations with wallets, treasuries, and DeFi applications. As wallets integrate systems like Rewind X, users may experience protected transfers as a simple optional safety layer — without custodial intermediaries.
 
@@ -57,6 +57,17 @@ For mainstream users, this level of risk is unacceptable. The mental overhead of
 
 The market needs a solution that adds a safety layer without compromising decentralization or custody.
 
+### What Rewind X Is Not
+
+To frame what follows, it is important to be explicit about scope. Rewind X is **not**:
+
+- **Insurance** or a fund recovery service
+- A **custodial** protocol or escrow product
+- A **manual chargeback** or dispute-resolution system
+- A **guarantee** of recovery in all cases
+
+Rewind X provides a deterministic, time-bounded rewind window during which the sender can reverse a transfer before final settlement. Outside that window, settlement is irreversible. The protocol holds no private keys and makes no judgments about transaction legitimacy.
+
 ---
 
 ## 2. Core Principles
@@ -75,7 +86,7 @@ Every protocol operation follows predetermined logic with no manual intervention
 
 Reversibility is strictly limited. Windows are configurable from 3 minutes to 24 hours.
 
-Under normal operation, rewind windows are fixed at creation and enforced deterministically. The sender can release a transfer early, immediately making it available to the recipient. The protocol includes an emergency window extension capability for exceptional circumstances. If used, extensions are recorded on-chain for transparency. No party can shorten a window against the sender's will.
+Rewind windows are fixed at creation and enforced deterministically. No administrative function can prolong or shorten an active transfer's window. The sender can release a transfer early, immediately making it available to the recipient.
 
 For safety, a short deterministic buffer exists near the end of the rewind window to reduce race conditions between last-second rewinds and settlement claims. Once this deterministic boundary is reached, the transfer becomes available for the recipient to receive. After expiry, the transfer is irreversible. This bounded approach preserves blockchain's finality guarantee while providing a safety buffer.
 
@@ -130,6 +141,16 @@ During the rewind window, only the sender can act. Three outcomes are possible: 
 
 The protocol operates with supported ERC-20 tokens with reliable price feeds. V1 supports 34 tokens on BNB Chain, including major stablecoins and popular DeFi assets.
 
+### Smart Contract Architecture
+
+V1 is built around three core contracts, supported by additional safety and infrastructure modules. The core contracts will be verified on BSCScan at mainnet deployment.
+
+- **SCTM (`SecureConditionalTransferManager`):** Entry point for Protected Transfers. Handles transfer creation, rewind requests and execution, early release, and settlement claims under deterministic on-chain rules.
+- **CTM (`CentralTransferManager`):** Holds protected balances during the active rewind window. Funds are held under deterministic contract logic — no privileged key can move them outside the encoded rules.
+- **RevenueManager:** Routes protocol fees (Protected Transfer Fee, Rewind Execution Fee). Fee revenue is segregated from user funds; emergency recovery is scoped to fee revenue only and subject to a timelock.
+
+For a full breakdown of admin function limits, attack vectors, and known limitations, see the [Security Overview](/security).
+
 ### Integrity Protections
 
 The protocol includes multiple layers of protection against manipulation and abuse. These systems operate transparently and deterministically, ensuring fair access while preventing exploitation patterns that could harm legitimate users or protocol stability.
@@ -144,13 +165,13 @@ Every Protected Transfer follows a four-stage lifecycle with deterministic trans
 
 The sender initiates a Protected Transfer by specifying the recipient, token, amount, and desired window duration (hours or minutes). The protocol validates inputs, calculates applicable fees based on the sender's NFT tier, and records the transfer in a non-upgradeable on-chain registry.
 
-At creation, the protocol deducts the Protected Transfer Fee from the transfer amount. The net amount is held under deterministic contract rules until received or rewound.
+At creation, the protocol charges the Protected Transfer Fee. The fee is applied in one of two modes selected by the sender: *deducted* (taken from the transfer amount) or *added on top* (paid separately). The held amount is locked under deterministic contract rules until received or rewound.
 
 ### Stage 2: Rewind Window
 
 The rewind window begins immediately upon transfer creation. During this period, the sender retains exclusive reversal rights. No other party (not the receiver, not the protocol, not any external entity) can act. The receiver cannot receive the transfer until the window expires.
 
-The window duration is fixed at initiation and enforced deterministically by on-chain logic. The sender may release the transfer early (see Stage 3). The protocol includes an emergency window extension capability. If used, this can delay settlement timing, but does not allow anyone to move, redirect, or seize funds. Extensions are recorded on-chain.
+The window duration is fixed at initiation and enforced deterministically by on-chain logic. The sender may release the transfer early (see Stage 3). No party — including administrators — can extend, shorten, or modify an active rewind window.
 
 ### Stage 3: Resolution
 
@@ -159,7 +180,7 @@ Resolution occurs through one of three paths:
 **Sender Reversal:** The sender initiates a rewind through a two-step process:
 
 1. **Request:** Call `requestRewind()` to register intent
-2. **Execute:** After a short security delay, call `executeRewind()` to complete
+2. **Execute:** After a 30-second initial hold, call `executeRewind()` to complete
 
 This design provides a final confirmation moment and reduces front-running risk. The protocol validates the request (window still open, sender is original initiator, limits not exceeded). On success, funds return to the sender's wallet.
 
@@ -203,17 +224,15 @@ All state-changing operations follow the CEI pattern, preventing reentrancy atta
 
 The protocol implements multi-layer protections against systematic abuse. These operate deterministically based on on-chain behavior patterns.
 
-### Predefined Safety Mechanisms
+### Circuit Breaker
 
-Automated safeguards can pause specific protocol functions if anomalous conditions are detected. These operate transparently according to predefined parameters, not manual intervention.
+An on-chain Circuit Breaker can pause specific protocol functions if anomalous conditions are detected. Activation and deactivation events are emitted on-chain. The mechanism operates according to predefined parameters, not manual intervention.
 
 ### External Review
 
-V1 has undergone extensive internal security review combining automated analysis, manual testing, and fork-based mainnet simulation.
+V1 has undergone extensive internal security review combining automated analysis, manual testing, and fork-based mainnet simulation. V1 has not been externally audited.
 
-An independent external audit is planned once real-world usage and funding support a full engagement.
-
-For details, see the [Security Overview](/security).
+External audit is planned for future versions with broader scope and expanded use cases.
 
 ---
 
@@ -223,9 +242,30 @@ The protocol employs a two-component fee structure designed to align incentives 
 
 ### Fee Components
 
-**Protected Transfer Fee (1–3%):** Charged when creating a Protected Transfer and deducted from the transfer amount. 1% for preferred supported tokens, up to 3% for extended / non-preferred supported tokens. NFT tiers provide discounts on this fee.
+**Protected Transfer Fee (1–3%):** Charged when creating a Protected Transfer. 1% for preferred supported tokens, up to 3% for extended / non-preferred supported tokens. NFT tiers provide discounts on this fee.
+
+**Fee Application Modes:** The sender selects how the Protected Transfer Fee is applied at creation:
+
+- **Deducted** — the fee is taken from the transfer amount; the recipient receives the net amount.
+- **Added on top** — the sender pays the fee separately; the recipient receives the full transfer amount.
 
 **Rewind Execution Fee (1.5%):** Charged only if a rewind is actually executed. This is a flat fee that applies equally to all users. It is separate from the transfer fee and is not discounted by NFT tiers. Calculated on-chain with fixed rules, no exceptions.
+
+### Worked Example
+
+Total cost on a $1,000 Protected Transfer (no NFT tier discount applied). Sender's total cost is identical across both fee modes — the modes only differ in who absorbs the fee at the recipient end.
+
+**Settles normally (no rewind):**
+
+- Preferred token (1%) — Protection Fee $10 → **Total $10**
+- Extended token (3%) — Protection Fee $30 → **Total $30**
+
+**Rewound by sender:**
+
+- Preferred token (1% + 1.5%) — Protection Fee $10 + Rewind Fee $15 → **Total $25**
+- Extended token (3% + 1.5%) — Protection Fee $30 + Rewind Fee $15 → **Total $45**
+
+The Protection Fee is charged at transfer creation; the Rewind Execution Fee only applies when a rewind is actually executed. NFT tiers (Genesis 10%, Gatekeeper 20%) apply discounts to the Protection Fee component only.
 
 ### Value-Neutral Rewind Adjustment
 
@@ -333,9 +373,9 @@ Reversals require active sender intervention within the window. Users must monit
 
 Rewinds may return fewer tokens than were originally sent if the token price increased after transfer creation. This is an intended design choice to preserve the original value basis and reduce abuse.
 
-### Net Settlement Amounts
+### Settlement Amounts
 
-If a rewind is executed, the sender recovers the value-adjusted amount minus the rewind execution fee. If no rewind occurs, the recipient receives the net held amount (after the protection fee is deducted at creation).
+If a rewind is executed, the sender recovers the value-adjusted amount minus the rewind execution fee. If no rewind occurs, the recipient receives an amount that depends on the fee mode chosen at creation: in *deducted* mode, the recipient receives the held net amount; in *added-on-top* mode, the recipient receives the full transfer amount.
 
 ### Oracle Dependency
 

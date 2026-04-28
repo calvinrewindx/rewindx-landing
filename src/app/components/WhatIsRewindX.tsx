@@ -8,21 +8,21 @@ const features = [
     title: "Protected Transfers",
     subtitle: "3 min – 24h Window",
     description:
-      "Every protected transfer enters a time-bounded state. The sender remains fully in control during this window.",
+      "Transfers enter a short rewind window before they become final.",
   },
   {
     icon: Cpu,
     title: "Deterministic Execution",
-    subtitle: "No Human Decisions",
+    subtitle: "Fixed On-Chain Rules",
     description:
-      "Every action follows predictable on-chain logic. No operators, no approvals, no subjective judgment.",
+      "Outcomes follow fixed on-chain rules — not manual review or discretionary reversal.",
   },
   {
     icon: User,
     title: "Non-Custodial Design",
-    subtitle: "No Discretionary Control",
+    subtitle: "Smart Contract Logic",
     description:
-      "Funds are held by the smart contract under predefined rules. No operator can intervene or take control of user funds.",
+      "Funds are controlled by smart contract logic, not by a human operator.",
   },
 ];
 
@@ -38,17 +38,13 @@ export default function WhatIsRewindX() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            What is <span className="gradient-text">Rewind X</span>?
+            What is <span className="text-cyan">Rewind X</span>?
           </h2>
-          <p className="text-white/60 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed mb-4">
-            Undo transfers before they&apos;re final.
+          <p className="text-white/70 text-lg sm:text-xl max-w-3xl mx-auto leading-relaxed mb-3">
+            Undo transfers before they become final.
           </p>
-          <p className="text-white/50 text-base max-w-3xl mx-auto leading-relaxed mb-4">
-            A time-bounded safety window for ERC-20 transfers.
-            Fully on-chain. Non-custodial. Deterministic.
-          </p>
-          <p className="text-white/60 text-base max-w-3xl mx-auto font-medium">
-            Finally, <span className="text-cyan">safety</span> without compromising <span className="text-violet">decentralization</span>.
+          <p className="text-white/50 text-base max-w-3xl mx-auto leading-relaxed">
+            A time-bounded rewind window for ERC-20 transfers.
           </p>
         </div>
 
@@ -88,9 +84,9 @@ export default function WhatIsRewindX() {
                 What it is
               </h4>
               <ul className="space-y-2 text-white/60 text-sm">
-                <li>Preventive safety layer</li>
+                <li>A protocol for time-bounded protected transfers</li>
                 <li>Deterministic on-chain rules</li>
-                <li>Sender-initiated protection</li>
+                <li>Sender-initiated rewind window</li>
               </ul>
             </div>
             {/* IS NOT */}
@@ -101,8 +97,9 @@ export default function WhatIsRewindX() {
               </h4>
               <ul className="space-y-2 text-white/60 text-sm">
                 <li>Not insurance or fund recovery</li>
-                <li>Not custodial</li>
-                <li>Not a manual chargeback system</li>
+                <li>Not a chargeback system</li>
+                <li>Not custody</li>
+                <li>Not a promise that every mistake can be reversed</li>
               </ul>
             </div>
           </div>

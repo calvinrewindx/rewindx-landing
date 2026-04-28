@@ -1,25 +1,20 @@
-"use client";
-
-import { Cpu, KeyRound, Wallet, Shield } from "lucide-react";
+import { Cpu, KeyRound, Wallet, Shield, ArrowRight } from "lucide-react";
 
 const principles = [
   {
-    icon: Cpu,
-    title: "Deterministic Execution",
-    description:
-      "All actions follow fixed on-chain rules. No exceptions, no manual intervention.",
+    icon: Wallet,
+    title: "Non-Custodial",
+    description: "Funds are governed by smart contract rules.",
   },
   {
-    icon: Wallet,
-    title: "Non-Custodial by Design",
-    description:
-      "Funds are held by the smart contract under predefined rules. No admin key can move user funds.",
+    icon: Cpu,
+    title: "Deterministic",
+    description: "Execution follows fixed on-chain conditions.",
   },
   {
     icon: KeyRound,
-    title: "Bounded Controls",
-    description:
-      "Administrative functions are strictly limited. Emergency pause can halt actions, but cannot access or move balances.",
+    title: "Bounded Admin",
+    description: "Emergency controls cannot access user funds.",
   },
 ];
 
@@ -28,32 +23,29 @@ export default function SecurityPrinciples() {
     <section className="section relative">
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-cyan/5 to-transparent" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
             Security <span className="text-cyan">Principles</span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Deterministic, non-custodial, and designed to minimize trust.
-          </p>
         </div>
 
-        {/* Principle Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        {/* Trust Signals — 3 Compact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {principles.map((principle, index) => (
             <div
               key={index}
-              className="group glass-card glass-card-hover p-8 text-center"
+              className="group glass-card glass-card-hover p-6 text-center"
             >
-              <div className="w-16 h-16 rounded-2xl bg-cyan/[0.08] border border-cyan/20 flex items-center justify-center mx-auto mb-6 group-hover:bg-cyan/[0.15] group-hover:border-cyan/40 transition-all duration-300">
-                <principle.icon className="w-8 h-8 text-cyan/70 group-hover:text-cyan transition-colors duration-300" />
+              <div className="w-12 h-12 rounded-xl bg-cyan/[0.08] border border-cyan/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-cyan/[0.15] group-hover:border-cyan/40 transition-all duration-300">
+                <principle.icon className="w-6 h-6 text-cyan/70 group-hover:text-cyan transition-colors duration-300" />
               </div>
               <h3
-                className="text-xl font-semibold text-white mb-4 group-hover:text-cyan transition-colors duration-300"
+                className="text-base font-semibold text-white mb-2 group-hover:text-cyan transition-colors duration-300"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
                 {principle.title}
@@ -63,6 +55,25 @@ export default function SecurityPrinciples() {
               </p>
             </div>
           ))}
+        </div>
+
+        {/* Links to Details */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-16">
+          <a
+            href="/security"
+            className="inline-flex items-center gap-2 text-cyan hover:text-cyan/80 transition-colors text-sm font-medium"
+          >
+            Security details
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
+          <span className="hidden sm:inline text-white/20">·</span>
+          <a
+            href="/lightpaper"
+            className="inline-flex items-center gap-2 text-white/60 hover:text-cyan transition-colors text-sm font-medium"
+          >
+            Technical paper
+            <ArrowRight className="w-3.5 h-3.5" />
+          </a>
         </div>
 
         {/* USP Block — Preventive Safety */}
@@ -99,7 +110,7 @@ export default function SecurityPrinciples() {
             </div>
 
             <p className="text-white/30 text-xs text-center mt-6 pt-4 border-t border-white/5">
-              Rewind X adds a safety layer without changing the core guarantees of blockchain finality.
+              Rewind X adds a rewind window without changing the core guarantees of blockchain finality.
             </p>
           </div>
         </div>

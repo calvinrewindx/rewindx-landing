@@ -1,7 +1,5 @@
 import Header from "./components/Header";
 import HeroV2 from "./components/HeroV2";
-import ReadingProgress from "./components/ReadingProgress";
-import TwoModes from "./components/TwoModes";
 import ProblemStats from "./components/ProblemStats";
 import WhatIsRewindX from "./components/WhatIsRewindX";
 import HowItWorks from "./components/HowItWorks";
@@ -21,12 +19,37 @@ import ScrollReveal from "./components/ScrollReveal";
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(){
+              var key='home-pos';
+              if('scrollRestoration' in history){history.scrollRestoration='manual'}
+              var saving=false;
+              function save(){if(!saving){saving=true;sessionStorage.setItem(key,String(window.scrollY));saving=false}}
+              window.addEventListener('scroll',save,{passive:true});
+              window.addEventListener('beforeunload',save);
+              window.addEventListener('pagehide',save);
+              if(!window.location.hash){
+                var pos=sessionStorage.getItem(key);
+                if(pos&&parseInt(pos)>100){
+                  var p=parseInt(pos);
+                  function go(){
+                    try{window.scrollTo({top:p,left:0,behavior:'instant'})}
+                    catch(e){window.scrollTo(0,p)}
+                  }
+                  go();
+                  requestAnimationFrame(go);
+                  document.addEventListener('DOMContentLoaded',go);
+                  window.addEventListener('load',go);
+                }
+              }
+            })();
+          `,
+        }}
+      />
       <Header />
-      <ReadingProgress />
       <HeroV2 />
-      <ScrollReveal delay={100}>
-        <TwoModes />
-      </ScrollReveal>
       <ScrollReveal>
         <ProblemStats />
       </ScrollReveal>
@@ -49,11 +72,11 @@ export default function Home() {
       <ScrollReveal>
         <MultiTokenPreview />
       </ScrollReveal>
-      <ScrollReveal delay={150}>
-        <NFTProof />
-      </ScrollReveal>
       <ScrollReveal>
         <FeeSection />
+      </ScrollReveal>
+      <ScrollReveal delay={150}>
+        <NFTProof />
       </ScrollReveal>
       <ScrollReveal delay={100}>
         <RewindSimulator />

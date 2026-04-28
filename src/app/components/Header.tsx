@@ -2,13 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText, ArrowRight } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "How it Works", href: "/#how-it-works" },
-  { label: "Architecture", href: "/architecture" },
-  { label: "Lightpaper", href: "/lightpaper" },
+  { label: "Security", href: "/security" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -72,8 +71,27 @@ export default function Header() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <a href="/lightpaper" className="btn-primary text-sm py-3 px-6 inline-block">
-              Read Lightpaper
+            <a
+              href="/lightpaper"
+              className="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-lg overflow-hidden transition-all duration-300"
+            >
+              {/* Animated gradient border */}
+              <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan via-cyan/80 to-violet opacity-90 group-hover:opacity-100 transition-opacity" />
+              {/* Inner background */}
+              <span className="absolute inset-[1px] rounded-[7px] bg-background group-hover:bg-background/95 transition-colors" />
+              {/* Hover shimmer */}
+              <span className="absolute inset-[1px] rounded-[7px] bg-gradient-to-r from-transparent via-cyan/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Content */}
+              <FileText className="relative z-10 w-3.5 h-3.5 text-cyan" />
+              <span
+                className="relative z-10 text-white text-sm font-medium tracking-wide"
+                style={{ fontFamily: "var(--font-space-grotesk)" }}
+              >
+                Lightpaper
+              </span>
+              <ArrowRight className="relative z-10 w-3.5 h-3.5 text-cyan group-hover:translate-x-0.5 transition-transform" />
+              {/* Glow on hover */}
+              <span className="absolute -inset-1 rounded-lg bg-cyan/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10" />
             </a>
           </div>
 
@@ -107,10 +125,19 @@ export default function Header() {
               ))}
               <a
                 href="/lightpaper"
-                className="btn-primary btn-shine text-sm py-3 px-6 mt-4 inline-block text-center"
+                className="group relative inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg overflow-hidden mt-4"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Read Lightpaper
+                <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan via-cyan/80 to-violet" />
+                <span className="absolute inset-[1px] rounded-[7px] bg-background" />
+                <FileText className="relative z-10 w-3.5 h-3.5 text-cyan" />
+                <span
+                  className="relative z-10 text-white text-sm font-medium tracking-wide"
+                  style={{ fontFamily: "var(--font-space-grotesk)" }}
+                >
+                  Lightpaper
+                </span>
+                <ArrowRight className="relative z-10 w-3.5 h-3.5 text-cyan" />
               </a>
             </nav>
           </div>

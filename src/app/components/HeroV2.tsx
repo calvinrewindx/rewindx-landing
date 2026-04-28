@@ -68,7 +68,7 @@ export default function HeroV2() {
 
         {/* Subheadline */}
         <p className="text-lg sm:text-xl text-white/60 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Protected ERC-20 transfers with a time-bounded undo window.
+          Send with a rewind window before transfers become final.
         </p>
 
         {/* Animation */}
@@ -106,29 +106,6 @@ export default function HeroV2() {
           </a>
           <a href="#features" className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/10 bg-white/[0.03] text-white/60 hover:text-white/80 hover:bg-white/[0.06] transition-colors text-sm font-medium">
             What is Rewind X?
-          </a>
-        </div>
-
-        {/* Contact */}
-        <div className="text-center flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 transition-colors text-sm font-mono"
-          >
-            <span>Partnerships & inquiries</span>
-            <span className="text-cyan/40">→</span>
-            <span>Contact</span>
-          </a>
-          <span className="text-white/10 hidden sm:inline">|</span>
-          <a
-            href="https://www.linkedin.com/in/calvin-x-568767399"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-white/30 hover:text-white/60 transition-colors text-sm font-mono"
-          >
-            <span>Follow</span>
-            <span className="text-cyan/40">→</span>
-            <span>LinkedIn</span>
           </a>
         </div>
 

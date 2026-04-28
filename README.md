@@ -36,12 +36,12 @@
 
 ## What is Rewind X?
 
-Rewind X introduces a **non-custodial, time-bounded safety window** for ERC-20 transfers.
+Rewind X introduces a **non-custodial, time-bounded rewind window** for ERC-20 transfers.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                                                                 │
-│   SEND ──────► [ 3min-24h SAFETY WINDOW ] ──────► SETTLE       │
+│   SEND ──────► [ 3min-24h REWIND WINDOW ] ──────► SETTLE       │
 │                        │                                        │
 │                        ▼                                        │
 │                    REWIND?                                      │
@@ -56,12 +56,12 @@ Rewind X introduces a **non-custodial, time-bounded safety window** for ERC-20 t
 
 | Feature | Description |
 |:-------:|:------------|
-| 🕐 | **3 min – 24h Window** — Time-bounded, on-chain safety period |
+| 🕐 | **3 min – 24h Window** — Time-bounded, on-chain rewind period |
 | 🔐 | **Non-Custodial** — No admin keys can move funds |
 | 🎖️ | **Rewind Proof NFT** — On-chain proof of successful rewinds |
-| ⚙️ | **17 Contracts** — Core ledger non-upgradeable |
+| ⚙️ | **Modular Contracts** — Core ledger non-upgradeable |
 | 💰 | **Flat Fees** — 1-3% protection + 1.5% rewind (if used) |
-| 🪙 | **38 Tokens** — Chainlink-priced assets on BNB Chain |
+| 🪙 | **34 Tokens** — Chainlink-priced assets on BNB Chain |
 
 </div>
 
@@ -92,8 +92,8 @@ rewindx-landing/
 ├── src/
 │   └── app/
 │       ├── components/        # React components
-│       ├── architecture/      # Architecture page
 │       ├── lightpaper/        # Lightpaper page
+│       ├── security/          # Security overview page
 │       ├── contact/           # Contact page
 │       ├── terms/             # Terms of Use
 │       ├── privacy/           # Privacy Policy
@@ -118,7 +118,7 @@ rewindx-landing/
 
 | Channel | Address |
 |:-------:|:--------|
-| 💼 **Investors** | [investors.rewindx@proton.me](mailto:investors.rewindx@proton.me) |
+| 💼 **Strategic & Partnerships** | [investors.rewindx@proton.me](mailto:investors.rewindx@proton.me) |
 | 🔧 **Technical** | [contact.rewindx@proton.me](mailto:contact.rewindx@proton.me) |
 | 🔗 **LinkedIn** | [Calvin](https://www.linkedin.com/in/calvin-x-568767399) |
 

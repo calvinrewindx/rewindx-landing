@@ -60,15 +60,6 @@ export default function ContactPage() {
         <div className="relative z-10 max-w-4xl mx-auto px-6 w-full">
           {/* Header */}
           <div className="text-center mb-16">
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan"></span>
-              </span>
-              <span className="text-white/60 text-sm">Active Development</span>
-            </div>
-
             <h1
               className="text-5xl sm:text-6xl md:text-7xl font-bold mb-6"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -77,7 +68,7 @@ export default function ContactPage() {
               <span className="text-cyan">Touch</span>
             </h1>
             <p className="text-white/50 text-lg max-w-xl mx-auto">
-              Rewind X is in active development. We welcome inquiries from investors, builders, and security researchers.
+              Inquiries from investors, builders, and security researchers.
             </p>
           </div>
 
@@ -95,10 +86,10 @@ export default function ContactPage() {
                   className="text-xl font-bold text-white mb-3"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
-                  Investment & Strategic Inquiries
+                  Strategic & Partnership Inquiries
                 </h2>
                 <p className="text-white/50 text-sm mb-6 leading-relaxed">
-                  For angels, infrastructure funds, and ecosystem partners evaluating Rewind X in a pre-launch context.
+                  For infrastructure funds, ecosystem partners, and supporters evaluating Rewind X.
                 </p>
 
                 <CopyableEmail email="investors.rewindx@proton.me" variant="cyan" />
@@ -114,7 +105,7 @@ export default function ContactPage() {
                 </a>
 
                 <p className="text-white/40 text-xs mt-4">
-                  Written inquiries preferred · 24–48h response
+                  Written inquiries preferred
                 </p>
               </div>
             </div>
@@ -137,13 +128,13 @@ export default function ContactPage() {
                   For wallet teams, auditors, and security researchers requesting high-level technical information or coordination.
                 </p>
                 <p className="text-white/40 text-xs mb-6 leading-relaxed">
-                  No source code, integrations, or implementation details are shared at this stage.
+                  No source code, integrations, or implementation details are shared.
                 </p>
 
                 <CopyableEmail email="contact.rewindx@proton.me" variant="violet" />
 
                 <p className="text-white/40 text-xs mt-4">
-                  Written inquiries preferred · 24–48h response
+                  Written inquiries preferred
                 </p>
               </div>
             </div>
@@ -181,7 +172,7 @@ export default function ContactPage() {
           {/* Note */}
           <div className="text-center">
             <p className="text-white/30 text-sm">
-              All messages are reviewed manually. No user support at this stage.
+              All messages are reviewed manually.
             </p>
           </div>
         </div>

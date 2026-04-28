@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 
@@ -8,7 +7,7 @@ export default function SubpageHeader({ title }: { title?: string }) {
       <div className="max-w-4xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo + Back */}
-          <Link
+          <a
             href="/"
             className="flex items-center gap-3 text-white/60 hover:text-white transition-colors group"
           >
@@ -23,7 +22,7 @@ export default function SubpageHeader({ title }: { title?: string }) {
                 unoptimized
               />
             </div>
-          </Link>
+          </a>
 
           {/* Page title */}
           {title && (

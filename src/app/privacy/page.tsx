@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Rewind X — Privacy Policy",
+  description: "Privacy Policy for the Rewind X interface.",
+};
 
 function Section({ num, title, children }: { num: number; title: string; children: React.ReactNode }) {
   return (

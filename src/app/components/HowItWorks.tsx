@@ -9,8 +9,8 @@ const steps = [
     icon: Send,
     title: "Create Protected Transfer",
     description:
-      "Send any supported ERC-20 using protected mode. Funds enter a time-bounded contract-held state under fixed on-chain rules.",
-    bullets: ["No admin can move or redirect user funds", "State transitions follow fixed protocol logic", "Non-custodial by design"],
+      "Send a supported ERC-20 with a defined rewind window. Funds enter contract-held state under fixed on-chain rules.",
+    bullets: ["Non-custodial by design", "No admin can move or redirect user funds"],
     color: "cyan",
   },
   {
@@ -19,8 +19,8 @@ const steps = [
     title: "Active Undo Window",
     subtitle: "3 min – 24h",
     description:
-      "During the active window, the sender can initiate a rewind.",
-    bullets: ["Sender-controlled during the window", "Early release by sender remains possible", "After expiry, either party can complete settlement"],
+      "During the active window, the sender can rewind or release early. If nothing happens, the transfer continues toward final settlement.",
+    bullets: ["Sender-controlled during the window", "Early release allows immediate settlement"],
     color: "violet",
   },
   {
@@ -28,8 +28,8 @@ const steps = [
     icon: RotateCcw,
     title: "Execute Rewind",
     description:
-      "The sender requests the rewind, waits through the required hold period, and then executes it on-chain.",
-    bullets: ["Hold period enforced on-chain", "Fixed protocol rules", "No manual approvals or operator decisions"],
+      "If the sender rewinds in time, the protocol executes the return on-chain. Execution follows predefined rules, not manual approval.",
+    bullets: ["Hold period enforced on-chain", "No manual approvals or operator decisions"],
     color: "cyan",
   },
   {
@@ -37,8 +37,8 @@ const steps = [
     icon: Award,
     title: "On-Chain Proof",
     description:
-      "Each successful rewind mints or updates a Rewind Proof NFT: a tamper-evident on-chain record.",
-    bullets: ["Publicly visible on-chain", "Proof of valid rewind activity", "Underlying records and events remain immutable"],
+      "Each successful rewind leaves a public on-chain record — minted as a Rewind Proof NFT.",
+    bullets: ["Publicly visible on-chain", "Verifiable proof that the action occurred"],
     color: "violet",
   },
 ];

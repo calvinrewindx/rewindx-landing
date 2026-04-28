@@ -76,10 +76,10 @@ export default function MultiTokenPreview() {
             Multi-Token <span className="text-cyan">Support</span>
           </h2>
           <p className="text-white/60 text-base sm:text-lg max-w-2xl mx-auto">
-            Works with supported ERC-20 tokens on BNB Chain. No custom integration required.
+            Supported across major ERC-20 assets on BNB Chain.
           </p>
           <p className="text-white/40 text-xs sm:text-sm mt-2">
-            Currently supports <span className="text-cyan font-medium">34 tokens</span> · Chainlink price feeds
+            USDT, USDC, DAI, WBNB and more · <span className="text-cyan font-medium">34 supported tokens</span>
           </p>
         </div>
 
@@ -125,7 +125,7 @@ export default function MultiTokenPreview() {
             onClick={() => setIsOpen(!isOpen)}
             className="inline-flex items-center gap-2 text-white/40 hover:text-white/60 transition-colors text-xs sm:text-sm"
           >
-            <span>{isOpen ? "Hide tokens" : "View all 34 supported tokens"}</span>
+            <span>{isOpen ? "Hide tokens" : "View all supported tokens"}</span>
             <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
           </button>
         </div>
