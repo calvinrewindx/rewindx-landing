@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Award, RotateCw, Hash, Layers, TrendingUp, Clock, Crown } from "lucide-react";
+import { Award, RotateCw, Hash, Layers, TrendingUp, Clock } from "lucide-react";
 
 const IPFS_BASE = "https://ipfs.io/ipfs/bafybeifjix6vdc3p7ztecontvzqg2u2q4og6uufiikepcfmnb4f2kcwdye";
 
@@ -93,7 +93,7 @@ export default function NFTProof() {
                       <div className="relative h-full px-6 py-7 flex flex-col items-center justify-between z-10">
                         {/* Header */}
                         <div className="w-full">
-                          <div className="flex items-center justify-between mb-1.5">
+                          <div className="flex items-center justify-between">
                             <span className="text-cyan/80 text-[9px] uppercase tracking-[0.3em] font-mono">
                               ◆ Rewind Proof
                             </span>
@@ -101,9 +101,6 @@ export default function NFTProof() {
                               ERC-721
                             </span>
                           </div>
-                          <p className="text-white/30 text-[9px] font-mono tracking-wider">
-                            #0000 · GENESIS EDITION
-                          </p>
                         </div>
 
                         {/* NFT Image with frame */}
@@ -181,7 +178,6 @@ export default function NFTProof() {
                           <DataRow icon={<Layers className="w-3 h-3" />} label="Tokens Used" value="—" accent="cyan" />
                           <DataRow icon={<TrendingUp className="w-3 h-3" />} label="Cumulative Volume" value="—" accent="cyan" />
                           <DataRow icon={<Clock className="w-3 h-3" />} label="Latest Rewind" value="—" accent="violet" />
-                          <DataRow icon={<Crown className="w-3 h-3" />} label="Tier Status" value="Rewind Proof" accent="violet" highlight />
                         </div>
 
                         {/* Footer */}
