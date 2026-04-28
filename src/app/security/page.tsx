@@ -347,7 +347,7 @@ export default function SecurityPage() {
                 {[
                   "This is an internal review, not an independent external audit. External audit is planned for future versions with broader scope.",
                   "The protocol is released as an initial public validation release (V1). Some edge cases may only emerge under real-world usage.",
-                  "Oracle dependency: Rewind execution requires Chainlink price feeds within configured staleness windows (1h for major tokens, 24h for low-volume tokens with longer Chainlink heartbeats). Standard transfer settlement continues with emergency price fallback if feeds become unreliable.",
+                  "Oracle dependency: Rewind execution requires fresh Chainlink price feeds within token-specific staleness windows configured to match each feed's heartbeat profile. If feeds become unreliable, rewinds are temporarily paused. Standard transfer settlement is not affected.",
                   "Native tokens (BNB) are not supported. Use the wrapped version (WBNB) for protected transfers.",
                   "Sender-only reversal: Only the original sender can trigger a rewind. If sender keys are compromised, the recipient cannot reverse on their behalf.",
                   "Token-specific edge cases: Tokens with transfer hooks, rebasing mechanics, or blacklist functions may behave unexpectedly. The supported token list has been selected to minimize these risks.",
